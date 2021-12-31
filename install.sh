@@ -153,11 +153,13 @@ fi
 
 osmedeus config reload
 install_banner "Osmedeus Web UI"
-rm -rf ~/.osmedeus/core/* && mkdir -p ~/.osmedeus/core >/dev/null 2>&1
+rm -rf ~/.osmedeus/core/* >/dev/null 2>&1
+mkdir -p ~/.osmedeus/core >/dev/null 2>&1
 cp -R ui ~/.osmedeus/core/ui >/dev/null 2>&1
 
 install_banner "Osmedeus Community Workflow"
-rm -rf $BASE_PATH/workflow && git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
+rm -rf $BASE_PATH/workflow >/dev/null 2>&1
+git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
 # # retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH/workflow" ]; then
     git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
