@@ -20,7 +20,7 @@
 > NOTE that you need some essential tools like `curl, wget, git, zip` and login as **root** to start
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install.sh | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install.sh)"
 ```
 
 ## Usage

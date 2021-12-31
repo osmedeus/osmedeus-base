@@ -53,33 +53,33 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     exit 1
 fi
 
-$SUDO $PACKGE_MANAGER update > /dev/null 2>&1
+$SUDO $PACKGE_MANAGER update -qq > /dev/null 2>&1
 install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
 # install all essioontials tools
-[ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER install wget -y 2>/dev/null
-[ -x "$(command -v curl)" ] || $SUDO $PACKGE_MANAGER install curl -y 2>/dev/null
-[ -x "$(command -v tmux)" ] || $SUDO $PACKGE_MANAGER install tmux -y 2>/dev/null
-[ -x "$(command -v git)" ] || $SUDO $PACKGE_MANAGER install git -y 2>/dev/null
-[ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER install nmap -y 2>/dev/null
-[ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER install masscan -y 2>/dev/null
-[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER install build-essential -y 2>/dev/null
-[ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER install ripgrep -y 2>/dev/null
-[ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER install unzip -y 2>/dev/null
-[ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER install chromium -y 2>/dev/null
-[ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER install chromium-browser -y 2>/dev/null
-[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER install build-essential -y 2>/dev/null
-[ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER install python-pip -y 2>/dev/null
-[ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER install python3-pip -y 2>/dev/null
-[ -x "$(command -v jq)" ] || $SUDO $PACKGE_MANAGER install jq -y 2>/dev/null
-[ -x "$(command -v rsync)" ] || $SUDO $PACKGE_MANAGER install rsync -y 2>/dev/null
-[ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER install htop -y 2>/dev/null
-[ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER install coreutils net-tools -y 2>/dev/null
+[ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER -qq install wget -y 2>/dev/null
+[ -x "$(command -v curl)" ] || $SUDO $PACKGE_MANAGER -qq install curl -y 2>/dev/null
+[ -x "$(command -v tmux)" ] || $SUDO $PACKGE_MANAGER -qq install tmux -y 2>/dev/null
+[ -x "$(command -v git)" ] || $SUDO $PACKGE_MANAGER -qq install git -y 2>/dev/null
+[ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER -qq install nmap -y 2>/dev/null
+[ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER -qq install masscan -y 2>/dev/null
+[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y 2>/dev/null
+[ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER -qq install ripgrep -y 2>/dev/null
+[ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER -qq install unzip -y 2>/dev/null
+[ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER -qq install chromium -y 2>/dev/null
+[ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER -qq install chromium-browser -y 2>/dev/null
+[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y 2>/dev/null
+[ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER -qq install python-pip -y 2>/dev/null
+[ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER -qq install python3-pip -y 2>/dev/null
+[ -x "$(command -v jq)" ] || $SUDO $PACKGE_MANAGER -qq install jq -y 2>/dev/null
+[ -x "$(command -v rsync)" ] || $SUDO $PACKGE_MANAGER -qq install rsync -y 2>/dev/null
+[ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER -qq install htop -y 2>/dev/null
+[ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER -qq install coreutils net-tools -y 2>/dev/null
 
 announce "Clean up old stuff first"
 rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
 
-announce "Cloning Osmedeus base repo"
+announce "Cloning Osmedeus base repo:\033[0m https://github.com/osmedeus/osmedeus-base"
 rm -rf $BASE_PATH && git clone --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 # # retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH" ]; then
@@ -87,7 +87,7 @@ if [ ! -d "$BASE_PATH" ]; then
 fi
 
 [ -z "$(which osmedeus)" ] && osmBin=/usr/local/bin/osmedeus || osmBin=$(which osmedeus)
-announce "Setup Osmedeus Core Engine: $osmBin"
+announce "Setup Osmedeus Core Engine:\033[0m $osmBin"
 unzip -q -o -j $BASE_PATH/dist/osmedeus-linux.zip -d $BASE_PATH/dist/
 rm -rf $osmBin && cp $BASE_PATH/dist/osmedeus $osmBin && chmod +x $osmBin
 
@@ -155,12 +155,12 @@ osmedeus config reload
 install_banner "Osmedeus Web UI"
 rm -rf ~/.osmedeus/core/* >/dev/null 2>&1
 mkdir -p ~/.osmedeus/core >/dev/null 2>&1
-cp -R ui ~/.osmedeus/core/ui >/dev/null 2>&1
+cp -R $BASE_PATH/ui ~/.osmedeus/core/ui >/dev/null 2>&1
 
-install_banner "Osmedeus Community Workflow"
+install_banner "Osmedeus Community Workflow:\033[0m https://github.com/osmedeus/osmedeus-workflow"
 rm -rf $BASE_PATH/workflow >/dev/null 2>&1
 git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
-# # retry to clone in case of anything wrong with the connection
+## retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH/workflow" ]; then
     git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
 fi
