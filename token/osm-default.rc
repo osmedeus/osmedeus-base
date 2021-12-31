@@ -1,0 +1,30 @@
+export GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ~/.osmedeus/secret_key.private'
+
+# for noti
+IPAddress=$(curl -s https://api.ipify.org)
+export SLACK_API_TOKEN=xoxb-XXXXXXXX
+export CLIENT_NAME=$HOSTNAME"@"$IPAddress
+export SLACK_STATUS_CHANNEL=CSXXXXX
+export SLACK_REPORT_CHANNEL=CSXXXX
+export SLACK_DIFF_CHANNEL=CSXXXXX
+export SLACK_WEBHOOK=https://xxx
+
+# for telegram
+export TELEGRAM_API_TOKEN=1111114500:AAGx
+## send this one to get channel ID: curl 'https://api.telegram.org/bot$TELEGRAM_API_TOKEN/sendMessage?chat_id=@osmpReports&text=hello'
+export TELEGRAM_CHANNEL=-100XXXXX
+export TELEGRAM_STATUS_CHANNEL=-100XXXXX
+export TELEGRAM_REPORT_CHANNEL=-100XXXXX
+export TELEGRAM_SENSITIVE_CHANNEL=-100XXXXX
+export TELEGRAM_DIRB_CHANNEL=-100XXXXX
+export TELEGRAM_MICS_CHANNEL=-100XXXXX
+
+# Set github token for run github scan
+export GITHUB_TOKEN=xxx,xxxx
+
+# For google dorks
+export FBCookie="xxx"
+
+source $HOME/osmedeus-base/token/cloud-variables.rc
+# Add binaries to PATH
+export PATH=$PATH:$HOME/osmedeus-base/binaries/

@@ -1,0 +1,10 @@
+# for CDN stuff
+export OSM_CDN_URL=https://reverent-xxx-xxx.netlify.app
+export OSM_CDN_WSURL=https://gracious-xxx-xxx.netlify.app
+export OSM_CDN_INDEX=https://osm-index-xxx-xxx.netlify.app/xxx.json
+
+# for clouds stuff
+export CLOUD_BUILD_REPO=git@gitlab.com:your_user_name/build-osm.git
+export CLOUD_SECRET_KEY=~/.osmedeus/secret_key.private
+export CLOUD_PUBLIC_KEY=~/osmedeus-base/cloud/ssh/cloud.pub
+export CLOUD_SECRET_KEY=~/osmedeus-base/cloud/ssh/cloud.privte

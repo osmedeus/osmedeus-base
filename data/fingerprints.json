@@ -1,0 +1,678 @@
+[
+    {
+		"service": "acquia",
+		"cname": [
+			"acquia-sites.com"
+		],
+		"fingerprint": [
+			"Welcome to Acquia Cloud"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "aftership",
+		"cname": [
+			"aftership.com"
+		],
+		"fingerprint": [
+			"Oops. The page you're looking for doesn't exist"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "aha!",
+		"cname": [
+			"aha.io"
+		],
+		"fingerprint": [
+			"There is no portal here"
+		],
+		"nxdomain": false
+    },
+    {
+		"service": "airee",
+		"cname": [
+			"airee.ru"
+		],
+		"fingerprint": [
+		     "Ошибка 402"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "anima",
+		"cname": [
+			"animaapp.com"
+		],
+		"fingerprint": [
+			 "Missing Website",
+			 "If this is your website and you've just created it, try refreshing in a minute"
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "aws/s3",
+		"cname": [
+			"amazonaws.com",
+            "s3-website"
+		],
+		"fingerprint": [
+			"The specified bucket does not exist",
+            "NoSuchBucket"
+		],
+		"nxdomain": false
+	},
+    	{
+		"service": "azure",
+		"cname": [
+			"azurewebsites.net",
+			"cloudapp.net",
+			"cloudapp.azure.com",
+			"azure-api.net",
+			"azurehdinsight.net",
+			"azureedge.net",
+			"azurecontainer.io",
+			"azuredatalakestore.net",
+			"azurecr.io",
+			"windows.net",
+			"trafficmanager.net",	
+			"visualstudio.com"
+		],
+		"fingerprint": [],
+		"nxdomain": true
+    },
+	{
+		"service": "bitbucket",
+		"cname": [
+			"bitbucket.io"
+		],
+		"fingerprint": [
+			"Repository not found"
+		],
+		"nxdomain": false
+    },
+	{
+		"service": "brightcove",
+		"cname": [
+			"bcvp0rtal.com",
+			"brightcove.com"
+		],
+		"fingerprint": [
+			"Error Code: 404"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "bigcartel",
+		"cname": [
+			"bigcartel.com"
+		],
+		"fingerprint": [
+			"Oops! We couldn't find that page"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "campaignmonitor",
+		"cname": [
+			"createsend.com"
+		],
+		"fingerprint": [
+			"Double check the URL or",
+			"Trying to access your account?"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "canny",
+		"cname": [
+			"canny.io"
+		],
+		"fingerprint": [
+			"Company Not Found",
+			"There is no such company. Did you enter the right URL?"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "cargocollective",
+		"cname": [
+			"cargocollective.com"
+		],
+		"fingerprint": [
+			"Connect it by adding it to your Settings."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "digitaloceanspaces",
+		"cname": [
+			"digitaloceanspaces.com"
+		],
+		"fingerprint": [
+				"</BucketName><RequestId>tx000000000000",
+				"Domain uses DO name serves with no records in DO."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "distil",
+		"cname": [
+			"distil.us"
+		],
+		"fingerprint": [
+		        "Requested Domain Unavailable"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "fastly",
+		"cname": [
+			"global.prod.fastly.net",
+			"map.fastly.net"
+		],
+		"fingerprint": [
+			"Fastly error: unknown domain:",
+            "Please check that this domain has been added to a service"
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "feedpress",
+		"cname": [
+			"feedpress.me"
+		],
+		"fingerprint": [
+			"The feed has not been found."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "fly",
+		"cname": [
+			"fly.io",
+			"shw.io"
+		],
+        	"fingerprint": [],
+		"nxdomain": false
+    	},
+	{
+		"service": "frontify",
+		"cname": [
+			"frontify"
+		],
+		"fingerprint": [
+			"404 - Page not found. Oops... look like you got lost."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "getresponse",
+		"cname": [
+			"gr8.com"
+		],
+		"fingerprint": [
+			"With GetResponse Landing Pages, lead generation has never been easier"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "ghost",
+		"cname": [
+			"ghost.io"
+		],
+		"fingerprint": [
+			"The thing you were looking for is no longer here, or never was"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "github",
+		"cname": [
+			"github.io"
+		],
+		"fingerprint": [
+			"There isn't a GitHub Pages site here.",
+            "For root URLs (like http://example.com/) you must provide an index.html file"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "google",
+		"cname": [
+			"google.com"
+		],
+		"fingerprint": [
+			"The requested URL / was not found on this server. That's all we know."
+		],
+		"nxdomain": false
+	},
+    	{
+		"service": "hatenablog",
+		"cname": [
+			"hatenablog.com"
+		],
+		"fingerprint": [
+			"404 Blog is not found"
+		],
+		"nxdomain": false
+   	 },
+	{
+		"service": "helprace",
+		"cname": [
+			"helprace.com"
+		],
+		"fingerprint": [
+			"Alias not configured!"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "helpjuice",
+		"cname": [
+			"helpjuice.com"
+		],
+		"fingerprint": [
+			"We could not find what you're looking for"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "helpscout",
+		"cname": [
+			"helpscoutdocs.com"
+		],
+		"fingerprint": [
+			"No settings were found for this company"
+		],
+		"nxdomain": false
+   	},
+    	{
+		"service": "heroku",
+		"cname": [
+			"herokuapp.com",
+			"herokudns.com",
+			"herokussl.com"
+		],
+		"fingerprint": [],
+		"nxdomain": false
+    	},
+    	{
+		"service": "intercom",
+		"cname": [
+			"custom.intercom.help",
+			"intercom.io"
+		],
+		"fingerprint": [
+			"This page is reserved for artistic dogs",
+			"Uh oh. That page doesn't exist."
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "jetBrains",
+		"cname": [
+			"jetbrains.com"
+		],
+		"fingerprint": [
+			"is not a registered InCloud YouTrack"
+		],
+		"nxdomain": false
+	},
+    	{
+		"service": "kinsta",
+		"cname": [
+			"kinsta.com"
+		],
+		"fingerprint": [
+			"No Site For Domain"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "landingi",
+		"cname": [
+			"landingi.com"
+		],
+		"fingerprint": [
+			"It looks like you're lost..."
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "launchrock",
+		"cname": [
+			"launchrock.com"
+		],
+		"fingerprint": [
+		    "It looks like you may have taken a wrong turn somewhere. Don't worry...it happens to all of us."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "mashery",
+		"cname": [
+			"mashery.com"
+		],
+		"fingerprint": [
+			"Unrecognized domain"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "nationbuilder",
+		"cname": [
+			"sendgrid.net" 
+		],
+		"fingerprint": [
+		    "Page cannot be found.",
+			"The URL you requested either moved or no longer exists."
+		],
+		"nxdomain": false
+	},
+    	{
+		"service": "naver",
+		"cname": [
+			"" 
+		],
+		"fingerprint": [
+		    "개인도메인 설정이 완료되지 않았습니다"
+		],
+		"nxdomain": false
+	},
+    	{
+		"service": "netlify",
+		"cname": [
+			".netlify.com"
+		],
+        	"fingerprint": [],
+		"nxdomain": false
+    	},
+    	{
+		"service": "ngrok",
+		"cname": [
+			"ngrok.io"
+		],
+        	"fingerprint": [
+			"Tunnel *.ngrok.io not found"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "ning",
+		"cname": [
+			"" 
+		],
+		"fingerprint": [
+		    "is free to take"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "pantheon",
+		"cname": [
+			"pantheonsite.io"
+		],
+		"fingerprint": [
+            "The gods are wise, but do not know of the site which you seek.",
+            "404 error unknown site!"
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "pingdom",
+		"cname": [
+			"stats.pingdom.com"
+		],
+		"fingerprint": [],
+		"nxdomain": false
+	},
+	{
+		"service": "proposify",
+		"cname": [
+			"proposify.com"
+		],
+		"fingerprint": [],
+		"nxdomain": false
+    	},
+	{
+		"service": "readme",
+		"cname": [
+			"readme.io",
+			"readmessl.com"
+		],
+		"fingerprint": [
+			"Project doesnt exist... yet!"
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "shopify",
+		"cname": [
+			"shops.myshopify.com"
+		],
+		"fingerprint": [
+            "Sorry, this shop is currently unavailable.",
+            "Only one step left!"
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "simplebooklet",
+		"cname": [
+			"simplebooklet.com"
+		],
+		"fingerprint": [
+			"We can't find this"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "strikingly",
+		"cname": [
+			"strikinglydns.com"
+		],
+        	"fingerprint": [
+			"But if you're looking to build your own website,",
+			"PAGE NOT FOUND"
+        	],
+		"nxdomain": false
+    	},
+	{
+		"service": "smartjobboard",
+		"cname": [],
+		"fingerprint": [
+			"This job board website is either expired or its domain name is invalid."
+		],
+		"nxdomain": false
+	},
+	
+    	{
+		"service": "smugmug",
+		"cname": [
+			"smugmug.com"
+		],
+		"fingerprint": [],
+		"nxdomain": false
+	},
+	{
+		"service": "squarespace",
+		"cname": [
+			"squarespace.com"
+		],
+		"fingerprint": [
+			"Squarespace - Claim This Domain"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "surge",
+		"cname": [
+			"surge.sh"
+		],
+		"fingerprint": [
+			"project not found"
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "surveygizmo-eu",
+		"cname": [
+			"surveygizmo.eu"
+		],
+		"fingerprint": [
+			"data-html-name"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "tave",
+		"cname": [
+			"tave.com"
+		],
+		"fingerprint": [
+			"Error 404: Page Not Found"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "teamwork",
+		"cname": [
+			"teamwork.com"
+		],
+		"fingerprint": [
+			"Oops - We didn't find your site"
+		],
+		"nxdomain": false
+	},
+    	{
+		"service": "tictail",
+		"cname": [
+			"tictail.com"
+		],
+		"fingerprint": [
+			"to target URL: <a href=\"https://tictail.com",
+            		"Start selling on Tictail.",
+            		"Building a brand of your own?"
+		],
+		"nxdomain": false
+    	},
+    	{
+		"service": "tistory",
+		"cname": [
+			"tistory.io"
+		],
+		"fingerprint": [
+		    "존재하지 않는 페이지 입니다."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "tilda",
+		"cname": [
+			"tilda.ws",
+			"tilda.cc"
+		],
+		"fingerprint": [
+		        "Domain has been assigned."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "tumblr",
+		"cname": [
+			"domains.tumblr.com"
+		],
+		"fingerprint": [
+            		"Whatever you were looking for doesn't currently exist at this address",
+            		"There's nothing here."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "unbounce",
+		"cname": [
+			"unbouncepages.com"
+		],
+		"fingerprint": [],
+		"nxdomain": false
+    	},
+	{
+		"service": "uservoice",
+		"cname": [
+			"uservoice.com"
+		],
+		"fingerprint": [
+			"This UserVoice subdomain is currently available!"
+		],
+		"nxdomain": false
+    	},
+	{
+		"service": "uptimerobot",
+		"cname": [
+			"uptimerobot.com"
+		],
+		"fingerprint": [
+			"Redirecting to https://uptimerobot.com/"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "vend",
+		"cname": [
+			"vendecommerce.com"
+		],
+		"fingerprint": [
+			"Looks like you've traveled too far into cyberspace"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "webflow",
+		"cname": [
+			"proxy-ssl.webflow.com"
+		],
+		"fingerprint": [
+			"The page you are looking for doesn't exist or has been moved."
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "webmin",
+		"cname": [
+			"webmin"
+		],
+		"fingerprint": [],
+		"nxdomain": false
+	},
+	{
+		"service": "wishpond",
+		"cname": [
+			"wishpond.com"
+		],
+		"fingerprint": [
+			"https://www.wishpond.com/404?campaign=true"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "wordpress",
+		"cname": [
+			"wordpress.com"
+		],
+		"fingerprint": [
+			"Do you want to register"
+		],
+		"nxdomain": false
+	},
+	{
+		"service": "zendesk",
+		"cname": [
+			"zendesk.com"
+		],
+		"fingerprint": [
+			"Help Center Closed"
+		],
+		"nxdomain": false
+	}
+]

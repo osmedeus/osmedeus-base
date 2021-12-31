@@ -1,0 +1,10 @@
+# for storages
+export SECRET_KEY=~/.osmedeus/secret_key.private
+export SUMMARY_REPO=git@gitlab.com:your_user_name/osmd-summary
+export VULN_REPO=git@gitlab.com:your_user_name/osmd-vuln
+export PATHS_REPO=git@gitlab.com:your_user_name/osmd-paths
+export HTTP_REPO=git@gitlab.com:your_user_name/osmd-http
+export PORTS_REPO=git@gitlab.com:your_user_name/osmd-ports
+export MICS_REPO=git@gitlab.com:your_user_name/osmd-mics
+export SUBDOMAIN_REPO=git@gitlab.com:your_user_name/osmd-subdomain
+export ASSETS_REPO=git@gitlab.com:your_user_name/osmd-assets

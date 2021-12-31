@@ -1,0 +1,68 @@
+site:__SITE__ filetype:wsdl
+site:__SITE__ filetype:php
+site:__SITE__ filetype:swf
+site:__SITE__ filetype:js
+site:__SITE__ filetype:jsp
+site:__SITE__ filetype:asp
+site:__SITE__ filetype:aspx
+site:__SITE__ filetype:txt
+site:__SITE__ filetype:xml
+site:__SITE__ filetype:sql
+site:__SITE__ filetype:cgi
+site:__SITE__ ext:cnf
+site:__SITE__ ext:config
+site:__SITE__ ext:log
+site:__SITE__ ext:sql
+site:__SITE__ ext:txt
+site:__SITE__ inurl:&
+site:__SITE__ inurl:config
+site:__SITE__ inurl:admin
+site:__SITE__ inurl:login
+site:__SITE__ inurl:logout
+site:__SITE__ inurl:signin
+site:__SITE__ inurl:signup
+site:__SITE__ inurl:signout
+site:__SITE__ inurl:register
+site:__SITE__ inurl:redirect
+site:__SITE__ inurl:unsubscribe
+site:__SITE__ intitle:"index of"
+site:__SITE__ intext:"/uploads/"
+site:__SITE__ inurl:wp-content
+site:__SITE__ inurl:jira
+site:__SITE__ inurl:page=
+site:__SITE__ inurl:return=
+site:__SITE__ inurl:redirect=
+site:__SITE__ inurl:url=
+site:__SITE__ inurl:file=
+site:__SITE__ inurl:token
+site:__SITE__ inurl:apikey
+site:__SITE__ inurl:password
+site:__SITE__ allinurl:@__SITE__
+site:__SITE__ intitle:"about atlassian bitbucket"
+site:__SITE__ "Fatal error"
+site:__SITE__ "PHP Error"
+site:__SITE__ "Call Stack"
+site:__SITE__ "mysql"
+site:__SITE__ "A problem occured in"
+site:__SITE__ "not found on this server"
+site:codepad.co "__SITE__"
+site:scribd.com "__SITE__"
+site:npmjs.com "__SITE__"
+site:npm.runkit.com "__SITE__"
+site:libraries.io "__SITE__"
+site:ycombinator.com "__SITE__"
+site:coggle.it "__SITE__"
+site:papaly.com "__SITE__"
+site:google.com "__SITE__"
+site:trello.com "__SITE__"
+site:prezi.com "__SITE__"
+site:jsdelivr.net "__SITE__"
+site:codepen.io "__SITE__"
+site:codeshare.io "__SITE__"
+site:sharecode.io "__SITE__"
+site:pastebin.com "__SITE__"
+site:repl.it "__SITE__"
+site:productforums.google.com "__SITE__"
+site:gitter.im "__SITE__"
+site:bitbucket.org "__SITE__"
+inurl:gitlab "__SITE__"
