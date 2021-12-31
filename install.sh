@@ -46,7 +46,7 @@ extractGz() {
 	rm -rf $1
 }
 
-announce "NOTE that this installation only works on Linux based machine."
+announce "NOTE that this installation only works on\033[0m Linux based machine."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "\033[1;34m[!] MacOS machine detected. Exit the script\033[0m"
     announce "Check out https://docs.osmedeus.org/faq/ for more information"
@@ -153,9 +153,9 @@ fi
 
 osmedeus config reload
 install_banner "Osmedeus Web UI"
-rm -rf ~/.osmedeus/core/* >/dev/null 2>&1
-mkdir -p ~/.osmedeus/core >/dev/null 2>&1
-cp -R $BASE_PATH/ui ~/.osmedeus/core/ui >/dev/null 2>&1
+rm -rf ~/.osmedeus/server/* >/dev/null 2>&1
+mkdir -p ~/.osmedeus/server >/dev/null 2>&1
+cp -R $BASE_PATH/ui ~/.osmedeus/server/ui >/dev/null 2>&1
 
 install_banner "Osmedeus Community Workflow:\033[0m https://github.com/osmedeus/osmedeus-workflow"
 rm -rf $BASE_PATH/workflow >/dev/null 2>&1
@@ -165,8 +165,9 @@ if [ ! -d "$BASE_PATH/workflow" ]; then
     git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
 fi
 
-install_banner "nuclei-templates"
-rm -rf ~/nuclei-templates && git clone --depth=1 https://github.com/projectdiscovery/nuclei-templates.git ~/nuclei-templates
+install_banner "Downloading Vulnscan template"
+jaeles config init >/dev/null 2>&1
+rm -rf ~/nuclei-templates && git clone --depth=1 https://github.com/projectdiscovery/nuclei-templates.git ~/nuclei-templates >/dev/null 2>&1
 
 ###### Private installation for premium package
 
