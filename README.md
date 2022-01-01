@@ -3,7 +3,7 @@
 <p align="center">
   <img alt="Osmedeus" src="https://raw.githubusercontent.com/osmedeus/assets/main/logo-transparent.png" height="140" />
   <br />
-  Osmedeus - A Workflow Engine for Offensive Security
+  <strong>Osmedeus - A Workflow Engine for Offensive Security</strong>
 
   <p align="center">
   <a href="https://docs.osmedeus.org/"><img src="https://img.shields.io/badge/Documentation-0078D4?style=for-the-badge&logo=Google-Chrome&logoColor=39ff14&labelColor=black&color=black"></a>
