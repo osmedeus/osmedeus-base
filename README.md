@@ -33,6 +33,26 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/m
   osmedeus scan -m /path/to/module.yaml -t [target] --params 'port=9200'
   osmedeus scan -m /path/to/module.yaml -t [target] -l /tmp/log.log
   cat targets | osmedeus scan -f sample
+  ## Start a simple scan with default 'general' flow
+  osmedeus scan -t sample.com
+
+  ## Start a general scan but exclude some of the module
+  osmedeus scan -t sample.com -x screenshot -x spider
+
+  ## Start a simple scan with other flow
+  osmedeus scan -f vuln -t sample.com
+
+  ## Scan for CIDR with file contains CIDR with the format '1.2.3.4/24'
+  osmedeus scan -f cidr -t list-of-cidrs.txt
+
+  ## Use a custom wordlist
+  osmedeus scan -t sample.com -p 'wordlists={{.Data}}/wordlists/content/big.txt' -p 'fthreads=40'
+
+  ## Scan list of targets
+  osmedeus scan -T list_of_targets.txt
+
+  ## Get target from a stdin and start the scan with 2 concurrency
+  cat list_of_targets.txt | osmedeus scan -c 2
 
 # Example Commands:
   osmedeus scan -t target.com
@@ -51,6 +71,21 @@ osmedeus server
 
 # Delete workspace
 osmedeus config delete -w workspace_name
+
+# Utils Commands
+
+osmedeus utils tmux ls
+osmedeus utils tmux logs -A -l 10
+osmedeus utils ps
+osmedeus utils ps --proc 'jaeles'
+osmedeus utils cron --cmd 'osmdeus scan -t example.com' --sch 60
+osmedeus utils cron --for --cmd 'osmedeus scan -t example.com'
+```
+
+## Using Docker
+
+```shell
+docker run -it j3ssie/osmedeus:latest scan -t example.com
 ```
 
 ## 💬 Community & Discussion

@@ -63,17 +63,17 @@ install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
 [ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER -qq install nmap -y 2>/dev/null
 [ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER -qq install masscan -y 2>/dev/null
 [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y 2>/dev/null
-# [ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER -qq install ripgrep -y 2>/dev/null
 [ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER -qq install unzip -y 2>/dev/null
 [ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER -qq install chromium -y 2>/dev/null
 [ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER -qq install chromium-browser -y 2>/dev/null
 [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y 2>/dev/null
-[ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER -qq install python-pip -y 2>/dev/null
-[ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER -qq install python3-pip -y 2>/dev/null
 [ -x "$(command -v jq)" ] || $SUDO $PACKGE_MANAGER -qq install jq -y 2>/dev/null
 [ -x "$(command -v rsync)" ] || $SUDO $PACKGE_MANAGER -qq install rsync -y 2>/dev/null
 [ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER -qq install htop -y 2>/dev/null
 [ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER -qq install coreutils net-tools -y 2>/dev/null
+# [ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER -qq install ripgrep -y 2>/dev/null
+# [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER -qq install python-pip -y 2>/dev/null
+# [ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER -qq install python3-pip -y 2>/dev/null
 
 announce "Clean up old stuff first"
 rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null

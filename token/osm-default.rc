@@ -1,5 +1,3 @@
-export GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ~/.osmedeus/secret_key.private'
-
 # for noti
 IPAddress=$(curl -s https://api.ipify.org)
 export SLACK_API_TOKEN=xoxb-XXXXXXXX
@@ -27,4 +25,4 @@ export FBCookie="xxx"
 
 source $HOME/osmedeus-base/token/cloud-variables.rc
 # Add binaries to PATH
-export PATH=$PATH:$HOME/osmedeus-base/binaries/
+export PATH=$PATH:$HOME/osmedeus-base/binaries
