@@ -55,7 +55,7 @@ fi
 
 $SUDO $PACKGE_MANAGER update -qq > /dev/null 2>&1
 install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
-# install all essioontials tools
+# reinstall all essioontials tools just to double check
 [ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER -qq install wget -y 2>/dev/null
 [ -x "$(command -v curl)" ] || $SUDO $PACKGE_MANAGER -qq install curl -y 2>/dev/null
 [ -x "$(command -v tmux)" ] || $SUDO $PACKGE_MANAGER -qq install tmux -y 2>/dev/null
@@ -63,7 +63,7 @@ install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
 [ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER -qq install nmap -y 2>/dev/null
 [ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER -qq install masscan -y 2>/dev/null
 [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y 2>/dev/null
-[ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER -qq install ripgrep -y 2>/dev/null
+# [ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER -qq install ripgrep -y 2>/dev/null
 [ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER -qq install unzip -y 2>/dev/null
 [ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER -qq install chromium -y 2>/dev/null
 [ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER -qq install chromium-browser -y 2>/dev/null
