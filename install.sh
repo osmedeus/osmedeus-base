@@ -46,7 +46,7 @@ extractGz() {
 	rm -rf $1
 }
 
-announce "NOTE that this installation only works on\033[0m Linux based machine."
+announce "NOTE that this installation only works on\033[0m Linux amd64 based machine."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "\033[1;34m[!] MacOS machine detected. Exit the script\033[0m"
     announce "Check out https://docs.osmedeus.org/faq/ for more information"
@@ -56,24 +56,24 @@ fi
 $SUDO $PACKGE_MANAGER update -qq > /dev/null 2>&1
 install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
 # reinstall all essioontials tools just to double check
-[ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER -qq install wget -y 2>/dev/null
-[ -x "$(command -v curl)" ] || $SUDO $PACKGE_MANAGER -qq install curl -y 2>/dev/null
-[ -x "$(command -v tmux)" ] || $SUDO $PACKGE_MANAGER -qq install tmux -y 2>/dev/null
-[ -x "$(command -v git)" ] || $SUDO $PACKGE_MANAGER -qq install git -y 2>/dev/null
-[ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER -qq install nmap -y 2>/dev/null
-[ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER -qq install masscan -y 2>/dev/null
-[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y 2>/dev/null
-[ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER -qq install unzip -y 2>/dev/null
-[ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER -qq install chromium -y 2>/dev/null
-[ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER -qq install chromium-browser -y 2>/dev/null
-[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y 2>/dev/null
-[ -x "$(command -v jq)" ] || $SUDO $PACKGE_MANAGER -qq install jq -y 2>/dev/null
-[ -x "$(command -v rsync)" ] || $SUDO $PACKGE_MANAGER -qq install rsync -y 2>/dev/null
-[ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER -qq install htop -y 2>/dev/null
-[ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER -qq install coreutils net-tools -y 2>/dev/null
-# [ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER -qq install ripgrep -y 2>/dev/null
-# [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER -qq install python-pip -y 2>/dev/null
-# [ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER -qq install python3-pip -y 2>/dev/null
+[ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER -qq install wget -y >/dev/null 2>&1
+[ -x "$(command -v curl)" ] || $SUDO $PACKGE_MANAGER -qq install curl -y >/dev/null 2>&1
+[ -x "$(command -v tmux)" ] || $SUDO $PACKGE_MANAGER -qq install tmux -y >/dev/null 2>&1
+[ -x "$(command -v git)" ] || $SUDO $PACKGE_MANAGER -qq install git -y >/dev/null 2>&1
+[ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER -qq install nmap -y >/dev/null 2>&1
+[ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER -qq install masscan -y >/dev/null 2>&1
+[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y >/dev/null 2>&1
+[ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER -qq install unzip -y >/dev/null 2>&1
+[ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER -qq install chromium -y >/dev/null 2>&1
+[ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER -qq install chromium-browser -y >/dev/null 2>&1
+[ -x "$(command -v jq)" ] || $SUDO $PACKGE_MANAGER -qq install jq -y >/dev/null 2>&1
+[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y >/dev/null 2>&1
+[ -x "$(command -v rsync)" ] || $SUDO $PACKGE_MANAGER -qq install rsync -y >/dev/null 2>&1
+[ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER -qq install coreutils net-tools -y >/dev/null 2>&1
+[ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER -qq install htop -y >/dev/null 2>&1
+# [ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER -qq install ripgrep -y >/dev/null 2>&1
+# [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER -qq install python-pip -y >/dev/null 2>&1
+# [ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER -qq install python3-pip -y >/dev/null 2>&1
 
 announce "Clean up old stuff first"
 rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
@@ -184,4 +184,4 @@ echo "---->>>"
 announce "The installation is done..."
 announce "Check here if you want to setup API & token:\033[0m https://docs.osmedeus.org/installation/token/"
 announce "Run\033[0m source ~/.bashrc \033[1;32m to complete the install"
-announce "Run\033[1;32m osmedeus config reload \033[0m to reload the config file"
+announce "Run\033[0m osmedeus config reload \033[1;32m to reload the config file"
