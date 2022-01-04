@@ -26,3 +26,4 @@ export FBCookie="xxx"
 source $HOME/osmedeus-base/token/cloud-variables.rc
 # Add binaries to PATH
 export PATH=$PATH:$HOME/osmedeus-base/binaries
+
