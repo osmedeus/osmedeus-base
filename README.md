@@ -37,6 +37,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/m
   ## Start a simple scan with default 'general' flow
   osmedeus scan -t sample.com
 
+  ## Start a scan directly with a module with inputs as a list of http domains like this https://sub.example.com
+  osmedeus scan -m ~/osmedeus-base/workflow/direct-module/dirbscan.yaml -t http-file.txt
+
   ## Start a general scan but exclude some of the module
   osmedeus scan -t sample.com -x screenshot -x spider
 
