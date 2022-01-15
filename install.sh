@@ -104,7 +104,7 @@ extractZip $TMP_DIST/subfinder.zip
 download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.5.7/nuclei_2.5.7_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.1.4/httpx_1.1.4_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.1.5/httpx_1.1.5_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
