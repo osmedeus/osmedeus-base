@@ -7,12 +7,10 @@ BASE_PATH="$HOME/osmedeus-base"
 BINARIES_PATH="$BASE_PATH/binaries"
 DATA_PATH="$BASE_PATH/data"
 TMP_DIST="/tmp/tmp-binaries"
+BAK_DIST="/tmp/bak-osm"
 DEFAULT_SHELL="$HOME/.bashrc"
 CWD=$(pwd)
 PACKGE_MANAGER="apt-get"
-
-echo -e "\033[1;37m[\033[1;31m+\033[1;37m]\033[1;32m Set Data Directory:\033[1;37m $DATA_PATH \033[0m"
-echo -e "\033[1;37m[\033[1;31m+\033[1;37m]\033[1;32m Set Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
 
 SUDO="sudo"
 if [ "$(whoami)" == "root" ]; then
@@ -49,7 +47,7 @@ extractGz() {
 announce "NOTE that this installation only works on\033[0m Linux amd64 based machine."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "\033[1;34m[!] MacOS machine detected. Exit the script\033[0m"
-    announce "Check out https://docs.osmedeus.org/faq/ for more information"
+    announce "Check out https://docs.osmedeus.org/installation/#install-for-macos-experimental for more MacOS installation"
     exit 1
 fi
 
@@ -75,9 +73,18 @@ install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
 # [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER -qq install python-pip -y >/dev/null 2>&1
 # [ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER -qq install python3-pip -y >/dev/null 2>&1
 
+announce "\033[1;33mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
+announce "\033[1;33mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
+
 announce "Clean up old stuff first"
 rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
+
+if [ -d "$HOME/osmedeus-base/data" ]; then
+    announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base\033[0m"
+    rm -rf $BAK_DIST 
+    mv $HOME/osmedeus-base $BAK_DIST
+fi
 
 announce "Cloning Osmedeus base repo:\033[0m https://github.com/osmedeus/osmedeus-base"
 rm -rf $BASE_PATH && git clone --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
@@ -168,6 +175,18 @@ fi
 install_banner "Downloading Vulnscan template"
 jaeles config init >/dev/null 2>&1
 rm -rf ~/nuclei-templates && git clone --depth=1 https://github.com/projectdiscovery/nuclei-templates.git ~/nuclei-templates >/dev/null 2>&1
+
+if [ -d "$BAK_DIST/data" ]; then
+    announce "Updating old data + cloud config ..."
+    rm -rf $HOME/osmedeus-base/data && cp -R $BAK_DIST/data $HOME/osmedeus-base/data
+fi
+if [ -d "$BAK_DIST/cloud" ]; then
+    rm -rf $HOME/osmedeus-base/cloud && cp -R $BAK_DIST/cloud $HOME/osmedeus-base/cloud
+fi
+if [ -d "$BAK_DIST/token" ]; then
+    rm -rf $HOME/osmedeus-base/token && cp -R $BAK_DIST/token $HOME/osmedeus-base/token
+fi
+rm -rf $BAK_DIST >/dev/null 2>&1
 
 ###### Private installation for premium package
 
