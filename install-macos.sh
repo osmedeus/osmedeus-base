@@ -66,8 +66,8 @@ if [[ "$OSTYPE" == "linux"* ]]; then
     [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER install build-essential -y >/dev/null 2>&1
 fi
 
-announce "\033[1;33mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
-announce "\033[1;33mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
+announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
+announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
 
 announce "Clean up old stuff first"
 rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH >/dev/null 2>&1

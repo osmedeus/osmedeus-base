@@ -27,7 +27,7 @@ install_banner() {
 }
 
 download() {
-    echo -e "\033[1;37m[\033[1;36m+\033[1;37m]\033[1;32m Downloading $1 \033[0m"
+    # echo -e "\033[1;37m[\033[1;36m+\033[1;37m]\033[1;32m Downloading $1 \033[0m"
     wget --no-check-certificate -q -O $1 $2
     if [ ! -f "$1" ]; then
         wget --no-check-certificate -q -O $1 $2
@@ -73,8 +73,8 @@ install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
 # [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER -qq install python-pip -y >/dev/null 2>&1
 # [ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER -qq install python3-pip -y >/dev/null 2>&1
 
-announce "\033[1;33mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
-announce "\033[1;33mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
+announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
+announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
 
 announce "Clean up old stuff first"
 rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
@@ -102,40 +102,52 @@ rm -rf $osmBin && cp $BASE_PATH/dist/osmedeus $osmBin && chmod +x $osmBin
 
 install_banner "External binaries"
 
-download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3.15.2/amass_linux_amd64.zip
+install_banner "Amass"
+download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3.16.0/amass_linux_amd64.zip
 extractZip $TMP_DIST/amass.zip
 
+install_banner "subfinder"
 download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.4.9/subfinder_2.4.9_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
+install_banner "nuclei"
 download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.5.7/nuclei_2.5.7_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
+install_banner "httpx"
 download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.1.5/httpx_1.1.5_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
+install_banner "aquatone"
 download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
 extractZip $TMP_DIST/aquatone.zip
 
+install_banner "findomain"
 download $BINARIES_PATH/findomain https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
 
+install_banner "gau"
 download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.0.6/gau_2.0.6_linux_amd64.tar.gz
 extractGz $TMP_DIST/gau.gz
 
+install_banner "ffuf"
 download $TMP_DIST/ffuf.gz https://github.com/ffuf/ffuf/releases/download/v1.3.1/ffuf_1.3.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/ffuf.gz
 
 ## my tools 
 
+install_banner "gospider"
 download $TMP_DIST/gospider.zip https://github.com/jaeles-project/gospider/releases/download/v1.1.6/gospider_v1.1.6_linux_x86_64.zip
 extractZip $TMP_DIST/gospider.zip
 
+install_banner "jaeles"
 download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/download/beta-v0.17/jaeles-v0.17-linux.zip
 extractZip $TMP_DIST/jaeles.zip
 
+install_banner "goverview"
 download $TMP_DIST/goverview.gz https://github.com/j3ssie/goverview/releases/download/v1.0.1/goverview_v1.0.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/goverview.gz
 
+install_banner "metabigor"
 download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v1.10/metabigor_v1.10_linux_amd64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
 

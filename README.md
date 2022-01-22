@@ -79,17 +79,17 @@ cat list_of_targets.txt | osmedeus scan -c 2
 osmedeus scan --wfFolder ~/custom-workflow/ -f your-custom-workflow -t sample.com
 
 # Example Commands:
-  osmedeus scan -t target.com
-  osmedeus scan -T list_of_targets.txt -W custom_workspaces
-  osmedeus scan -t target.com -w workspace_name --debug
-  osmedeus scan -f single -t www.sample.com
-  osmedeus scan -f ovuln-T list_of_target.txt
-  osmedeus scan -m ~/osmedeus-base/workflow/test/dirbscan.yaml -t list_of_urls.txt
-  osmedeus health
-  ls ~/.osmedeus/storages/summary/ | osmedeus scan -m ~/osmedeus-base/workflow/test/dirbscan.yaml
-  ls ~/.osmedeus/storages/summary/ | osmedeus scan -m ~/osmedeus-base/workflow/test/busting.yaml -D
+osmedeus scan -t target.com
+osmedeus scan -T list_of_targets.txt -W custom_workspaces
+osmedeus scan -t target.com -w workspace_name --debug
+osmedeus scan -f single -t www.sample.com
+osmedeus scan -f ovuln-T list_of_target.txt
+osmedeus scan -m ~/osmedeus-base/workflow/test/dirbscan.yaml -t list_of_urls.txt
+osmedeus health
+ls ~/.osmedeus/storages/summary/ | osmedeus scan -m ~/osmedeus-base/workflow/test/dirbscan.yaml
+ls ~/.osmedeus/storages/summary/ | osmedeus scan -m ~/osmedeus-base/workflow/test/busting.yaml -D
 
-# Start Web UI at https://localhost:8000/ui/
+# Start Web UI at https://<your-instance-machine>:8000/ui/
 osmedeus server
 # login with credentials from `~/.osmedeus/config.yaml`
 
@@ -111,6 +111,8 @@ osmedeus utils cron --for --cmd 'osmedeus scan -t example.com'
 ```shell
 docker run -it j3ssie/osmedeus:latest scan -t example.com
 ```
+
+Check this page for more [docker usage](https://docs.osmedeus.org/installation/using-docker/)
 
 ## 💬 Community & Discussion
 
