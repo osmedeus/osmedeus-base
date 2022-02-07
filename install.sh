@@ -81,7 +81,7 @@ rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
 
 if [ -d "$HOME/osmedeus-base/data" ]; then
-    announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base\033[0m"
+    announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base $HOME/.osmedeus\033[0m"
     rm -rf $BAK_DIST 
     mv $HOME/osmedeus-base $BAK_DIST
 fi

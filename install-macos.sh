@@ -74,7 +74,7 @@ rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH >/dev/null 2>&1
 mkdir -p "$GO_DIR" >/dev/null 2>&1
 
 if [ -d "$HOME/osmedeus-base/data" ]; then
-    announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base\033[0m"
+    announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base $HOME/.osmedeus\033[0m"
     rm -rf $BAK_DIST 
     mv $HOME/osmedeus-base $BAK_DIST
 fi
@@ -181,6 +181,7 @@ install_banner "httprobe"
 $GO_BIN get -ldflags "-s -w" -u github.com/tomnomnom/httprobe 2>&1 > /dev/null
 install_banner "unfurl"
 $GO_BIN get -ldflags "-s -w" -u github.com/tomnomnom/unfurl 2>&1 > /dev/null
+$GO_BIN get -ldflags "-s -w" -u github.com/tomnomnom/anew 2>&1 > /dev/null
 install_banner "go cli-utils"
 $GO_BIN get -ldflags "-s -w" -u github.com/shenwei356/rush/ 2>&1 > /dev/null
 $GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/chrunk 2>&1 > /dev/null
