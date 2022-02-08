@@ -111,7 +111,7 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.5.7/nuclei_2.5.7_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.6.0/nuclei_2.6.0_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -168,6 +168,10 @@ export PATH=$BINARIES_PATH:$PATH
 isInFile=$(cat $DEFAULT_SHELL | grep -c "osm-default.rc")
 if [ $isInFile -eq 0 ]; then
    echo 'source $HOME/osmedeus-base/token/osm-default.rc' >> $DEFAULT_SHELL
+fi
+isInFile=$(cat $DEFAULT_SHELL | grep -c "[[ -f $DEFAULT_SHELL ]]")
+if [ $isInFile -eq 0 ]; then
+   echo "[[ -f $DEFAULT_SHELL ]] && . $DEFAULT_SHELL" >> $HOME/.bash_profile
 fi
 
 osmedeus config reload
