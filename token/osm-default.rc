@@ -1,5 +1,5 @@
 # for noti
-IPAddress=$(curl -s https://api.ipify.org)
+IPAddress=$(curl -s https://ipinfo.io/ip)
 export SLACK_API_TOKEN=xoxb-XXXXXXXX
 export CLIENT_NAME=$HOSTNAME"@"$IPAddress
 export SLACK_STATUS_CHANNEL=CSXXXXX
@@ -26,4 +26,3 @@ export FBCookie="xxx"
 source $HOME/osmedeus-base/token/cloud-variables.rc
 # Add binaries to PATH
 export PATH=$PATH:$HOME/osmedeus-base/binaries
-

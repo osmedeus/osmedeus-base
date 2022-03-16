@@ -27,7 +27,6 @@ install_banner() {
 }
 
 download() {
-    # echo -e "\033[1;37m[\033[1;36m+\033[1;37m]\033[1;32m Downloading $1 \033[0m"
     wget --no-check-certificate -q -O $1 $2
     if [ ! -f "$1" ]; then
         wget --no-check-certificate -q -O $1 $2
@@ -43,6 +42,10 @@ extractGz() {
 	tar -xf $1 -C $BINARIES_PATH/
 	rm -rf $1
 }
+
+if [[ $EUID -ne 0 ]]; then
+  announce "You're running the script as\033[1;34m $USER \033[0m. It is recommended to run as root user by running\033[1;34m sudo su \033[0mfirst"
+fi
 
 announce "NOTE that this installation only works on\033[0m Linux amd64 based machine."
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -69,9 +72,6 @@ install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
 [ -x "$(command -v rsync)" ] || $SUDO $PACKGE_MANAGER -qq install rsync -y >/dev/null 2>&1
 [ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER -qq install coreutils net-tools -y >/dev/null 2>&1
 [ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER -qq install htop -y >/dev/null 2>&1
-# [ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER -qq install ripgrep -y >/dev/null 2>&1
-# [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER -qq install python-pip -y >/dev/null 2>&1
-# [ -x "$(command -v pip3)" ] || $SUDO $PACKGE_MANAGER -qq install python3-pip -y >/dev/null 2>&1
 
 announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
 announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
@@ -97,6 +97,11 @@ fi
 announce "Setup Osmedeus Core Engine:\033[0m $osmBin"
 unzip -q -o -j $BASE_PATH/dist/osmedeus-linux.zip -d $BASE_PATH/dist/
 rm -rf $osmBin && cp $BASE_PATH/dist/osmedeus $osmBin && chmod +x $osmBin
+if [ ! -f "$osmBin" ]; then
+    echo "[!] Unable to copy the Osmedeus binary to: $osmBin"
+    osmBin="$BINARIES_PATH/osmedeus"
+    announce "Copying Osmedeus binary to $osmBin instead"
+fi
 
 #### done the osm core part
 

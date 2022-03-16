@@ -64,6 +64,20 @@ if [[ "$OSTYPE" == "linux"* ]]; then
     [ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER install unzip -y >/dev/null 2>&1
     [ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER install chromium-browser -y >/dev/null 2>&1
     [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER install build-essential -y >/dev/null 2>&1
+else
+    PACKGE_MANAGER="brew"
+    [ -x "$(command -v wget)" ] || $PACKGE_MANAGER install wget -q >/dev/null 2>&1
+    [ -x "$(command -v curl)" ] || $PACKGE_MANAGER install curl -q >/dev/null 2>&1
+    [ -x "$(command -v tmux)" ] || $PACKGE_MANAGER install tmux -q >/dev/null 2>&1
+    [ -x "$(command -v git)" ] || $PACKGE_MANAGER install git -q >/dev/null 2>&1
+    [ -x "$(command -v nmap)" ] || $PACKGE_MANAGER install nmap -q >/dev/null 2>&1
+    [ -x "$(command -v masscan)" ] || $PACKGE_MANAGER install masscan -q >/dev/null 2>&1
+    [ -x "$(command -v chromium)" ] || $PACKGE_MANAGER install chromium -q >/dev/null 2>&1
+    [ -x "$(command -v make)" ] || $PACKGE_MANAGER install build-essential -q >/dev/null 2>&1
+    [ -x "$(command -v rg)" ] || $PACKGE_MANAGER install ripgrep -q >/dev/null 2>&1
+    [ -x "$(command -v unzip)" ] || $PACKGE_MANAGER install unzip -q >/dev/null 2>&1
+    [ -x "$(command -v chromium-browser)" ] || $PACKGE_MANAGER install chromium-browser -q >/dev/null 2>&1
+    [ -x "$(command -v make)" ] || $PACKGE_MANAGER install build-essential -q >/dev/null 2>&1
 fi
 
 announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
@@ -94,6 +108,11 @@ else
     unzip -q -o -j $BASE_PATH/dist/osmedeus-linux.zip -d $BASE_PATH/dist/
 fi
 rm -rf $osmBin && cp $BASE_PATH/dist/osmedeus $osmBin && chmod +x $osmBin
+if [ ! -f "$osmBin" ]; then
+    echo "[!] Unable to copy the Osmedeus binary to: $osmBin"
+    osmBin="$BINARIES_PATH/osmedeus"
+    announce "Copying Osmedeus binary to $osmBin instead"
+fi
 
 ######## Start to install binaries
 
@@ -102,7 +121,7 @@ mkdir -p $BINARIES_PATH >/dev/null 2>&1
 install_banner "massdns"
 cd $BINARIES_PATH
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    brew install massdns
+    brew install massdns -q
     cp $(which massdns) $BINARIES_PATH/massdns
 else
     git clone --depth=1 https://github.com/blechschmidt/massdns build-massdns
@@ -142,7 +161,7 @@ extractGz $TMP_DIST/csvtk.gz
 
 install_banner "rustscan"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    brew install rustscan
+    brew install rustscan -q
 else
     wget -q -O /tmp/rustscan.deb https://github.com/RustScan/RustScan/releases/download/2.0.1/rustscan_2.0.1_amd64.deb
     dpkg -i /tmp/rustscan.deb 2>&1 > /dev/null
