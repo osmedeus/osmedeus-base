@@ -78,7 +78,6 @@ announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
 
 announce "Clean up old stuff first"
 rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
-rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
 
 if [ -d "$HOME/osmedeus-base/data" ]; then
     announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base $HOME/.osmedeus\033[0m"
@@ -107,21 +106,33 @@ fi
 
 install_banner "External binaries"
 
+rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
+download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.7.8/packer_1.7.8_linux_amd64.zip
+extractZip $TMP_DIST/packer.zip
+
 install_banner "Amass"
-download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3.16.0/amass_linux_amd64.zip
+download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3.19.1/amass_linux_amd64.zip
 extractZip $TMP_DIST/amass.zip
 
 install_banner "subfinder"
-download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.4.9/subfinder_2.4.9_linux_amd64.zip
+download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.5.1/subfinder_2.5.1_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.6.0/nuclei_2.6.0_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.6.5/nuclei_2.6.5_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.1.5/httpx_1.1.5_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.0/httpx_1.2.0_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
+
+install_banner "ffuf"
+download $TMP_DIST/ffuf.gz https://github.com/ffuf/ffuf/releases/download/v1.4.1/ffuf_1.4.1_linux_amd64.tar.gz
+extractGz $TMP_DIST/ffuf.gz
+
+install_banner "gau"
+download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.0.9/gau_2.0.9_linux_amd64.tar.gz
+extractGz $TMP_DIST/gau.gz
 
 install_banner "aquatone"
 download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
@@ -129,14 +140,6 @@ extractZip $TMP_DIST/aquatone.zip
 
 install_banner "findomain"
 download $BINARIES_PATH/findomain https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
-
-install_banner "gau"
-download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.0.6/gau_2.0.6_linux_amd64.tar.gz
-extractGz $TMP_DIST/gau.gz
-
-install_banner "ffuf"
-download $TMP_DIST/ffuf.gz https://github.com/ffuf/ffuf/releases/download/v1.3.1/ffuf_1.3.1_linux_amd64.tar.gz
-extractGz $TMP_DIST/ffuf.gz
 
 ## my tools 
 
@@ -152,7 +155,6 @@ install_banner "goverview"
 download $TMP_DIST/goverview.gz https://github.com/j3ssie/goverview/releases/download/v1.0.1/goverview_v1.0.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/goverview.gz
 
-install_banner "metabigor"
 download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v1.10/metabigor_v1.10_linux_amd64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
 
