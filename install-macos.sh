@@ -193,51 +193,53 @@ cd $CWD
 # Install go stuff
 ##
 install_banner "goaltdns"
-$GO_BIN get -ldflags "-s -w" -u github.com/subfinder/goaltdns 2>&1 > /dev/null
+$GO_BIN install github.com/subfinder/goaltdns@latest 2>&1 > /dev/null
 install_banner "assetfinder"
-$GO_BIN get -ldflags "-s -w" -u github.com/tomnomnom/assetfinder 2>&1 > /dev/null
+$GO_BIN install github.com/tomnomnom/assetfinder@latest 2>&1 > /dev/null
 install_banner "httprobe"
-$GO_BIN get -ldflags "-s -w" -u github.com/tomnomnom/httprobe 2>&1 > /dev/null
+$GO_BIN install github.com/tomnomnom/httprobe@latest 2>&1 > /dev/null
 install_banner "unfurl"
-$GO_BIN get -ldflags "-s -w" -u github.com/tomnomnom/unfurl 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/tomnomnom/anew 2>&1 > /dev/null
+$GO_BIN install github.com/tomnomnom/unfurl@latest 2>&1 > /dev/null
+$GO_BIN install github.com/tomnomnom/anew@latest 2>&1 > /dev/null
 install_banner "go cli-utils"
-$GO_BIN get -ldflags "-s -w" -u github.com/shenwei356/rush/ 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/chrunk 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/cinfo 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/eip 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/durl 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/ourl 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/urp 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/cleansub 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/go-auxs/cdnfilter 2>&1 > /dev/null
-$GO_BIN get -ldflags "-s -w" -u github.com/theblackturtle/ptools/wurl 2>&1 > /dev/null
+$GO_BIN install github.com/shenwei356/rush@latest/ 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/chrunk@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/cinfo@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/eip@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/durl@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/ourl@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/urp@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/cleansub@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/cdnfilter@latest 2>&1 > /dev/null
+$GO_BIN install github.com/theblackturtle/ptools/wurl@latest 2>&1 > /dev/null
 install_banner "goverview"
-$GO_BIN get -ldflags "-s -w" -u github.com/j3ssie/goverview 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/goverview@latest 2>&1 > /dev/null
 install_banner "github-endpoints"
-$GO_BIN get -ldflags "-s -w" -u github.com/gwen001/github-endpoints 2>&1 > /dev/null
+$GO_BIN install github.com/gwen001/github-endpoints@latest 2>&1 > /dev/null
 install_banner "github-subdomains"
-$GO_BIN get -ldflags "-s -w" -u github.com/gwen001/github-subdomains 2>&1 > /dev/null
+$GO_BIN install github.com/gwen001/github-subdomains@latest 2>&1 > /dev/null
 GO111MODULE=off $GO_BIN get -u github.com/Josue87/gotator 2>&1 > /dev/null
 install_banner "puredns"
-$GO_BIN get -u github.com/d3mondev/puredns/v2 2>&1 > /dev/null
+$GO_BIN install github.com/d3mondev/puredns/v2@latest 2>&1 > /dev/null
 
 install_banner "amass"
-GO111MODULE=on $GO_BIN get github.com/OWASP/Amass/v3/... 2>&1 > /dev/null
+$GO_BIN install github.com/OWASP/Amass/v3/...@latest 2>&1 > /dev/null
 install_banner "gau"
-GO111MODULE=on $GO_BIN get -u github.com/lc/gau 2>&1 > /dev/null
+$GO_BIN install github.com/lc/gau@latest 2>&1 > /dev/null
 install_banner "shuffledns"
-GO111MODULE=on $GO_BIN get github.com/projectdiscovery/shuffledns/cmd/shuffledns 2>&1 > /dev/null
+$GO_BIN install github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest 2>&1 > /dev/null
 install_banner "dnsx"
-GO111MODULE=on $GO_BIN get github.com/projectdiscovery/dnsx/cmd/dnsx 2>&1 > /dev/null
+$GO_BIN install github.com/projectdiscovery/dnsx/cmd/dnsx@latest 2>&1 > /dev/null
 install_banner "nuclei"
 $GO_BIN install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest 2>&1 > /dev/null
 install_banner "subfinder"
 $GO_BIN install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 2>&1 > /dev/null
+install_banner "gospider"
+$GO_BIN install github.com/jaeles-project/gospider@latest 2>&1 > /dev/null
 install_banner "jaeles"
-GO111MODULE=on $GO_BIN install github.com/jaeles-project/jaeles@latest 2>&1 > /dev/null
+$GO_BIN install github.com/jaeles-project/jaeles@latest 2>&1 > /dev/null
 install_banner "metabigor"
-GO111MODULE=on $GO_BIN install github.com/j3ssie/metabigor@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/metabigor@latest 2>&1 > /dev/null
 
 echo -e "\033[1;32m[+] Copy all go tools from: $GO_DIR \033[0m"
 cp $GO_DIR/* $BINARIES_PATH/ >/dev/null 2>&1
