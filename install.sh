@@ -123,7 +123,7 @@ download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/release
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.0/httpx_1.2.0_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.1/httpx_1.2.1_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "ffuf"
