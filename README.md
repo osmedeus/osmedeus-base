@@ -21,13 +21,13 @@
 > NOTE that you need some essential tools like `curl, wget, git, zip` and login as **root** to start
 
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install.sh)"
+bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install.sh)
 ```
 
 ## Installation for MacOS (experimental)
 
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install-macos.sh)"
+bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install-macos.sh)
 ```
 
 Check out [this page](https://docs.osmedeus.org/installation/) for more the install on other platforms
