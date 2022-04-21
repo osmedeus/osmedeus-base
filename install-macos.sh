@@ -145,9 +145,9 @@ chmod +x $BINARIES_PATH/findomain
 install_banner "packer"
 rm -rf /tmp/packer.zip
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.7.8/packer_1.7.8_darwin_amd64.zip
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_darwin_amd64.zip
 else
-    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.7.8/packer_1.7.8_linux_amd64.zip
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_linux_amd64.zip
 fi
 extractZip $TMP_DIST/packer.zip
 
