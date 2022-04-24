@@ -204,7 +204,8 @@ $GO_BIN install github.com/tomnomnom/anew@latest 2>&1 > /dev/null
 install_banner "go cli-utils"
 $GO_BIN install github.com/shenwei356/rush@latest/ 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/chrunk@latest 2>&1 > /dev/null
-$GO_BIN install github.com/j3ssie/go-auxs/cinfo@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/cinfo@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/cdnstrip@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/eip@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/durl@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/ourl@latest 2>&1 > /dev/null
