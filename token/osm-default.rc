@@ -10,7 +10,7 @@ export SLACK_WEBHOOK=https://xxx
 # for telegram
 export TELEGRAM_API_TOKEN=1111114500:AAGx
 
-## send this one to get channel ID: curl 'https://api.telegram.org/bot$TELEGRAM_API_TOKEN/sendMessage?chat_id=@osmpReports&text=hello'
+## send this one to get channel ID: curl 'https://api.telegram.org/bot$TELEGRAM_API_TOKEN/sendMessage?chat_id=@yourOsmChannel&text=hello'
 ## {"ok":true,"result":{"message_id":2,"sender_chat":{"id":-1001353928088,"title":"your-osm-channel","username":"yourOsmChannel","type":"channel"},"chat":{"id":-1001353928088,"title":"your-osm-channel","username":"yourOsmChannel","type":"channel"},"date":1650958729,"text":"hello"}}#
 ## --> your channel ID is '-1001353928088'
 
