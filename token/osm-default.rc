@@ -24,9 +24,5 @@ export TELEGRAM_MICS_CHANNEL=-100XXXXX
 # Set github token for run github scan
 export GITHUB_TOKEN=xxx,xxxx
 
-# For google dorks
-export FBCookie="xxx"
-
-source $HOME/osmedeus-base/token/cloud-variables.rc
 # Add binaries to PATH
 export PATH=$PATH:$HOME/osmedeus-base/binaries
