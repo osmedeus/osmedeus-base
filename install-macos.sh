@@ -206,12 +206,12 @@ $GO_BIN install github.com/shenwei356/rush@latest/ 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/chrunk@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/cinfo@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/cdnstrip@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/str-replace@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/eip@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/durl@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/ourl@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/urp@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/cleansub@latest 2>&1 > /dev/null
-$GO_BIN install github.com/j3ssie/go-auxs/cdnfilter@latest 2>&1 > /dev/null
 $GO_BIN install github.com/theblackturtle/ptools/wurl@latest 2>&1 > /dev/null
 install_banner "goverview"
 $GO_BIN install github.com/j3ssie/goverview@latest 2>&1 > /dev/null
@@ -231,6 +231,8 @@ install_banner "shuffledns"
 $GO_BIN install github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest 2>&1 > /dev/null
 install_banner "dnsx"
 $GO_BIN install github.com/projectdiscovery/dnsx/cmd/dnsx@latest 2>&1 > /dev/null
+install_banner "httpx"
+$GO_BIN install github.com/projectdiscovery/httpx/cmd/httpx@latest 2>&1 > /dev/null
 install_banner "nuclei"
 $GO_BIN install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest 2>&1 > /dev/null
 install_banner "subfinder"

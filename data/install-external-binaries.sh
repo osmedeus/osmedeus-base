@@ -7,12 +7,16 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.6.8/nuclei_2.6.8_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.6.9/nuclei_2.6.9_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
 download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.1/httpx_1.2.1_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
+
+install_banner "dnsx"
+download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/download/v1.1.0/dnsx_1.1.0_linux_amd64.zip
+extractZip $TMP_DIST/dnsx.zip
 
 install_banner "gau"
 download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.1.1/gau_2.1.1_linux_amd64.tar.gz
@@ -27,7 +31,7 @@ download $TMP_DIST/gospider.zip https://github.com/jaeles-project/gospider/relea
 extractZip $TMP_DIST/gospider.zip
 
 install_banner "jaeles"
-download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/download/beta-v0.17/jaeles-v0.17-linux.zip
+download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/download/beta-v0.17/jaeles_v0.17-linux.zip
 extractZip $TMP_DIST/jaeles.zip
 
 install_banner "metabigor"
