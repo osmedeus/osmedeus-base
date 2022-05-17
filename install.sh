@@ -18,6 +18,9 @@ if [ "$(whoami)" == "root" ]; then
     SUDO=""
 fi
 [ -x "$(command -v apt)" ] && PACKGE_MANAGER="apt"
+if [ -f "$HOME/.zshrc" ]; then
+    DEFAULT_SHELL="$HOME/.zshrc"
+fi
 
 announce() {
     echo -e "\033[1;37m[\033[1;31m+\033[1;37m]\033[1;32m $1 \033[0m"
@@ -128,8 +131,9 @@ fi
 cp $TMP_DIST/auxs-binaries/releases/* $BINARIES_PATH/
 chmod +x $BINARIES_PATH/*
 export PATH=$BINARIES_PATH:$PATH
-### done the binaries part
 
+### done the binaries part
+announce "Adding default environment in your $DEFAULT_SHELL \033[0m"
 isInFile=$(cat $DEFAULT_SHELL | grep -c "osm-default.rc")
 if [ $isInFile -eq 0 ]; then
    echo 'source $HOME/osmedeus-base/token/osm-default.rc' >> $DEFAULT_SHELL

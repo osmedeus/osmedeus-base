@@ -15,7 +15,9 @@ if [ "$(whoami)" == "root" ]; then
     SUDO=""
 fi
 [ -x "$(command -v apt)" ] && PACKGE_MANAGER="apt"
-
+if [ -f "$HOME/.zshrc" ]; then
+    DEFAULT_SHELL="$HOME/.zshrc"
+fi
 if [[ "$OSTYPE" == "darwin"* ]]; then
     PACKGE_MANAGER="brew"
 else
@@ -186,6 +188,9 @@ export PATH=$GOPATH/bin:$PATH
 echo -e "\033[1;32m[+] Detected go binary: $GO_BIN \033[0m"
 [[ -d $GO_DIR ]] || GO_DIR=$GOPATH/bin
 echo -e "\033[1;32m[+] Detected go tools: $GO_DIR \033[0m"
+CURRENT_GO=$(go version)
+echo -e "\033[1;32m[+] Required golang verion >= v1.17 \033[0m"
+echo -e "\033[1;32m[+] Detected current golang version: $CURRENT_GO \033[0m"
 
 cd $CWD
 
@@ -250,7 +255,7 @@ chmod +x $BINARIES_PATH/*
 export PATH=$BINARIES_PATH:$PATH
 
 ###### done the binaries part
-
+announce "Adding default environment in your $DEFAULT_SHELL \033[0m"
 isInFile=$(cat $DEFAULT_SHELL | grep -c "osm-default.rc")
 if [ $isInFile -eq 0 ]; then
    echo 'source $HOME/osmedeus-base/token/osm-default.rc' >> $DEFAULT_SHELL
