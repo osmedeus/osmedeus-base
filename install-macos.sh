@@ -176,7 +176,12 @@ cd $CWD
 
 # update golang version
 install_banner "Golang latest version"
+# delete old go binaries if it detect
+if [ -f "$HOME/.go/bin/go" ]; then
+    rm -rf $HOME/.go/bin/go
+fi
 wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
+if /Users/j3ssie/.go/bin/go
 
 export GO_BIN="$HOME/.go/bin/go"
 export GOROOT=$HOME/.go

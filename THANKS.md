@@ -28,7 +28,7 @@
 | nmap         | https://github.com/nmap/nmap       |
 
 
-Special thanks to my friend [@theblackturtle](https://github.com/theblackturtle) for create and testing a lot of auxiliary tools
+Special thanks to my friend [@theblackturtle](https://github.com/theblackturtle) for creating and testing a lot of auxiliary tools.
 
 ***
 

@@ -16,26 +16,39 @@
 
 ***
 
-## Installation for Linux
+
+## 🔥 What is Osmedeus?
+
+Osmedeus is a Workflow Engine for Offensive Security. It was designed to build a foundation with the capability and flexibility that allows you to build your own reconnaissance system and run it on a large number of targets.
+
+## 📖 Documentation & FAQ
+
+You can check out the documentation at [**docs.osmedeus.org**](https://docs.osmedeus.org) and the Frequently Asked Questions at [**here**](https://docs.osmedeus.org/faq) for more information.
+
+
+## 📦 Installation
+
+### Installation for Linux
 
 > NOTE that you need some essential tools like `curl, wget, git, zip` and login as **root** to start
 
-```shell
+```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install.sh)
 ```
 
-## Installation for MacOS (experimental)
+### Installation for MacOS (experimental)
 
-```shell
+```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install-macos.sh)
 ```
 
 Check out [this page](https://docs.osmedeus.org/installation/) for more the install on other platforms
 
 
-## Usage
+## 💡 Usage
 
-```shell
+
+```bash
 # Practical Usage:
 osmedeus scan -f [flowName] -t [target]
 osmedeus scan -f [flowName] -T [targetsFile]
@@ -97,7 +110,6 @@ osmedeus server
 osmedeus config delete -w workspace_name
 
 # Utils Commands
-
 osmedeus utils tmux ls
 osmedeus utils tmux logs -A -l 10
 osmedeus utils ps
@@ -106,9 +118,11 @@ osmedeus utils cron --cmd 'osmdeus scan -t example.com' --sch 60
 osmedeus utils cron --for --cmd 'osmedeus scan -t example.com'
 ```
 
+Check out [**this page**](https://docs.osmedeus.org/installation/usage/) for full usage and the [**Practical Usage**](https://docs.osmedeus.org/installation/practical-usage/) to see how to use Osmedeus in a practical way.
+
 ## Using Docker
 
-```shell
+```bash
 docker run -it j3ssie/osmedeus:latest scan -t example.com
 ```
 
@@ -120,12 +134,15 @@ Join Our Discord server [here](https://discord.gg/mtQG2FQsYA)
 
 ## 💎 Donation & Sponsor
 
-<p align="center">
+<h3 align="center">
  <img alt="Osmedeus" src="https://raw.githubusercontent.com/osmedeus/assets/main/premium-package.gif" />
 
  <p align="center"> Check out for a couple of <strong><a href="https://docs.osmedeus.org/donation/">donation methods here</a></strong> to get a <strong><a href="https://docs.osmedeus.org/premium/">premium package</a></strong><p>
-</p>
+</h3>
 
+## 🙏 Thanks
+
+Special Thanks to all authors of the binaries tool that's being used in the Workflow at [THANKS.md](THANKS.md)
 
 ## License
 
