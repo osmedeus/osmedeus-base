@@ -11,7 +11,7 @@ download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/release
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.1/httpx_1.2.1_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.2/httpx_1.2.2_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "dnsx"
@@ -45,3 +45,6 @@ extractGz $TMP_DIST/goverview.gz
 install_banner "aquatone"
 download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
 extractZip $TMP_DIST/aquatone.zip
+
+install_banner "gowitness"
+download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/2.4.0/gowitness-2.4.0-linux-amd64

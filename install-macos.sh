@@ -176,8 +176,8 @@ cd $CWD
 # update golang version
 install_banner "Golang latest version"
 # delete old go binaries if it detect
-if [ -f "$HOME/.go/bin/go" ]; then
-    rm -rf $HOME/.go/bin/go
+if [ -d "$HOME/.go/bin/" ]; then
+    rm -rf $HOME/.go/
 fi
 wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 
@@ -222,6 +222,10 @@ $GO_BIN install github.com/j3ssie/go-auxs/ourl@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/urp@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/cleansub@latest 2>&1 > /dev/null
 $GO_BIN install github.com/theblackturtle/ptools/wurl@latest 2>&1 > /dev/null
+install_banner "aquatone"
+$GO_BIN install github.com/j3ssie/michenriksen/aquatone@latest 2>&1 > /dev/null
+install_banner "gowitness"
+$GO_BIN install github.com/sensepost/gowitness@latest 2>&1 > /dev/null
 install_banner "goverview"
 $GO_BIN install github.com/j3ssie/goverview@latest 2>&1 > /dev/null
 install_banner "github-endpoints"
