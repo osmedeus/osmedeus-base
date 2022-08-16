@@ -3,15 +3,15 @@ download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3
 extractZip $TMP_DIST/amass.zip
 
 install_banner "subfinder"
-download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.5.2/subfinder_2.5.2_linux_amd64.zip
+download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.5.3/subfinder_2.5.3_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.7.3/nuclei_2.7.3_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.7.5/nuclei_2.7.5_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.3/httpx_1.2.3_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.4/httpx_1.2.4_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "dnsx"
@@ -19,7 +19,7 @@ download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/do
 extractZip $TMP_DIST/dnsx.zip
 
 install_banner "gau"
-download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.1.1/gau_2.1.1_linux_amd64.tar.gz
+download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.1.2/gau_2.1.2_linux_amd64.tar.gz
 extractGz $TMP_DIST/gau.gz
 
 install_banner "ffuf"
@@ -47,4 +47,4 @@ download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/release
 extractZip $TMP_DIST/aquatone.zip
 
 install_banner "gowitness"
-download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/2.4.0/gowitness-2.4.0-linux-amd64
+download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/2.4.1/gowitness-2.4.1-linux-amd64
