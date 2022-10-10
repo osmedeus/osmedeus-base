@@ -1,5 +1,5 @@
 install_banner "Amass"
-download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3.19.3/amass_linux_amd64.zip
+download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3.20.0/amass_linux_amd64.zip
 extractZip $TMP_DIST/amass.zip
 
 install_banner "subfinder"
@@ -7,7 +7,7 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.7.7/nuclei_2.7.7_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.7.8/nuclei_2.7.8_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -15,7 +15,7 @@ download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "dnsx"
-download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/download/v1.1.0/dnsx_1.1.0_linux_amd64.zip
+download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/download/v1.1.1/dnsx_1.1.1_linux_amd64.zip
 extractZip $TMP_DIST/dnsx.zip
 
 install_banner "gau"
