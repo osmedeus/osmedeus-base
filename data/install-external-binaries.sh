@@ -3,15 +3,23 @@ download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3
 extractZip $TMP_DIST/amass.zip
 
 install_banner "subfinder"
-download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.5.3/subfinder_2.5.3_linux_amd64.zip
+download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.5.4/subfinder_2.5.4_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.7.8/nuclei_2.7.8_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.7.9/nuclei_2.7.9_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.4/httpx_1.2.4_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.5/httpx_1.2.5_linux_amd64.zip
+extractZip $TMP_DIST/httpx.zip
+
+install_banner "tlsx"
+download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v0.0.9/tlsx_0.0.9_linux_amd64.zip
+extractZip $TMP_DIST/httpx.zip
+
+install_banner "katana"
+download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/releases/download/v0.0.2/katana_0.0.2_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "dnsx"
