@@ -16,11 +16,11 @@ extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
 download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v0.0.9/tlsx_0.0.9_linux_amd64.zip
-extractZip $TMP_DIST/httpx.zip
+extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"
 download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/releases/download/v0.0.2/katana_0.0.2_linux_amd64.zip
-extractZip $TMP_DIST/httpx.zip
+extractZip $TMP_DIST/katana.zip
 
 install_banner "dnsx"
 download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/download/v1.1.1/dnsx_1.1.1_linux_amd64.zip
