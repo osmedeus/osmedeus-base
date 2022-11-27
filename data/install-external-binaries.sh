@@ -3,7 +3,7 @@ download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3
 extractZip $TMP_DIST/amass.zip
 
 install_banner "subfinder"
-download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.5.4/subfinder_2.5.4_linux_amd64.zip
+download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.5.5/subfinder_2.5.5_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
@@ -43,7 +43,7 @@ download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/
 extractZip $TMP_DIST/jaeles.zip
 
 install_banner "metabigor"
-download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v1.12.1/metabigor_v1.12.1_linux_amd64.tar.gz
+download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v1.2.3/metabigor_v1.2.3_linux_amd64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
 
 install_banner "goverview"
