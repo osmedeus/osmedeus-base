@@ -51,7 +51,7 @@ if [[ $EUID -ne 0 ]]; then
   announce "You're running the script as\033[1;34m $USER \033[0m. It is recommended to run as root user by running\033[1;34m sudo su \033[0mfirst"
 fi
 
-announce "NOTE that this installation only works on\033[0m Linux amd64 based machine."
+announce "NOTE that this installation only works on\033[0m Linux 64-bit intel based machine machine."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "\033[1;34m[!] MacOS machine detected. Exit the script\033[0m"
     announce "Check out https://docs.osmedeus.org/installation/#install-for-macos-experimental for more MacOS installation"
