@@ -1,5 +1,5 @@
 install_banner "Amass"
-download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3.20.0/amass_linux_amd64.zip
+download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v3.21.2/amass_linux_amd64.zip
 extractZip $TMP_DIST/amass.zip
 
 install_banner "subfinder"
@@ -7,7 +7,7 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.8.1/nuclei_2.8.1_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.8.3/nuclei_2.8.3_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -15,7 +15,7 @@ download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
-download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v0.0.9/tlsx_0.0.9_linux_amd64.zip
+download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.0.0/tlsx_1.0.0_linux_amd64.zip
 extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"
@@ -43,7 +43,7 @@ download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/
 extractZip $TMP_DIST/jaeles.zip
 
 install_banner "metabigor"
-download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v1.2.3/metabigor_v1.2.3_linux_amd64.tar.gz
+download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v1.2.4/metabigor_v1.2.4_linux_amd64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
 
 install_banner "goverview"

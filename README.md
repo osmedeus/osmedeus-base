@@ -49,73 +49,65 @@ Check out [this page](https://docs.osmedeus.org/installation/) for more the inst
 
 
 ```bash
-# Practical Usage:
-osmedeus scan -f [flowName] -t [target]
-osmedeus scan -f [flowName] -T [targetsFile]
-osmedeus scan -f /path/to/flow.yaml -t [target]
-osmedeus scan -m /path/to/module.yaml -t [target] --params 'port=9200'
-osmedeus scan -m /path/to/module.yaml -t [target] -l /tmp/log.log
-cat targets | osmedeus scan -f sample
+# Scan Usage:
+  osmedeus scan -f [flowName] -t [target]
+  osmedeus scan -m [modulePath] -T [targetsFile]
+  osmedeus scan -f /path/to/flow.yaml -t [target]
+  osmedeus scan --threads-hold=30 -f cidr -t 1.2.3.4/24
+  osmedeus scan -m /path/to/module.yaml -t [target] -l /tmp/log.log
+  cat targets | osmedeus scan -f sample
 
-## Start a simple scan with default 'general' flow
-osmedeus scan -t sample.com
+# Practical Scan Usage:
+  osmedeus scan -T list_of_targets.txt -W custom_workspaces
+  osmedeus scan -t target.com -w workspace_name --debug
+  osmedeus scan -f general -t sample.com
+  osmedeus scan --tactic aggressive -f general -t sample.com
+  osmedeus scan -f extensive -t sample.com -t another.com
+  cat list_of_urls.txt | osmedeus scan -f urls
+  osmedeus scan --threads-hold=30 -f cidr -t 1.2.3.4/24
+  osmedeus scan -m ~/.osmedeus/core/workflow/test/dirbscan.yaml -t list_of_urls.txt
+  osmedeus scan --wfFolder ~/custom-workflow/ -f your-custom-workflow -t list_of_urls.txt
+  osmedeus scan --chunk --chunk-part 40 -c 2 -f cidr -t list-of-cidr.txt
 
-## Start a scan directly with a module with inputs as a list of http domains like this https://sub.example.com
-osmedeus scan -m ~/osmedeus-base/workflow/direct-module/dirbscan.yaml -t http-file.txt
+# Queue Usage:
+  osmedeus queue -Q /tmp/queue-file.txt -c 2
+  osmedeus queue --add -t example.com -Q /tmp/queue-file.txt
 
-## Start a general scan but exclude some of the module
-osmedeus scan -t sample.com -x screenshot -x spider
+# Provider Usage:
+  osmedeus provider wizard
+  osmedeus provider validate
+  osmedeus provider build --token xxx --rebuild --ic
+  osmedeus provider create --name 'sample'
+  osmedeus provider health --debug
+  osmedeus provider list
+  osmedeus provider delete --id 34317111 --id 34317112
 
-## Start a simple scan with other flow
-osmedeus scan -f vuln -t sample.com
+# Cloud Usage:
+  osmedeus cloud -f [flowName] -t [target]
+  osmedeus cloud -m [modulePath] -t [target]
+  osmedeus cloud -c 5 -f [flowName] -T [targetsFile]
+  osmedeus cloud --token xxx -c 5 -f [flowName] -T [targetsFile]
+  osmedeus cloud --chunk -c 5 -f [flowName] -t [targetsFile]
 
-## Scan for CIDR with file contains CIDR with the format '1.2.3.4/24'
-osmedeus scan -f cidr -t list-of-cidrs.txt
-osmedeus scan -f cidr -t '1.2.3.4/24' # this will auto convert the single input to the file and run
-
-## Directly run the vuln scan and directory scan on list of domains
-osmedeus scan -f vuln-and-dirb -t list-of-domains.txt
-
-## Directly run the general but without subdomain enumeration scan on list of domains
-osmedeus scan -f domains -t list-of-domains.txt
-
-## Use a custom wordlist
-osmedeus scan -t sample.com -p 'wordlists={{.Data}}/wordlists/content/big.txt' -p 'fthreads=40'
-
-## Scan list of targets
-osmedeus scan -T list_of_targets.txt
-
-## Get target from a stdin and start the scan with 2 concurrency
-cat list_of_targets.txt | osmedeus scan -c 2
-
-## Start the scan with your custom workflow folder
-osmedeus scan --wfFolder ~/custom-workflow/ -f your-custom-workflow -t sample.com
-
-# Example Commands:
-osmedeus scan -t target.com
-osmedeus scan -T list_of_targets.txt -W custom_workspaces
-osmedeus scan -t target.com -w workspace_name --debug
-osmedeus scan -f single -t www.sample.com
-osmedeus scan -f ovuln-T list_of_target.txt
-osmedeus scan -m ~/osmedeus-base/workflow/test/dirbscan.yaml -t list_of_urls.txt
-osmedeus health
-ls ~/.osmedeus/storages/summary/ | osmedeus scan -m ~/osmedeus-base/workflow/test/dirbscan.yaml
-ls ~/.osmedeus/storages/summary/ | osmedeus scan -m ~/osmedeus-base/workflow/test/busting.yaml -D
-
-# Start Web UI at https://<your-instance-machine>:8000/ui/
-osmedeus server
-# login with credentials from `~/.osmedeus/config.yaml`
-
-# Delete workspace
-osmedeus config delete -w workspace_name
-
-# Utils Commands
-osmedeus utils tmux ls
-osmedeus utils tmux logs -A -l 10
-osmedeus utils ps
-osmedeus utils ps --proc 'jaeles'
-osmedeus utils cron --cmd 'osmdeus scan -t example.com' --sch 60
-osmedeus utils cron --for --cmd 'osmedeus scan -t example.com'
+# Utilities Usage:
+  ## Health check utility
+  osmedeus health
+  osmedeus health git
+  osmedeus health cloud
+  osmedeus version --json
+  ## Update utility
+  osmedeus update
+  osmedeus update --vuln
+  osmedeus update --force --clean
+  ## Other utilities
+  osmedeus utils tmux ls
+  osmedeus utils tmux logs -A -l 10
+  osmedeus utils ps
+  osmedeus utils ps --proc 'jaeles'
+  osmedeus utils cron --cmd 'osmdeus scan -t example.com' --sch 60
+  osmedeus utils cron --for --cmd 'osmedeus scan -t example.com'
+  osmedeus utils workflow
+  osmedeus config set --threads-hold=10
 ```
 
 Check out [**this page**](https://docs.osmedeus.org/installation/usage/) for full usage and the [**Practical Usage**](https://docs.osmedeus.org/installation/practical-usage/) to see how to use Osmedeus in a practical way.
