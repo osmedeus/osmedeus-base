@@ -100,7 +100,21 @@ def generate_content():
     content += 'install_banner "gowitness"\n'
     binary_version = get_version("sensepost/gowitness").strip("v")
     line = "download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/{version}/gowitness-{version}-linux-amd64".format(version=binary_version)
+    line += "\nextractZip $TMP_DIST/aquatone.zip\n"
     content += line + "\n"
+
+    content += 'install_banner "trufflehog"\n'
+    binary_version = get_version("trufflesecurity/trufflehog").strip("v")
+    line = "download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v{version}/trufflehog_{version}_linux_amd64.tar.gz".format(version=binary_version)
+    line += "\nextractGz $TMP_DIST/trufflehog.gz\n"
+    content += line + "\n"
+
+    content += 'install_banner "findomain"\n'
+    binary_version = get_version("Findomain/Findomain").split(" ")[1].strip("v")
+    line = "download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/{version}/findomain-linux.zip".format(version=binary_version)
+    line += "\nextractZip $TMP_DIST/findomain.zip\n"
+    content += line + "\n"
+    
     return content
 
 def main():

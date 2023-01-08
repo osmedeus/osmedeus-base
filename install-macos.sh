@@ -135,13 +135,13 @@ else
 fi
 cd $BASE_PATH
 
-## findomain
 install_banner "findomain"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    wget -q -O $BINARIES_PATH/findomain https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-osx
+    download $TMP_DIST/findomain.zip https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-osx.zip
 else
-    wget -q -O $BINARIES_PATH/findomain https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
+    download $TMP_DIST/findomain.zip https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux.zip    
 fi
+extractZip $TMP_DIST/findomain.zip
 chmod +x $BINARIES_PATH/findomain
 
 install_banner "packer"
@@ -260,6 +260,8 @@ install_banner "jaeles"
 $GO_BIN install github.com/jaeles-project/jaeles@latest 2>&1 > /dev/null
 install_banner "metabigor"
 $GO_BIN install github.com/j3ssie/metabigor@latest 2>&1 > /dev/null
+install_banner "trufflehog"
+$GO_BIN install github.com/trufflesecurity/trufflehog@latest 2>&1 > /dev/null
 
 echo -e "\033[1;32m[+] Copy all go tools from: $GO_DIR \033[0m"
 cp $GO_DIR/* $BINARIES_PATH/ >/dev/null 2>&1

@@ -114,8 +114,6 @@ install_banner "External binaries"
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
 download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_linux_amd64.zip
 extractZip $TMP_DIST/packer.zip
-install_banner "findomain"
-download $BINARIES_PATH/findomain https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
 
 curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
 source "$TMP_DIST/external-binaries.sh"

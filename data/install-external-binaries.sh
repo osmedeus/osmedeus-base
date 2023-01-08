@@ -7,15 +7,15 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.8.3/nuclei_2.8.3_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.8.6/nuclei_2.8.6_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.5/httpx_1.2.5_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.2.6/httpx_1.2.6_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
-download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.0.0/tlsx_1.0.0_linux_amd64.zip
+download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.0.3/tlsx_1.0.3_linux_amd64.zip
 extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"
@@ -56,3 +56,13 @@ extractZip $TMP_DIST/aquatone.zip
 
 install_banner "gowitness"
 download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/2.4.2/gowitness-2.4.2-linux-amd64
+extractZip $TMP_DIST/aquatone.zip
+
+install_banner "trufflehog"
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.23.1/trufflehog_3.23.1_linux_amd64.tar.gz
+extractGz $TMP_DIST/trufflehog.gz
+
+install_banner "findomain"
+download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/8.2.1/findomain-linux.zip
+extractZip $TMP_DIST/findomain.zip
+
