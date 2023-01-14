@@ -19,7 +19,7 @@ download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/do
 extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"
-download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/releases/download/v0.0.2/katana_0.0.2_linux_amd64.zip
+download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/releases/download/v0.0.3/katana_0.0.3_linux_amd64.zip
 extractZip $TMP_DIST/katana.zip
 
 install_banner "dnsx"
@@ -56,10 +56,10 @@ extractZip $TMP_DIST/aquatone.zip
 
 install_banner "gowitness"
 download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/2.4.2/gowitness-2.4.2-linux-amd64
-extractZip $TMP_DIST/aquatone.zip
+cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.23.1/trufflehog_3.23.1_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.25.2/trufflehog_3.25.2_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "findomain"

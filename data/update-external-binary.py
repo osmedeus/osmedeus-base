@@ -100,7 +100,7 @@ def generate_content():
     content += 'install_banner "gowitness"\n'
     binary_version = get_version("sensepost/gowitness").strip("v")
     line = "download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/{version}/gowitness-{version}-linux-amd64".format(version=binary_version)
-    line += "\nextractZip $TMP_DIST/aquatone.zip\n"
+    line += "\ncp $TMP_DIST/gowitness $BINARIES_PATH/gowitness\n"
     content += line + "\n"
 
     content += 'install_banner "trufflehog"\n'
