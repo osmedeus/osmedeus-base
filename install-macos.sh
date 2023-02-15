@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 # global stuff
 BASE_PATH="$HOME/osmedeus-base"
@@ -91,13 +91,13 @@ mkdir -p "$GO_DIR" >/dev/null 2>&1
 
 if [ -d "$HOME/osmedeus-base/data" ]; then
     announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base $HOME/.osmedeus\033[0m"
-    rm -rf $BAK_DIST 
+    rm -rf $BAK_DIST
     mv $HOME/osmedeus-base $BAK_DIST
 fi
 
 announce "Cloning Osmedeus base repo:\033[0m https://github.com/osmedeus/osmedeus-base"
 rm -rf $BASE_PATH && git clone --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
-# # retry to clone in case of anything wrong with the connection
+# retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH" ]; then
     git clone --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 fi
@@ -137,29 +137,32 @@ cd $BASE_PATH
 
 install_banner "findomain"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    download $TMP_DIST/findomain.zip https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-osx.zip
+    brew install findomain -q
+    cp $(which findomain) $BINARIES_PATH/findomain
 else
-    download $TMP_DIST/findomain.zip https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux.zip    
+    download $TMP_DIST/findomain.zip https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux.zip
+    extractZip $TMP_DIST/findomain.zip
 fi
-extractZip $TMP_DIST/findomain.zip
 chmod +x $BINARIES_PATH/findomain
 
 install_banner "packer"
 rm -rf /tmp/packer.zip
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_darwin_amd64.zip
+    brew install packer -q
+    cp $(which packer) $BINARIES_PATH/packer
 else
     download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_linux_amd64.zip
+    extractZip $TMP_DIST/packer.zip
 fi
-extractZip $TMP_DIST/packer.zip
 
 install_banner "csvtk"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.22.0/csvtk_darwin_amd64.tar.gz
+    brew install csvtk -q
+    cp $(which csvtk) $BINARIES_PATH/csvtk
 else
     download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.22.0/csvtk_linux_amd64.tar.gz
+    extractGz $TMP_DIST/csvtk.gz
 fi
-extractGz $TMP_DIST/csvtk.gz
 
 install_banner "rustscan"
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -175,22 +178,28 @@ cd $CWD
 
 # update golang version
 install_banner "Golang latest version"
+
 # delete old go binaries if it detect
 if [ -d "$HOME/.go/bin/" ]; then
     rm -rf $HOME/.go/
 fi
-wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 
-export GO_BIN="$HOME/.go/bin/go"
-export GOROOT=$HOME/.go
-export PATH=$GOROOT/bin:$PATH
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
+GO_BIN=$(which go)
 
-# in case the script fail
-[[ -f $GO_BIN ]] || GO_BIN=$(which go)
+if [ -f "$GO_BIN" ]; then
+    echo -e "\033[1;32m[+] Detected go binary: $GO_BIN \033[0m"
+    brew uninstall golang -q
+fi
+
+# (re)install fresh golang
+brew install golang -q
+
+# Go is installed via Brew, so GOROOT, GOPATH are set
+export GOPATH=$(go env GOPATH)
+export GO_BIN=$(which go)
+export GO_DIR="$GOPATH/bin"
+
 echo -e "\033[1;32m[+] Detected go binary: $GO_BIN \033[0m"
-[[ -d $GO_DIR ]] || GO_DIR=$GOPATH/bin
 echo -e "\033[1;32m[+] Detected go tools: $GO_DIR \033[0m"
 CURRENT_GO=$(go version)
 echo -e "\033[1;32m[+] Required golang verion >= v1.17 \033[0m"
@@ -201,6 +210,8 @@ cd $CWD
 ##
 # Install go stuff
 ##
+install_banner "goaltdns"
+$GO_BIN install github.com/subfinder/goaltdns@latest 2>&1 > /dev/null
 install_banner "goaltdns"
 $GO_BIN install github.com/subfinder/goaltdns@latest 2>&1 > /dev/null
 install_banner "assetfinder"
@@ -223,7 +234,7 @@ $GO_BIN install github.com/j3ssie/go-auxs/urp@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/cleansub@latest 2>&1 > /dev/null
 $GO_BIN install github.com/theblackturtle/ptools/wurl@latest 2>&1 > /dev/null
 install_banner "aquatone"
-$GO_BIN install github.com/j3ssie/michenriksen/aquatone@latest 2>&1 > /dev/null
+$GO_BIN install github.com/michenriksen/aquatone@latest 2>&1 > /dev/null
 install_banner "gowitness"
 $GO_BIN install github.com/sensepost/gowitness@latest 2>&1 > /dev/null
 install_banner "goverview"
