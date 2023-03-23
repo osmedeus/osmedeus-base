@@ -146,14 +146,14 @@ fi
 chmod +x $BINARIES_PATH/findomain
 
 install_banner "packer"
-rm -rf /tmp/packer.zip
+rm -rf $TMP_DIST/packer.zip
+PACKER_VERSION=1.8.6
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    brew install packer -q
-    cp $(which packer) $BINARIES_PATH/packer
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_darwin_amd64.zip
 else
-    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_linux_amd64.zip
-    extractZip $TMP_DIST/packer.zip
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
 fi
+extractZip $TMP_DIST/packer.zip
 
 install_banner "csvtk"
 if [[ "$OSTYPE" == "darwin"* ]]; then

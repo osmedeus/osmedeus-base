@@ -112,7 +112,9 @@ fi
 install_banner "External binaries"
 
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
-download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_linux_amd64.zip
+
+PACKER_VERSION=1.8.6
+download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
 extractZip $TMP_DIST/packer.zip
 
 curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
