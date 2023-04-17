@@ -59,10 +59,10 @@ download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/dow
 cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.31.4/trufflehog_3.31.4_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.31.6/trufflehog_3.31.6_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "findomain"
-download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/8.2.2/findomain-linux.zip
+download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.0/findomain-linux.zip
 extractZip $TMP_DIST/findomain.zip
 
