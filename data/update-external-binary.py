@@ -109,6 +109,12 @@ def generate_content():
     line += "\nextractGz $TMP_DIST/trufflehog.gz\n"
     content += line + "\n"
 
+    content += 'install_banner "gitleaks"\n'
+    binary_version = get_version("gitleaks/gitleaks").strip("v")
+    line = "download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/download/v{version}/gitleaks_{version}_linux_x64.tar.gz".format(version=binary_version)
+    line += "\nextractGz $TMP_DIST/gitleaks.gz\n"
+    content += line + "\n"
+
     content += 'install_banner "findomain"\n'
     binary_version = get_version("Findomain/Findomain").split(" ")[1].strip("v")
     line = "download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/{version}/findomain-linux.zip".format(version=binary_version)

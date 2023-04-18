@@ -145,6 +145,13 @@ else
 fi
 chmod +x $BINARIES_PATH/findomain
 
+install_banner "semgrep"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew install semgrep -q
+else
+    python3 -m pip -q install semgrep
+fi
+
 install_banner "packer"
 rm -rf $TMP_DIST/packer.zip
 PACKER_VERSION=1.8.6
@@ -334,3 +341,4 @@ announce "The installation is done..."
 announce "Check here if you want to setup API & token:\033[0m https://docs.osmedeus.org/installation/token/"
 announce "Run\033[0m source $DEFAULT_SHELL \033[1;32m to complete the install"
 announce "Run\033[0m osmedeus config reload \033[1;32m to reload the config file"
+announce "You can change the default Threads Hold with the command:\033[0m osmedeus config set --threads-hold=<number-of-threads> \033[1;32m"

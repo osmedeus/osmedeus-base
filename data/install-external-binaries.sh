@@ -15,7 +15,7 @@ download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
-download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.0.6/tlsx_1.0.6_linux_amd64.zip
+download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.0.7/tlsx_1.0.7_linux_amd64.zip
 extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"
@@ -61,6 +61,10 @@ cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
 install_banner "trufflehog"
 download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.31.6/trufflehog_3.31.6_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
+
+install_banner "gitleaks"
+download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/download/v8.16.2/gitleaks_8.16.2_linux_x64.tar.gz
+extractGz $TMP_DIST/gitleaks.gz
 
 install_banner "findomain"
 download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.0/findomain-linux.zip

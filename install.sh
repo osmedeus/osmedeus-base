@@ -77,6 +77,7 @@ install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
 [ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER -qq install coreutils net-tools -y >/dev/null 2>&1
 [ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER -qq install htop -y >/dev/null 2>&1
 [ -x "$(command -v timeout)" ] || $SUDO $PACKGE_MANAGER install timeout -y >/dev/null 2>&1
+[ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER install python3 python3-pip -y >/dev/null 2>&1
 
 announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
 announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
@@ -116,6 +117,8 @@ rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
 PACKER_VERSION=1.8.6
 download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
 extractZip $TMP_DIST/packer.zip
+
+[ -x "$(command -v semgrep)" ] || python3 -m pip -q install semgrep >/dev/null 2>&1
 
 curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
 source "$TMP_DIST/external-binaries.sh"
@@ -190,3 +193,4 @@ announce "The installation is done..."
 announce "Check here if you want to setup API & token:\033[0m https://docs.osmedeus.org/installation/token/"
 announce "Run\033[0m source ~/.bashrc \033[1;32m to complete the install"
 announce "Run\033[0m osmedeus config reload \033[1;32m to reload the config file"
+announce "You can change the default Threads Hold with the command:\033[0m osmedeus config set --threads-hold=<number-of-threads> \033[1;32m"
