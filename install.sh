@@ -31,9 +31,9 @@ install_banner() {
 }
 
 download() {
-    wget --no-check-certificate -q -O $1 $2
+    wget -q -O $1 $2
     if [ ! -f "$1" ]; then
-        wget --no-check-certificate -q -O $1 $2
+        wget -q -O $1 $2
     fi
 }
 
