@@ -55,6 +55,12 @@ def generate_content():
     line += "\nextractZip $TMP_DIST/dnsx.zip\n"
     content += line + "\n"
 
+    content += 'install_banner "alterx"\n'
+    binary_version = get_version("projectdiscovery/alterx").strip("v")
+    line = "download $TMP_DIST/alterx.zip https://github.com/projectdiscovery/alterx/releases/download/v{version}/alterx_{version}_linux_amd64.zip".format(version=binary_version)
+    line += "\nextractZip $TMP_DIST/alterx.zip\n"
+    content += line + "\n"
+
     content += 'install_banner "gau"\n'
     binary_version = get_version("lc/gau").strip("v")
     line = "download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v{version}/gau_{version}_linux_amd64.tar.gz".format(version=binary_version)

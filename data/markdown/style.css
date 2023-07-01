@@ -1,0 +1,188 @@
+html {
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+body {
+  font-family: menlo, courier new, monospace, sans-serif;
+  line-height: 1.75;
+  /* max-width: 800px; */
+  margin: 0 auto;
+  padding: 5rem;
+}
+
+%margin-bottom-1-5 {
+  margin-bottom: 1.5rem;
+}
+
+%margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+%position {
+  position: absolute;
+  transform: translateX(-100%);
+  padding-right: 0.5rem;
+}
+
+%padding-left-1 {
+  padding-left: 1rem;
+}
+
+%text-grey {
+  color: #999;
+}
+
+%text-weight-bold {
+  font-weight: bold;
+}
+
+%text-weight-normal {
+  font-weight: normal;
+}
+
+%text-style-normal {
+  font-style: normal;
+}
+
+// headings
+h1, h2, h3, h4, h5, h6 {
+  @extend %margin-bottom-1-5;
+  @extend %text-weight-bold;
+  
+  &:before {
+    @extend %position;
+    @extend %text-grey;
+    @extend %text-weight-normal;
+  }
+}
+h1:before { content: '# '; }
+h2:before { content: '## '; }
+h3:before { content: '### '; }
+h4:before { content: '#### '; }
+h5:before { content: '##### '; }
+h6:before { content: '###### '; }
+
+s:before, s:after {
+  content: '~~';
+  @extend %text-grey;
+}
+
+a {
+  color: #3498DB;
+
+  &:before, &:after {
+    @extend %text-grey;
+  }
+  
+}
+
+strong {
+  @extend %text-weight-bold;
+
+}
+
+em {
+  font-style: italic;
+
+}
+
+strong, em {
+  &:before, &:after {
+    @extend %text-grey;
+    @extend %text-weight-normal;
+  }
+}
+
+img {
+  width: 100%;
+}
+
+p {
+  @extend %margin-bottom-1-5;
+}
+
+hr {
+  border: 0;
+  border-top: solid 1px #eee;
+  @extend %margin-bottom-1-5;
+}
+
+
+ol, ul {
+  @extend %margin-bottom-1-5;
+}
+
+ol {
+  counter-reset: section;
+}
+
+ol > li:before {
+  counter-increment: section;
+  content: counter(section) ".";
+}
+
+ul > li:before {
+  content: '-';
+}
+
+li {
+  &:before {
+    @extend %text-grey;
+    padding-right: 0.5rem;
+  }
+  
+  > ul, > ol {
+    @extend %margin-bottom-0;
+    @extend %padding-left-1;
+  }
+}
+
+table {
+  @extend %margin-bottom-1-5;
+  width: 100%;
+}
+
+th, td {
+  border: solid 1px #eee;
+  padding: 0.5rem 1rem;
+}
+
+th {
+  background: #fafafa;
+  @extend %text-weight-bold;
+}
+
+code:before, code:after {
+  /* content: '`'; */
+  @extend %text-grey;
+}
+
+pre {
+  @extend %margin-bottom-1-5;
+  
+  code:before, code:after {
+    content: '```';
+    display: block;
+  }
+}
+
+blockquote {
+  border-left: 4px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+summary {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  /* margin-bottom: 10px; */
+}
+
+details {
+  @extend %margin-bottom-1-5;
+  content: '```';
+  display: block;
+}

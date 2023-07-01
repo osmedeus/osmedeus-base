@@ -267,6 +267,8 @@ install_banner "dnsx"
 $GO_BIN install github.com/projectdiscovery/dnsx/cmd/dnsx@latest 2>&1 > /dev/null
 install_banner "tlsx"
 $GO_BIN install github.com/projectdiscovery/tlsx/cmd/tlsx@latest 2>&1 > /dev/null
+install_banner "alterx"
+$GO_BIN install github.com/projectdiscovery/alterx/cmd/alterx@latest 2>&1 > /dev/null
 install_banner "katana"
 $GO_BIN install github.com/projectdiscovery/katana/cmd/katana@latest 2>&1 > /dev/null
 install_banner "httpx"
