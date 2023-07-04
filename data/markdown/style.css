@@ -94,10 +94,6 @@ strong, em {
   }
 }
 
-img {
-  width: 100%;
-}
-
 p {
   @extend %margin-bottom-1-5;
 }
