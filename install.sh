@@ -48,7 +48,30 @@ extractGz() {
 }
 
 if [[ $EUID -ne 0 ]]; then
-  announce "You're running the script as\033[1;34m $USER \033[0m. It is recommended to run as root user by running\033[1;34m sudo su \033[0mfirst"
+  announce "You're running the script as\033[1;34m $USER \033[0m. It is recommended to run as root user by running\033[1;34m sudo su \033[0mfirst and then run the script"
+  announce "If you're already have essential tools installed, you can continue the installation as normal"
+  echo -e "\033[1;37m[\033[1;31m+\033[1;37m]\033[1;32m Press any key to continue ... \033[0m"; read -n 1; echo
+else
+  $SUDO $PACKGE_MANAGER update -qq > /dev/null 2>&1
+  install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
+  # reinstall all essioontials tools just to double check
+  [ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER -qq install wget -y >/dev/null 2>&1
+  [ -x "$(command -v curl)" ] || $SUDO $PACKGE_MANAGER -qq install curl -y >/dev/null 2>&1
+  [ -x "$(command -v tmux)" ] || $SUDO $PACKGE_MANAGER -qq install tmux -y >/dev/null 2>&1
+  [ -x "$(command -v git)" ] || $SUDO $PACKGE_MANAGER -qq install git -y >/dev/null 2>&1
+  [ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER -qq install nmap -y >/dev/null 2>&1
+  [ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER -qq install masscan -y >/dev/null 2>&1
+  [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y >/dev/null 2>&1
+  [ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER -qq install unzip -y >/dev/null 2>&1
+  [ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER -qq install chromium -y >/dev/null 2>&1
+  [ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER -qq install chromium-browser -y >/dev/null 2>&1
+  [ -x "$(command -v jq)" ] || $SUDO $PACKGE_MANAGER -qq install jq -y >/dev/null 2>&1
+  [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y >/dev/null 2>&1
+  [ -x "$(command -v rsync)" ] || $SUDO $PACKGE_MANAGER -qq install rsync -y >/dev/null 2>&1
+  [ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER -qq install coreutils net-tools -y >/dev/null 2>&1
+  [ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER -qq install htop -y >/dev/null 2>&1
+  [ -x "$(command -v timeout)" ] || $SUDO $PACKGE_MANAGER install timeout -y >/dev/null 2>&1
+  [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER install python3 python3-pip -y >/dev/null 2>&1
 fi
 
 announce "NOTE that this installation only works on\033[0m Linux 64-bit intel based machine machine."
@@ -57,27 +80,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     announce "Check out https://docs.osmedeus.org/installation/#install-for-macos-experimental for more MacOS installation"
     exit 1
 fi
-
-$SUDO $PACKGE_MANAGER update -qq > /dev/null 2>&1
-install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
-# reinstall all essioontials tools just to double check
-[ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER -qq install wget -y >/dev/null 2>&1
-[ -x "$(command -v curl)" ] || $SUDO $PACKGE_MANAGER -qq install curl -y >/dev/null 2>&1
-[ -x "$(command -v tmux)" ] || $SUDO $PACKGE_MANAGER -qq install tmux -y >/dev/null 2>&1
-[ -x "$(command -v git)" ] || $SUDO $PACKGE_MANAGER -qq install git -y >/dev/null 2>&1
-[ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER -qq install nmap -y >/dev/null 2>&1
-[ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER -qq install masscan -y >/dev/null 2>&1
-[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y >/dev/null 2>&1
-[ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER -qq install unzip -y >/dev/null 2>&1
-[ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER -qq install chromium -y >/dev/null 2>&1
-[ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER -qq install chromium-browser -y >/dev/null 2>&1
-[ -x "$(command -v jq)" ] || $SUDO $PACKGE_MANAGER -qq install jq -y >/dev/null 2>&1
-[ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER -qq install build-essential -y >/dev/null 2>&1
-[ -x "$(command -v rsync)" ] || $SUDO $PACKGE_MANAGER -qq install rsync -y >/dev/null 2>&1
-[ -x "$(command -v netstat)" ] || $SUDO $PACKGE_MANAGER -qq install coreutils net-tools -y >/dev/null 2>&1
-[ -x "$(command -v htop)" ] || $SUDO $PACKGE_MANAGER -qq install htop -y >/dev/null 2>&1
-[ -x "$(command -v timeout)" ] || $SUDO $PACKGE_MANAGER install timeout -y >/dev/null 2>&1
-[ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER install python3 python3-pip -y >/dev/null 2>&1
 
 announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
 announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
@@ -193,4 +195,7 @@ announce "The installation is done..."
 announce "Check here if you want to setup API & token:\033[0m https://docs.osmedeus.org/installation/token/"
 announce "Run\033[0m source ~/.bashrc \033[1;32m to complete the install"
 announce "Run\033[0m osmedeus config reload \033[1;32m to reload the config file"
+
+announce "Set default Osmedeus Threads Hold to:\033[0m 10 \033[1;32m"
+osmedeus config set --threads-hold=10
 announce "You can change the default Threads Hold with the command:\033[0m osmedeus config set --threads-hold=<number-of-threads> \033[1;32m"
