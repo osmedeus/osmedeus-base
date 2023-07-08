@@ -81,7 +81,7 @@ def generate_content():
 
     content += 'install_banner "jaeles"\n'
     binary_version = get_version("jaeles-project/jaeles")
-    line = "download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/download/{version}/jaeles-{version_strip}-linux.zip".format(version=binary_version, version_strip=binary_version.strip("beta-"))
+    line = "download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/download/{version}/jaeles-{version}-linux.zip".format(version=binary_version)
     line += "\nextractZip $TMP_DIST/jaeles.zip\n"
     content += line + "\n"
 

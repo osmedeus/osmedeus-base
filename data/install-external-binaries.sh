@@ -43,7 +43,7 @@ download $TMP_DIST/gospider.zip https://github.com/jaeles-project/gospider/relea
 extractZip $TMP_DIST/gospider.zip
 
 install_banner "jaeles"
-download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/download/beta-0.17.1/jaeles-0.17.1-linux.zip
+download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/download/beta-v0.17.1/jaeles-beta-v0.17.1-linux.zip
 extractZip $TMP_DIST/jaeles.zip
 
 install_banner "metabigor"
