@@ -3,11 +3,11 @@ download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v4
 extractZip $TMP_DIST/amass.zip
 
 install_banner "subfinder"
-download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.6.1/subfinder_2.6.1_linux_amd64.zip
+download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.6.2/subfinder_2.6.2_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.9.10/nuclei_2.9.10_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.9.11/nuclei_2.9.11_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -15,7 +15,7 @@ download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
-download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.1.1/tlsx_1.1.1_linux_amd64.zip
+download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.1.3/tlsx_1.1.3_linux_amd64.zip
 extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"
@@ -63,7 +63,7 @@ download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/dow
 cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.46.3/trufflehog_3.46.3_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.52.1/trufflehog_3.52.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
