@@ -199,10 +199,12 @@ if [ -f "$GO_BIN" ]; then
 fi
 
 # (re)install fresh golang
-brew install golang -q
+brew install golang -q 2>&1 > /dev/null
+export GO_VERSION=$(curl -s 'https://go.dev/VERSION?m=text'|sed 's/go//g')
+if [ -x "$(command -v go)" ]; then 
+    wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --version $GO_VERSION
+fi
 
-# export GO_VERSION=$(curl -s 'https://go.dev/VERSION?m=text'|sed 's/go//g')
-# wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --version $GO_VERSION
 
 # Go is installed via Brew, so GOROOT, GOPATH are set
 export GOPATH=$(go env GOPATH)

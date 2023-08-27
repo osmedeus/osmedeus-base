@@ -7,7 +7,7 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.9.11/nuclei_2.9.11_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.9.13/nuclei_2.9.13_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -63,11 +63,11 @@ download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/dow
 cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.52.1/trufflehog_3.52.1_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.53.0/trufflehog_3.53.0_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
-download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/download/v8.17.0/gitleaks_8.17.0_linux_x64.tar.gz
+download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/download/v8.18.0/gitleaks_8.18.0_linux_x64.tar.gz
 extractGz $TMP_DIST/gitleaks.gz
 
 install_banner "findomain"
