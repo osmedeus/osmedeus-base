@@ -260,7 +260,7 @@ install_banner "puredns"
 $GO_BIN install github.com/d3mondev/puredns/v2@latest 2>&1 > /dev/null
 
 install_banner "amass"
-$GO_BIN install github.com/OWASP/Amass/v3/...@latest 2>&1 > /dev/null
+$GO_BIN install github.com/OWASP/Amass/v4/...@latest 2>&1 > /dev/null
 install_banner "gau"
 $GO_BIN install github.com/lc/gau@latest 2>&1 > /dev/null
 install_banner "shuffledns"
