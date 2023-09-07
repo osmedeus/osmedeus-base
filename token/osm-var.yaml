@@ -1,0 +1,51 @@
+cdn:
+    cdn_aws_access_key: CDN_AWS_ACCESS_KEY
+    cdn_aws_region: ap-southeast-1
+    cdn_aws_secret_key: CDN_AWS_SECRET_KEY
+    cdn_s3_bucket: CDN_S3_BUCKET
+git:
+    api: GITLAB_API_TOKEN
+    base_url: https://gitlab.com
+    default_tag: osmd
+    default_uid: "111111"
+    default_user: j3ssie
+    destorage: ~/.osmedeus/destorage
+    group: GITLAB_GROUP
+    password: GITLAB_PASS
+    prefix_name: deosm
+    username: GITLAB_USER
+notification:
+    client_name: CLIENT_NAME
+    slack_diff_channel: SLACK_DIFF_CHANNEL
+    slack_report_channel: SLACK_REPORT_CHANNEL
+    slack_status_channel: SLACK_STATUS_CHANNEL
+    slack_webhook: SLACK_WEBHOOK
+    telegram_channel: TELEGRAM_CHANNEL
+    telegram_dirb_channel: TELEGRAM_DIRB_CHANNEL
+    telegram_mics_channel: TELEGRAM_MICS_CHANNEL
+    telegram_report_channel: TELEGRAM_REPORT_CHANNEL
+    telegram_sensitive_channel: TELEGRAM_SENSITIVE_CHANNEL
+    telegram_status_channel: TELEGRAM_STATUS_CHANNEL
+storages:
+    assets_repo: ASSETS_REPO
+    assets_storage: ~/.osmedeus/storages/assets
+    http_repo: HTTP_REPO
+    http_storage: ~/.osmedeus/storages/http
+    mics_repo: MICS_REPO
+    mics_storage: ~/.osmedeus/storages/mics
+    paths_repo: PATHS_REPO
+    paths_storage: ~/.osmedeus/storages/paths
+    ports_repo: PORTS_REPO
+    ports_storage: ~/.osmedeus/storages/ports
+    secret_key: SECRET_KEY
+    subdomain_repo: SUBDOMAIN_REPO
+    subdomain_storage: ~/.osmedeus/storages/subdomain
+    summary_repo: SUMMARY_REPO
+    summary_storage: ~/.osmedeus/storages/summary
+    vuln_repo: VULN_REPO
+    vuln_storage: ~/.osmedeus/storages/vuln
+tokens:
+    GITHUB_TOKEN: GITHUB_TOKEN
+    GITLAB_API_TOKEN: GITLAB_API_TOKEN
+    SLACK_API_TOKEN: SLACK_API_TOKEN
+    TELEGRAM_API_TOKEN: TELEGRAM_API_TOKEN
