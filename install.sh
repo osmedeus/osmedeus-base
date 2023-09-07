@@ -151,7 +151,6 @@ if [ $isInFile -eq 0 ]; then
    echo "[[ -f $DEFAULT_SHELL ]] && . $DEFAULT_SHELL" >> $HOME/.bash_profile
 fi
 
-osmedeus config reload
 install_banner "Osmedeus Web UI"
 rm -rf ~/.osmedeus/server/* >/dev/null 2>&1
 mkdir -p ~/.osmedeus/server >/dev/null 2>&1
@@ -196,7 +195,6 @@ echo "---->>>"
 announce "The installation is done..."
 announce "Check here if you want to setup API & token:\033[0m https://docs.osmedeus.org/installation/token/"
 announce "Run\033[0m source ~/.bashrc \033[1;32m to complete the install"
-announce "Run\033[0m osmedeus config reload \033[1;32m to reload the config file"
 
 announce "Set default Osmedeus Threads Hold to:\033[0m 10 \033[1;32m"
 osmedeus config set --threads-hold=10

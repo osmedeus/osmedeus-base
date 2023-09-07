@@ -347,7 +347,6 @@ echo "---->>>"
 announce "The installation is done..."
 announce "Check here if you want to setup API & token:\033[0m https://docs.osmedeus.org/installation/token/"
 announce "Run\033[0m source $DEFAULT_SHELL \033[1;32m to complete the install"
-announce "Run\033[0m osmedeus config reload \033[1;32m to reload the config file"
 
 announce "Set default Osmedeus Threads Hold to:\033[0m 10 \033[1;32m"
 osmedeus config set --threads-hold=10
