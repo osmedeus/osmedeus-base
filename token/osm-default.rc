@@ -1,0 +1,1 @@
+# Please remove the line `$HOME/osmedeus-base/token/osm-default.rc` in your `~/.bashrc` or `~/.zshrc` and `~/.bash_profile` file as the token config now has been move to `$HOME/osmedeus-base/token/osm-var.yaml` since **v4.6.0**
