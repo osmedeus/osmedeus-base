@@ -151,6 +151,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
     python3 -m pip -q install semgrep
 fi
+cp $(which semgrep) $BINARIES_PATH/semgrep
 
 install_banner "packer"
 rm -rf $TMP_DIST/packer.zip

@@ -123,6 +123,7 @@ download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VER
 extractZip $TMP_DIST/packer.zip
 
 [ -x "$(command -v semgrep)" ] || python3 -m pip -q install semgrep >/dev/null 2>&1
+cp $(which semgrep) $BINARIES_PATH/semgrep
 
 curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
 source "$TMP_DIST/external-binaries.sh"
