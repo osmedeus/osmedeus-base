@@ -33,4 +33,4 @@ options:
   alterations: # specific option to use when brute forcing is needed
     enabled: false
     wordlists: # wordlist(s) to use that are specific to alterations
-      - "../wordlists/dns/alt.txt"
+      - "../wordlists/dns/altdns.txt"

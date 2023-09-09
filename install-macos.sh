@@ -294,15 +294,6 @@ chmod +x $BINARIES_PATH/*
 export PATH=$BINARIES_PATH:$PATH
 
 ###### done the binaries part
-announce "Adding default environment in your $DEFAULT_SHELL \033[0m"
-isInFile=$(cat $DEFAULT_SHELL | grep -c "osm-default.rc")
-if [ $isInFile -eq 0 ]; then
-   echo 'source $HOME/osmedeus-base/token/osm-default.rc' >> $DEFAULT_SHELL
-fi
-isInFile=$(cat $DEFAULT_SHELL | grep -c "[[ -f $DEFAULT_SHELL ]]")
-if [ $isInFile -eq 0 ]; then
-   echo "[[ -f $DEFAULT_SHELL ]] && . $DEFAULT_SHELL" >> $HOME/.bash_profile
-fi
 
 osmedeus config reload
 install_banner "Osmedeus Web UI"
