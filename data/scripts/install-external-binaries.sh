@@ -1,9 +1,9 @@
 install_banner "Amass"
-download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v4.1.0/amass_linux_amd64.zip
+download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v4.2.0/amass_linux_amd64.zip
 extractZip $TMP_DIST/amass.zip
 
 install_banner "subfinder"
-download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.6.2/subfinder_2.6.2_linux_amd64.zip
+download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.6.3/subfinder_2.6.3_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
@@ -11,7 +11,7 @@ download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/release
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.3.4/httpx_1.3.4_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.3.5/httpx_1.3.5_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
@@ -19,7 +19,7 @@ download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/do
 extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"
-download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/releases/download/v1.0.3/katana_1.0.3_linux_amd64.zip
+download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/releases/download/v1.0.4/katana_1.0.4_linux_amd64.zip
 extractZip $TMP_DIST/katana.zip
 
 install_banner "dnsx"
@@ -63,7 +63,7 @@ download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/dow
 cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.54.4/trufflehog_3.54.4_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.56.1/trufflehog_3.56.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
@@ -71,6 +71,6 @@ download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/dow
 extractGz $TMP_DIST/gitleaks.gz
 
 install_banner "findomain"
-download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.0/findomain-linux.zip
+download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.1/findomain-linux.zip
 extractZip $TMP_DIST/findomain.zip
 
