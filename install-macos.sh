@@ -245,6 +245,7 @@ $GO_BIN install github.com/j3ssie/go-auxs/durl@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/ourl@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/urp@latest 2>&1 > /dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/cleansub@latest 2>&1 > /dev/null
+$GO_BIN install github.com/j3ssie/go-auxs/junique@latest 2>&1 > /dev/null
 $GO_BIN install github.com/theblackturtle/ptools/wurl@latest 2>&1 > /dev/null
 install_banner "aquatone"
 $GO_BIN install github.com/michenriksen/aquatone@latest 2>&1 > /dev/null

@@ -7,7 +7,7 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.9.14/nuclei_2.9.14_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v2.9.15/nuclei_2.9.15_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -23,7 +23,7 @@ download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/release
 extractZip $TMP_DIST/katana.zip
 
 install_banner "dnsx"
-download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/download/v1.1.4/dnsx_1.1.4_linux_amd64.zip
+download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/download/v1.1.5/dnsx_1.1.5_linux_amd64.zip
 extractZip $TMP_DIST/dnsx.zip
 
 install_banner "alterx"
@@ -35,7 +35,7 @@ download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.1.2/gau
 extractGz $TMP_DIST/gau.gz
 
 install_banner "ffuf"
-download $TMP_DIST/ffuf.gz https://github.com/ffuf/ffuf/releases/download/v2.0.0/ffuf_2.0.0_linux_amd64.tar.gz
+download $TMP_DIST/ffuf.gz https://github.com/ffuf/ffuf/releases/download/v2.1.0/ffuf_2.1.0_linux_amd64.tar.gz
 extractGz $TMP_DIST/ffuf.gz
 
 install_banner "gospider"
@@ -63,7 +63,7 @@ download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/dow
 cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.56.1/trufflehog_3.56.1_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.57.0/trufflehog_3.57.0_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
