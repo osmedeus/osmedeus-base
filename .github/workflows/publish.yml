@@ -1,6 +1,7 @@
 name: publish
 on:
   workflow_run:
+    workflows: publish
     types: [requested]
 
 jobs:
@@ -16,7 +17,7 @@ jobs:
             # registry: ghcr.io
             registry: ${{ env.REGISTRY }}
             username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+            password: ${{ secrets.API_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
