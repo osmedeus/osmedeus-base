@@ -1,0 +1,39 @@
+name: publish
+on:
+  workflow_run:
+    types: [requested]
+
+jobs:
+  publish-osmedeus-docker-image:
+    name: Build and publish Osmedeus Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+            # registry: ghcr.io
+            registry: ${{ env.REGISTRY }}
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      # - name: Build the Osmedeus Docker image
+      #   run: |
+      #       docker build . --tag ghcr.io/j3ssie/osmedeus:latest
+      #       docker run ghcr.io/j3ssie/osmedeus:latest
+      #       docker push ghcr.io/j3ssie/osmedeus:latest
