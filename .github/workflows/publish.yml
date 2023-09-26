@@ -1,8 +1,5 @@
 name: publish
-on:
-  workflow_run:
-    workflows: publish
-    types: [requested]
+on: push
 
 jobs:
   publish-osmedeus-docker-image:
