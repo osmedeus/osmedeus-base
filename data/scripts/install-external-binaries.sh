@@ -15,7 +15,7 @@ download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
-download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.1.4/tlsx_1.1.4_linux_amd64.zip
+download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.1.5/tlsx_1.1.5_linux_amd64.zip
 extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"

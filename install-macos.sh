@@ -49,7 +49,7 @@ extractGz() {
 	rm -rf $1
 }
 
-announce "NOTE that this installation only works on\033[0m Linux and MacOS Intel chip"
+announce "NOTE that this installation only works on\033[0m Linux (x86) and MacOS Intel chip (and experimental on Apple Silicon chip)"
 if [[ "$OSTYPE" == "linux"* ]]; then
     $SUDO $PACKGE_MANAGER update -qq > /dev/null 2>&1
     touch /var/lib/cloud/instance/locale-check.skip > /dev/null 2>&1
@@ -202,7 +202,8 @@ fi
 # (re)install fresh golang
 brew install golang -q 2>&1 > /dev/null
 export GO_VERSION=$(curl -s 'https://go.dev/VERSION?m=text'|sed 's/go//g')
-if [ -x "$(command -v go)" ]; then 
+if [ -z "$(command -v go)" ]; then 
+    install_banner "latest go version: $GO_VERSION"
     wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --version $GO_VERSION
 fi
 
@@ -262,7 +263,7 @@ install_banner "puredns"
 $GO_BIN install github.com/d3mondev/puredns/v2@latest 2>&1 > /dev/null
 
 install_banner "amass"
-$GO_BIN install github.com/OWASP/Amass/v4/...@latest 2>&1 > /dev/null
+$GO_BIN install github.com/owasp-amass/amass/v4/...@master > /dev/null
 install_banner "gau"
 $GO_BIN install github.com/lc/gau@latest 2>&1 > /dev/null
 install_banner "shuffledns"
@@ -339,8 +340,5 @@ osmedeus health
 echo "---->>>"
 announce "The installation is done..."
 announce "Check here if you want to setup API & token:\033[0m https://docs.osmedeus.org/installation/token/"
-announce "Run\033[0m source $DEFAULT_SHELL \033[1;32m to complete the install"
-
-announce "Set default Osmedeus Threads Hold to:\033[0m 10 \033[1;32m"
-osmedeus config set --threads-hold=10
+announce "Run\033[0m source $DEFAULT_SHELL \033[1;32mto complete the install"
 announce "You can change the default Threads Hold with the command:\033[0m osmedeus config set --threads-hold=<number-of-threads> \033[1;32m"
