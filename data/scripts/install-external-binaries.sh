@@ -47,7 +47,7 @@ download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/
 extractZip $TMP_DIST/jaeles.zip
 
 install_banner "metabigor"
-download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v1.2.5/metabigor_v1.2.5_linux_amd64.tar.gz
+download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v1.2.6/metabigor_v1.2.6_linux_amd64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
 
 install_banner "goverview"
