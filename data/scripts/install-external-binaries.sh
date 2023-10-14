@@ -27,7 +27,7 @@ download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/do
 extractZip $TMP_DIST/dnsx.zip
 
 install_banner "alterx"
-download $TMP_DIST/alterx.zip https://github.com/projectdiscovery/alterx/releases/download/v0.0.2/alterx_0.0.2_linux_amd64.zip
+download $TMP_DIST/alterx.zip https://github.com/projectdiscovery/alterx/releases/download/v0.0.3/alterx_0.0.3_linux_amd64.zip
 extractZip $TMP_DIST/alterx.zip
 
 install_banner "gau"
