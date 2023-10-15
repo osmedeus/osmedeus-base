@@ -338,9 +338,10 @@ fi
 echo "---->>>"
 osmedeus health
 echo "---->>>"
+
 announce "The installation is done..."
 announce "Check here if you want to setup API & token:\033[0m https://docs.osmedeus.org/installation/token/"
 announce "Run\033[0m source $DEFAULT_SHELL \033[1;32mto complete the install"
 osmedeus config set --threads-hold=10
-osmedeus config set --client-name 
+osmedeus config set --client-name PublicIP
 announce "You can change the default Threads Hold with the command:\033[0m osmedeus config set --threads-hold=<number-of-threads> \033[1;32m"
