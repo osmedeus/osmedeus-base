@@ -94,10 +94,10 @@ if [ -d "$HOME/osmedeus-base/data" ]; then
 fi
 
 announce "Cloning Osmedeus base repo:\033[0m https://github.com/osmedeus/osmedeus-base"
-rm -rf $BASE_PATH && git clone --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
+rm -rf $BASE_PATH && git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 # # retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH" ]; then
-    git clone --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
+    git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 fi
 
 [ -z "$(which osmedeus)" ] && osmBin=/usr/local/bin/osmedeus || osmBin=$(which osmedeus)
@@ -115,8 +115,10 @@ fi
 #### done the osm core part
 
 install_banner "External binaries"
-
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
+
+curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
+source "$TMP_DIST/external-binaries.sh"
 
 PACKER_VERSION=1.8.6
 download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
@@ -125,16 +127,13 @@ extractZip $TMP_DIST/packer.zip
 [ -x "$(command -v semgrep)" ] || python3 -m pip -q install semgrep >/dev/null 2>&1
 cp $(which semgrep) $BINARIES_PATH/semgrep
 
-curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
-source "$TMP_DIST/external-binaries.sh"
-
 rm -rf $BINARIES_PATH/LICENSE*  $BINARIES_PATH/README* $BINARIES_PATH/config.ini 2>/dev/null
 
 install_banner "auxiliary tools"
-git clone --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries
+git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries
 # retry to clone in case of anything wrong with the connection
 if [ ! -d "$TMP_DIST/auxs-binaries" ]; then
-    git clone --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries
+git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries
 fi
 
 cp $TMP_DIST/auxs-binaries/releases/* $BINARIES_PATH/
@@ -150,15 +149,15 @@ cp -R $BASE_PATH/ui ~/.osmedeus/server/ui >/dev/null 2>&1
 
 install_banner "Osmedeus Community Workflow:\033[0m https://github.com/osmedeus/osmedeus-workflow"
 rm -rf $BASE_PATH/workflow >/dev/null 2>&1
-git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
+git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
 ## retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH/workflow" ]; then
-    git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
+    git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
 fi
 
-install_banner "Downloading Vulnscan template"
+announce "Downloading Vulnerability templates"
 jaeles config init >/dev/null 2>&1
-rm -rf ~/nuclei-templates && git clone --depth=1 https://github.com/projectdiscovery/nuclei-templates.git ~/nuclei-templates >/dev/null 2>&1
+rm -rf ~/nuclei-templates && git clone --quiet --depth=1 https://github.com/projectdiscovery/nuclei-templates.git ~/nuclei-templates >/dev/null 2>&1
 
 if [ -d "$BAK_DIST/data" ]; then
     announce "Updating old data + cloud config ..."

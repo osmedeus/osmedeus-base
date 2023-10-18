@@ -96,10 +96,10 @@ if [ -d "$HOME/osmedeus-base/data" ]; then
 fi
 
 announce "Cloning Osmedeus base repo:\033[0m https://github.com/osmedeus/osmedeus-base"
-rm -rf $BASE_PATH && git clone --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
+rm -rf $BASE_PATH && git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 # retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH" ]; then
-    git clone --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
+    git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 fi
 
 [ -z "$(which osmedeus)" ] && osmBin=/usr/local/bin/osmedeus || osmBin=$(which osmedeus)
@@ -126,7 +126,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install massdns -q
     cp $(which massdns) $BINARIES_PATH/massdns
 else
-    git clone --depth=1 https://github.com/blechschmidt/massdns build-massdns
+    git clone --quiet --depth=1 https://github.com/blechschmidt/massdns build-massdns
     rm -rf build-massdns/.git
     cd build-massdns
     make 2>&1 > /dev/null
@@ -306,15 +306,15 @@ cp -R $BASE_PATH/ui $HOME/.osmedeus/server/ui >/dev/null 2>&1
 
 install_banner "Osmedeus Community Workflow:\033[0m https://github.com/osmedeus/osmedeus-workflow"
 rm -rf $BASE_PATH/workflow >/dev/null 2>&1
-git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
+git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
 ## retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH/workflow" ]; then
-    git clone --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
+    git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
 fi
 
-install_banner "Downloading Vulnscan template"
+announce "Downloading Vulnerability templates"
 jaeles config init >/dev/null 2>&1
-rm -rf $HOME/nuclei-templates && git clone --depth=1 https://github.com/projectdiscovery/nuclei-templates.git $HOME/nuclei-templates >/dev/null 2>&1
+rm -rf $HOME/nuclei-templates && git clone --quiet --depth=1 https://github.com/projectdiscovery/nuclei-templates.git $HOME/nuclei-templates >/dev/null 2>&1
 
 if [ -d "$BAK_DIST/data" ]; then
     announce "Updating old data + cloud config ..."
