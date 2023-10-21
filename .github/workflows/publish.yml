@@ -1,9 +1,8 @@
 name: docker-build
 
-# on:
-#   push:
-#     branches:
-#       - 'main'
+on:
+  release:
+    types: [published]
 
 jobs:
   docker:
