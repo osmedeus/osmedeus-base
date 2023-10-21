@@ -1,8 +1,6 @@
 name: docker-build
 
-on:
-  release:
-    types: [published]
+on: workflow_dispatch
 
 jobs:
   docker:
