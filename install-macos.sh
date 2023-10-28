@@ -201,10 +201,10 @@ fi
 
 # (re)install fresh golang
 brew install golang -q 2>&1 > /dev/null
-export GO_VERSION=$(curl -s 'https://go.dev/VERSION?m=text'|sed 's/go//g')
+export GO_LATEST_VERSION=$(curl -s 'https://go.dev/VERSION?m=text'|grep 'go'|sed 's/go//g')
 if [ -z "$(command -v go)" ]; then 
-    install_banner "latest go version: $GO_VERSION"
-    wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --version $GO_VERSION
+    install_banner "latest go version: $GO_LATEST_VERSION"
+    wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --version $GO_LATEST_VERSION
 fi
 
 
