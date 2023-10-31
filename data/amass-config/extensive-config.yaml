@@ -24,12 +24,12 @@ options:
     - 8.8.8.8
   datasources: "./datasources.yaml" # the file path that will point to the data source configuration
   wordlist: # global wordlist(s) to uses 
-    - "../wordlists/dns/shorts.txt"
+    - "../wordlists/dns/small.txt"
   # database: "postgres://username:password@localhost:5432/database?testing=works" # databases URI to be used when adding entries
   bruteforce: # specific option to use when brute forcing is needed
     enabled: true
     wordlists: # wordlist(s) to use that are specific to brute forcing
-      - "../wordlists/dns/shorts.txt"
+      - "../wordlists/dns/medium.txt"
   alterations: # specific option to use when brute forcing is needed
     enabled: true
     wordlists: # wordlist(s) to use that are specific to alterations

@@ -11,7 +11,7 @@ download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/release
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.3.5/httpx_1.3.5_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.3.6/httpx_1.3.6_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
@@ -59,11 +59,11 @@ download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/release
 extractZip $TMP_DIST/aquatone.zip
 
 install_banner "gowitness"
-download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/2.5.0/gowitness-2.5.0-linux-amd64
+download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/2.5.1/gowitness-2.5.1-linux-amd64
 cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.61.0/trufflehog_3.61.0_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.62.0/trufflehog_3.62.0_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
@@ -71,6 +71,6 @@ download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/dow
 extractGz $TMP_DIST/gitleaks.gz
 
 install_banner "findomain"
-download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.2/findomain-linux.zip
+download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.3/findomain-linux.zip
 extractZip $TMP_DIST/findomain.zip
 
