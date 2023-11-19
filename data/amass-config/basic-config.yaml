@@ -27,7 +27,7 @@ options:
     - "../wordlists/dns/small.txt"
   # database: "postgres://username:password@localhost:5432/database?testing=works" # databases URI to be used when adding entries
   bruteforce: # specific option to use when brute forcing is needed
-    enabled: true
+    enabled: false
     wordlists: # wordlist(s) to use that are specific to brute forcing
       - "../wordlists/dns/small.txt"
   alterations: # specific option to use when brute forcing is needed
