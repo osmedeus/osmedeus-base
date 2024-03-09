@@ -119,6 +119,7 @@ fi
 ######## Start to install binaries
 
 mkdir -p $BINARIES_PATH >/dev/null 2>&1
+cp $BASE_PATH/dist/osmedeus $BINARIES_PATH/osmedeus && chmod +x $BINARIES_PATH/osmedeus
 
 install_banner "massdns"
 cd $BINARIES_PATH
@@ -290,6 +291,8 @@ install_banner "metabigor"
 $GO_BIN install github.com/j3ssie/metabigor@latest 2>&1 > /dev/null
 install_banner "trufflehog"
 $GO_BIN install github.com/trufflesecurity/trufflehog@latest 2>&1 > /dev/null
+install_banner "ffuf"
+$GO_BIN install github.com/ffuf/ffuf/v2@latest 2>&1 > /dev/null
 
 echo -e "\033[1;32m[+] Copy all go tools from: $GO_DIR \033[0m"
 cp $GO_DIR/* $BINARIES_PATH/ >/dev/null 2>&1
@@ -327,13 +330,6 @@ if [ -d "$BAK_DIST/token" ]; then
     rm -rf $HOME/osmedeus-base/token && cp -R $BAK_DIST/token $HOME/osmedeus-base/token
 fi
 rm -rf $BAK_DIST >/dev/null 2>&1
-
-###### Private installation for premium package
-
-if [ -f "$BASE_PATH/secret/secret.sh" ]; then
-    install_banner "private component"
-    . $BASE_PATH/secret/secret.sh
-fi
 
 echo "---->>>"
 osmedeus health

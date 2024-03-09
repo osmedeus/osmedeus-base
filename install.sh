@@ -171,15 +171,6 @@ if [ -d "$BAK_DIST/token" ]; then
 fi
 rm -rf $BAK_DIST >/dev/null 2>&1
 
-###### Private installation for premium package
-
-if [ -f "$BASE_PATH/secret/secret.sh" ]; then
-    install_banner "private component"
-    . $BASE_PATH/secret/secret.sh
-fi
-
-#######
-
 echo "---->>>"
 osmedeus health
 echo "---->>>"
