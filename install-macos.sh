@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 
 # global stuff
 BASE_PATH="$HOME/osmedeus-base"
