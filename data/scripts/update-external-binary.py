@@ -19,6 +19,12 @@ def generate_content():
     line += "\nextractZip $TMP_DIST/amass.zip\n"
     content += line + "\n"
 
+    content += 'install_banner "httprobe"\n'
+    binary_version = get_version("tomnomnom/httprobe").strip("v")
+    line = "download $TMP_DIST/httprobe.gz https://github.com/tomnomnom/httprobe/releases/download/v{version}/httprobe-linux-amd64-{version}.tgz".format(version=binary_version)
+    line += "\nextractGz $TMP_DIST/httprobe.gz\n"
+    content += line + "\n"
+
     content += 'install_banner "subfinder"\n'
     binary_version = get_version("projectdiscovery/subfinder").strip("v")
     line = "download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v{version}/subfinder_{version}_linux_amd64.zip".format(version=binary_version)
@@ -97,12 +103,6 @@ def generate_content():
     line += "\nextractGz $TMP_DIST/goverview.gz\n"
     content += line + "\n"
 
-    content += 'install_banner "aquatone"\n'
-    binary_version = get_version("michenriksen/aquatone").strip("v")
-    line = "download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v{version}/aquatone_linux_amd64_{version}.zip".format(version=binary_version)
-    line += "\nextractZip $TMP_DIST/aquatone.zip\n"
-    content += line + "\n"
-
     content += 'install_banner "gowitness"\n'
     binary_version = get_version("sensepost/gowitness").strip("v")
     line = "download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/{version}/gowitness-{version}-linux-amd64".format(version=binary_version)
@@ -127,6 +127,19 @@ def generate_content():
     line += "\nextractZip $TMP_DIST/findomain.zip\n"
     content += line + "\n"
     
+    # some unchanged binaries that don't need to be updated to avoid Github API rate limit
+    content += 'install_banner "aquatone"\n'
+    binary_version = "1.7.0"
+    line = "download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v{version}/aquatone_linux_amd64_{version}.zip".format(version=binary_version)
+    line += "\nextractZip $TMP_DIST/aquatone.zip\n"
+    content += line + "\n"
+    
+    content += 'install_banner "durl"\n'
+    binary_version = "0.1"
+    line = "download $TMP_DIST/durl.gz https://github.com/j3ssie/durl/releases/download/v{version}/durl_{version}_linux_amd64.tar.gz".format(version=binary_version)
+    line += "\nextractGz $TMP_DIST/durl.zip\n"
+    content += line + "\n"
+
     return content
 
 def main():
