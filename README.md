@@ -36,10 +36,10 @@ You can check out the documentation at [**docs.osmedeus.org**](https://docs.osme
 bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install.sh)
 ```
 
-### Installation for MacOS (experimental)
+### Install for MacOS or ARM based machine
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install-macos.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install-arm.sh)
 ```
 
 Check out [this page](https://docs.osmedeus.org/installation/) for more the install on other platforms

@@ -149,7 +149,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_darwin_amd64.zip
   fi
 else
-  download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
+  if [[ $(uname -p) != "arm" ]]; then
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
+  else
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_arm64.zip
+  fi
 fi
 extractZip $TMP_DIST/packer.zip
 
@@ -158,7 +162,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install csvtk -q
   cp $(which csvtk) $BINARIES_PATH/csvtk
 else
-  download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.30.0/csvtk_linux_amd64.tar.gz
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.30.0/csvtk_linux_arm64.tar.gz
+  else
+    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.30.0/csvtk_linux_amd64.tar.gz
+  fi
   extractGz $TMP_DIST/csvtk.gz
 fi
 
@@ -170,7 +178,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_amd64.tar.gz
   fi
 else
-  download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_linux_amd64.tar.gz
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_linux_arm64.tar.gz
+  else
+    download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_linux_amd64.tar.gz
+  fi
   extractGz $TMP_DIST/metabigor.gz
 fi
 

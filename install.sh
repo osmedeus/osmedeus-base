@@ -47,6 +47,10 @@ extractGz() {
 	rm -rf $1
 }
 
+
+announce "Please be aware that this installation is only compatible with\033[0m Linux (amd64) and MacOS Intel chip systems"
+announce "If you're utilizing an ARM-based machine, kindly consult the ARM script here: https://docs.osmedeus.org/installation/#install-for-arm"
+
 if [[ $EUID -ne 0 ]]; then
   announce "You're running the script as\033[1;34m $USER \033[0m. It is recommended to run as root user by running\033[1;34m sudo su \033[0mfirst and then run the script"
   announce "If you're already have essential tools installed, you can continue the installation as normal"
@@ -74,10 +78,15 @@ else
   [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER install python3 python3-pip -y >/dev/null 2>&1
 fi
 
-announce "NOTE that this installation only works on\033[0m Linux 64-bit intel based machine machine."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "\033[1;34m[!] MacOS machine detected. Exit the script\033[0m"
     announce "Check out https://docs.osmedeus.org/installation/#install-for-macos-experimental for more MacOS installation"
+    exit 1
+fi
+
+if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    echo -e "\033[1;34m[!] An ARM-based machine has been identified. The installation will now proceed with the ARM-specific script.\033[0m"
+    bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install-arm.sh)
     exit 1
 fi
 
