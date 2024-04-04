@@ -49,7 +49,6 @@ extractGz() {
   rm -rf $1
 }
 
-announce "NOTE that this installation only works on\033[0m Linux (x86) and MacOS Intel chip (and experimental on Apple Silicon chip)"
 if [[ "$OSTYPE" == "linux"* ]]; then
   $SUDO $PACKGE_MANAGER update -qq >/dev/null 2>&1
   touch /var/lib/cloud/instance/locale-check.skip >/dev/null 2>&1

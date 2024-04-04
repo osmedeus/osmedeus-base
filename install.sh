@@ -49,8 +49,6 @@ extractGz() {
 
 
 announce "Please be aware that this installation is only compatible with\033[0m Linux (amd64) and MacOS Intel chip systems"
-announce "If you're utilizing an ARM-based machine, kindly consult the ARM script here: https://docs.osmedeus.org/installation/#install-for-arm"
-
 if [[ $EUID -ne 0 ]]; then
   announce "You're running the script as\033[1;34m $USER \033[0m. It is recommended to run as root user by running\033[1;34m sudo su \033[0mfirst and then run the script"
   announce "If you're already have essential tools installed, you can continue the installation as normal"
@@ -80,7 +78,7 @@ fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "\033[1;34m[!] MacOS machine detected. Exit the script\033[0m"
-    announce "Check out https://docs.osmedeus.org/installation/#install-for-macos-experimental for more MacOS installation"
+    announce "Check out https://docs.osmedeus.org/installation/#install-for-macos-or-arm-based-machine for more MacOS installation"
     exit 1
 fi
 
