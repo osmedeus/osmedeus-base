@@ -2,12 +2,12 @@ FROM debian:bullseye
 ARG DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
 
-RUN apt update && apt install -y -qq apt-utils 2>&1
-RUN apt upgrade -y -qq
-RUN apt install git wget curl unzip sudo jq vim file -y -qq
-RUN apt install coreutils -y -qq
-RUN apt install nmap masscan chromium -y -qq
-RUN apt autoremove -y 
+RUN apt-get update && apt-get install -y -qq apt-utils 2>&1
+RUN apt-get upgrade -y -qq
+RUN apt-get install git wget curl unzip sudo jq vim file -y -qq
+RUN apt-get install coreutils -y -qq
+RUN apt-get install nmap masscan chromium -y -qq
+RUN apt-get autoremove -y 
 
 ENV PATH "$PATH:/root/osmedeus-base/binaries/"
 WORKDIR /root/
