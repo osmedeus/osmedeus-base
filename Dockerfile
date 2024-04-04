@@ -12,7 +12,7 @@ RUN apt autoremove -y
 ENV PATH "$PATH:/root/osmedeus-base/binaries/"
 WORKDIR /root/
 
-RUN curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install-macos.sh -o /tmp/install.sh
+RUN curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/main/install-macos.sh -o /tmp/install.sh
 RUN chmod +x /tmp/install.sh
 RUN /tmp/install.sh
 
