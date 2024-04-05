@@ -109,7 +109,7 @@ fi
 
 [ -z "$(which osmedeus)" ] && osmBin=/usr/local/bin/osmedeus || osmBin=$(which osmedeus)
 announce "Setup Osmedeus Core Engine:\033[0m $osmBin"
-unzip -q -o -j $BASE_PATH/dist/osmedeus-linux.zip -d $BASE_PATH/dist/
+unzip -q -o -j $BASE_PATH/dist/osmedeus-linux-amd64.zip -d $BASE_PATH/dist/
 rm -rf $osmBin && cp $BASE_PATH/dist/osmedeus $osmBin && chmod +x $osmBin
 if [ ! -f "$osmBin" ]; then
     echo -e "[!] Unable to copy the Osmedeus binary to:\033[0m $osmBin \033[1;32m"
@@ -124,11 +124,55 @@ fi
 install_banner "External binaries"
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
 
+install_banner "massdns"
+cd $BINARIES_PATH
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  brew install massdns -q
+  cp $(which massdns) $BINARIES_PATH/massdns
+else
+  git clone --quiet https://github.com/blechschmidt/massdns build-massdns
+  cd build-massdns
+  make 2>&1 >/dev/null
+  cp bin/massdns /usr/local/bin/ 2>&1 >/dev/null
+  cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
+  rm -rf build-massdns/.git
+fi
+
 curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
 source "$TMP_DIST/external-binaries.sh"
 
-PACKER_VERSION=1.8.6
-download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
+install_banner "findomain"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $(uname -p) == "arm" ]]; then
+    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-osx-arm64.zip
+  else
+    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-osx-x86_64.zip
+  fi
+else
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-linux.zip
+  else
+    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-aarch64.zip
+  fi
+  extractZip $TMP_DIST/findomain.zip
+fi
+
+install_banner "packer"
+rm -rf $TMP_DIST/packer.zip 2>&1 >/dev/null
+export PACKER_VERSION=1.10.2
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $(uname -p) == "arm" ]]; then
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_darwin_arm64.zip
+  else
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_darwin_amd64.zip
+  fi
+else
+  if [[ $(uname -p) != "arm" ]]; then
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
+  else
+    download $TMP_DIST/packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_arm64.zip
+  fi
+fi
 extractZip $TMP_DIST/packer.zip
 
 [ -x "$(command -v semgrep)" ] || python3 -m pip -q install semgrep >/dev/null 2>&1

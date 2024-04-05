@@ -39,6 +39,25 @@ download() {
   fi
 }
 
+download_multi_platform() {
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    DOWNLOAD_URL=$(echo $2 | sed -E 's/linux/darwin/g')
+  else
+    DOWNLOAD_URL=$(echo $2 | sed -E 's/darwin|osx|macos/linux/g')
+  fi
+
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    DOWNLOAD_URL=$(echo $DOWNLOAD_URL | sed -E 's/amd/arm/g')
+  else
+    DOWNLOAD_URL=$(echo $DOWNLOAD_URL | sed -E 's/arm/amd/g')
+  fi
+
+  wget -q -O $1 $DOWNLOAD_URL
+  if [ ! -f "$1" ]; then
+    wget -q -O $1 $DOWNLOAD_URL
+  fi
+}
+
 extractZip() {
   unzip -q -o -j $1 -d $BINARIES_PATH/
   rm -rf $1
@@ -111,24 +130,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install massdns -q
   cp $(which massdns) $BINARIES_PATH/massdns
 else
-  git clone --quiet --depth=1 https://github.com/blechschmidt/massdns build-massdns
+  git clone --quiet https://github.com/blechschmidt/massdns build-massdns
   cd build-massdns
   make 2>&1 >/dev/null
-  cp bin/massdns /usr/local/bin/
-  cp bin/massdns $BINARIES_PATH/massdns
+  cp bin/massdns /usr/local/bin/ 2>&1 >/dev/null
+  cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
   rm -rf build-massdns/.git
 fi
 cd $BASE_PATH
-
-install_banner "findomain"
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  brew install findomain -q
-  cp $(which findomain) $BINARIES_PATH/findomain
-else
-  download $TMP_DIST/findomain.zip https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux.zip
-  extractZip $TMP_DIST/findomain.zip
-fi
-chmod +x $BINARIES_PATH/findomain
 
 install_banner "semgrep"
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -137,6 +146,22 @@ else
   python3 -m pip -q install semgrep
 fi
 cp $(which semgrep) $BINARIES_PATH/semgrep
+
+install_banner "findomain"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $(uname -p) == "arm" ]]; then
+    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-osx-arm64.zip
+  else
+    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-osx-x86_64.zip
+  fi
+else
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-linux.zip
+  else
+    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-aarch64.zip
+  fi
+  extractZip $TMP_DIST/findomain.zip
+fi
 
 install_banner "packer"
 rm -rf $TMP_DIST/packer.zip 2>&1 >/dev/null
@@ -169,22 +194,6 @@ else
   extractGz $TMP_DIST/csvtk.gz
 fi
 
-install_banner "metabigor"
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  if [[ $(uname -p) == "arm" ]]; then
-    download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_arm64.tar.gz
-  else
-    download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_amd64.tar.gz
-  fi
-else
-  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
-    download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_linux_arm64.tar.gz
-  else
-    download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_linux_amd64.tar.gz
-  fi
-  extractGz $TMP_DIST/metabigor.gz
-fi
-
 install_banner "rustscan"
 if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install rustscan -q
@@ -194,6 +203,15 @@ else
   rm -rf /tmp/rustscan.deb
 fi
 cp $(which rustscan) $BINARIES_PATH/rustscan
+
+install_banner "metabigor"
+download_multi_platform $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_arm64.tar.gz
+extractGz $TMP_DIST/metabigor.gz
+
+install_banner "trufflehog"
+TRUFFLEHOG_VERSION=$(curl -s https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest | jq -r '.name' | sed 's/v//g')
+download_multi_platform $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_darwin_arm64.tar.gz
+extractGz $TMP_DIST/trufflehog.gz
 
 ######## Start to install golang
 cd $CWD
@@ -302,8 +320,6 @@ install_banner "gospider"
 $GO_BIN install github.com/jaeles-project/gospider@latest 2>&1 >/dev/null
 install_banner "jaeles"
 $GO_BIN install github.com/jaeles-project/jaeles@latest 2>&1 >/dev/null
-install_banner "trufflehog"
-$GO_BIN install github.com/trufflesecurity/trufflehog@latest 2>&1 >/dev/null
 install_banner "ffuf"
 $GO_BIN install github.com/ffuf/ffuf/v2@latest 2>&1 >/dev/null
 
