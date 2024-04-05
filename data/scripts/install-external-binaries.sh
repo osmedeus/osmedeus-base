@@ -78,11 +78,10 @@ install_banner "aquatone"
 download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
 extractZip $TMP_DIST/aquatone.zip
 
-install_banner "json-cleaner"
+install_banner "durl"
 download $TMP_DIST/durl.gz https://github.com/j3ssie/durl/releases/download/v0.1/durl_0.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/durl.gz
 
 install_banner "json-cleaner"
 download $TMP_DIST/json-cleaner.gz https://github.com/j3ssie/json-cleaner/releases/download/v0.1/json-cleaner_0.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/json-cleaner.gz
-

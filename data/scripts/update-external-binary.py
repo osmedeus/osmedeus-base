@@ -126,20 +126,20 @@ def generate_content():
     line = "download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/{version}/findomain-linux.zip".format(version=binary_version)
     line += "\nextractZip $TMP_DIST/findomain.zip\n"
     content += line + "\n"
-    
+
     # some unchanged binaries that don't need to be updated to avoid Github API rate limit
     content += 'install_banner "aquatone"\n'
     binary_version = "1.7.0"
     line = "download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v{version}/aquatone_linux_amd64_{version}.zip".format(version=binary_version)
     line += "\nextractZip $TMP_DIST/aquatone.zip\n"
     content += line + "\n"
-    
-    content += 'install_banner "json-cleaner"\n'
+
+    content += 'install_banner "durl"\n'
     binary_version = "0.1"
     line = "download $TMP_DIST/durl.gz https://github.com/j3ssie/durl/releases/download/v{version}/durl_{version}_linux_amd64.tar.gz".format(version=binary_version)
     line += "\nextractGz $TMP_DIST/durl.gz\n"
     content += line + "\n"
-    
+
     content += 'install_banner "json-cleaner"\n'
     binary_version = "0.1"
     line = "download $TMP_DIST/json-cleaner.gz https://github.com/j3ssie/json-cleaner/releases/download/v{version}/json-cleaner_{version}_linux_amd64.tar.gz".format(version=binary_version)
