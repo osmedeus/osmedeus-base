@@ -278,6 +278,7 @@ $GO_BIN install github.com/j3ssie/cinfo@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/cdnstrip@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/str-replace@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/durl@latest 2>&1 >/dev/null
+$GO_BIN install github.com/j3ssie/json-cleaner@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/ourl@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/urp@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/cleansub@latest 2>&1 >/dev/null

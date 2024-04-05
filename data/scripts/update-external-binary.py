@@ -134,10 +134,16 @@ def generate_content():
     line += "\nextractZip $TMP_DIST/aquatone.zip\n"
     content += line + "\n"
     
-    content += 'install_banner "durl"\n'
+    content += 'install_banner "json-cleaner"\n'
     binary_version = "0.1"
     line = "download $TMP_DIST/durl.gz https://github.com/j3ssie/durl/releases/download/v{version}/durl_{version}_linux_amd64.tar.gz".format(version=binary_version)
-    line += "\nextractGz $TMP_DIST/durl.zip\n"
+    line += "\nextractGz $TMP_DIST/durl.gz\n"
+    content += line + "\n"
+    
+    content += 'install_banner "json-cleaner"\n'
+    binary_version = "0.1"
+    line = "download $TMP_DIST/json-cleaner.gz https://github.com/j3ssie/json-cleaner/releases/download/v{version}/json-cleaner_{version}_linux_amd64.tar.gz".format(version=binary_version)
+    line += "\nextractGz $TMP_DIST/json-cleaner.gz\n"
     content += line + "\n"
 
     return content
