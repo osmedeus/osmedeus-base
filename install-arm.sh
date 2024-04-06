@@ -317,6 +317,8 @@ install_banner "nuclei"
 $GO_BIN install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest 2>&1 >/dev/null
 install_banner "subfinder"
 $GO_BIN install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 2>&1 >/dev/null
+install_banner "notify"
+$GO_BIN install github.com/projectdiscovery/notify/cmd/notify@latest 2>&1 >/dev/null
 install_banner "gospider"
 $GO_BIN install github.com/jaeles-project/gospider@latest 2>&1 >/dev/null
 install_banner "jaeles"

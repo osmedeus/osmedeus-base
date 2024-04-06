@@ -34,6 +34,10 @@ install_banner "alterx"
 download $TMP_DIST/alterx.zip https://github.com/projectdiscovery/alterx/releases/download/v0.0.4/alterx_0.0.4_linux_amd64.zip
 extractZip $TMP_DIST/alterx.zip
 
+install_banner "notify"
+download $TMP_DIST/notify.zip https://github.com/projectdiscovery/notify/releases/download/v1.0.6/notify_1.0.6_linux_amd64.zip
+extractZip $TMP_DIST/notify.zip
+
 install_banner "gau"
 download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.2.1/gau_2.2.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/gau.gz
@@ -85,3 +89,4 @@ extractGz $TMP_DIST/durl.gz
 install_banner "json-cleaner"
 download $TMP_DIST/json-cleaner.gz https://github.com/j3ssie/json-cleaner/releases/download/v0.1/json-cleaner_0.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/json-cleaner.gz
+
