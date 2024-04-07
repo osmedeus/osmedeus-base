@@ -73,6 +73,12 @@ def generate_content():
     line += "\nextractZip $TMP_DIST/notify.zip\n"
     content += line + "\n"
 
+    content += 'install_banner "naabu"\n'
+    binary_version = get_version("projectdiscovery/naabu").strip("v")
+    line = "download $TMP_DIST/naabu.zip https://github.com/projectdiscovery/naabu/releases/download/v{version}/naabu_{version}_linux_amd64.zip".format(version=binary_version)
+    line += "\nextractZip $TMP_DIST/naabu.zip\n"
+    content += line + "\n"
+
     content += 'install_banner "gau"\n'
     binary_version = get_version("lc/gau").strip("v")
     line = "download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v{version}/gau_{version}_linux_amd64.tar.gz".format(version=binary_version)

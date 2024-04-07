@@ -76,6 +76,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
   [ -x "$(command -v curl)" ] || $SUDO $PACKGE_MANAGER install curl -y >/dev/null 2>&1
   [ -x "$(command -v tmux)" ] || $SUDO $PACKGE_MANAGER install tmux -y >/dev/null 2>&1
   [ -x "$(command -v git)" ] || $SUDO $PACKGE_MANAGER install git -y >/dev/null 2>&1
+  [ -x "$(command -v jq)" ] || $SUDO $PACKGE_MANAGER install jq -y >/dev/null 2>&1
   [ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER install nmap -y >/dev/null 2>&1
   [ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER install masscan -y >/dev/null 2>&1
   [ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER install chromium -y >/dev/null 2>&1
@@ -91,6 +92,7 @@ else
   [ -x "$(command -v curl)" ] || $PACKGE_MANAGER install curl -q >/dev/null 2>&1
   [ -x "$(command -v tmux)" ] || $PACKGE_MANAGER install tmux -q >/dev/null 2>&1
   [ -x "$(command -v git)" ] || $PACKGE_MANAGER install git -q >/dev/null 2>&1
+  [ -x "$(command -v jq)" ] || $PACKGE_MANAGER install jq -q >/dev/null 2>&1
   [ -x "$(command -v nmap)" ] || $PACKGE_MANAGER install nmap -q >/dev/null 2>&1
   [ -x "$(command -v masscan)" ] || $PACKGE_MANAGER install masscan -q >/dev/null 2>&1
   [ -x "$(command -v chromium)" ] || $PACKGE_MANAGER install chromium -q >/dev/null 2>&1
@@ -198,11 +200,11 @@ install_banner "rustscan"
 if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install rustscan -q
 else
-  wget -q -O /tmp/rustscan.deb https://github.com/RustScan/RustScan/releases/download/2.0.1/rustscan_2.0.1_amd64.deb
+  wget -q -O /tmp/rustscan.deb https://github.com/RustScan/RustScan/releases/download/2.0.1/rustscan_2.0.1_amd64.deb 2>&1 >/dev/null
   dpkg -i /tmp/rustscan.deb 2>&1 >/dev/null
-  rm -rf /tmp/rustscan.deb
+  rm -rf /tmp/rustscan.deb 2>&1 >/dev/null
 fi
-cp $(which rustscan) $BINARIES_PATH/rustscan
+cp $(which rustscan) $BINARIES_PATH/rustscan 2>&1 >/dev/null
 
 install_banner "metabigor"
 download_multi_platform $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_arm64.tar.gz
@@ -218,7 +220,6 @@ cd $CWD
 
 # update golang version
 install_banner "Golang"
-
 export GO_BIN=$(which go)
 if [ -f "$GO_BIN" ]; then
   announce "Detected go binary: $GO_BIN"
@@ -227,27 +228,22 @@ fi
 export GOPATH=$(go env GOPATH)
 export GO_DIR="$GOPATH/bin"
 export GO_BIN=$(which go)
-
-# clean up old go version
 if [ -d "$GOPATH" ]; then
-  rm -rf $GOPATH $GO_DIR 2>&1 >/dev/null
+  announce "The current GOPATH already exists. Try to install the latest version of Golang"
 fi
 
-if [ ! -d "$GOPATH" ]; then
-  announce "[+] The GOPATH cannot be found. Please install the most recent version of Go"
-  # (re)install fresh golang
-  # brew install golang -q 2>&1 > /dev/null
-  export GO_LATEST_VERSION=$(curl -s 'https://go.dev/VERSION?m=text' | grep 'go' | sed 's/go//g')
-  install_banner "latest go version: $GO_LATEST_VERSION"
-  wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --version $GO_LATEST_VERSION
+# (re)install fresh golang
+# brew install golang -q 2>&1 > /dev/null
+export GO_LATEST_VERSION=$(curl -s 'https://go.dev/VERSION?m=text' | grep 'go' | sed 's/go//g')
+install_banner "latest go version: $GO_LATEST_VERSION"
+wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --version $GO_LATEST_VERSION
 
-  export GOROOT=$HOME/.go
-  export PATH=$GOROOT/bin:$PATH
-  export GOPATH=$HOME/go
-  export PATH=$GOPATH/bin:$PATH
-  export GO_DIR="$GOPATH/bin"
-  export GO_BIN=$(which go)
-fi
+export GOROOT=$HOME/.go
+export PATH=$GOROOT/bin:$PATH
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+export GO_DIR="$GOPATH/bin"
+export GO_BIN=$(which go)
 
 announce "Detected go binary:\033[1;37m $GO_BIN\033[0m"
 announce "Detected go tools:\033[1;37m $GO_DIR\033[0m"
@@ -315,6 +311,8 @@ install_banner "httpx"
 $GO_BIN install github.com/projectdiscovery/httpx/cmd/httpx@latest 2>&1 >/dev/null
 install_banner "nuclei"
 $GO_BIN install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest 2>&1 >/dev/null
+install_banner "naabu"
+$GO_BIN install github.com/projectdiscovery/naabu/v2/cmd/naabu@latest 2>&1 >/dev/null
 install_banner "subfinder"
 $GO_BIN install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 2>&1 >/dev/null
 install_banner "notify"

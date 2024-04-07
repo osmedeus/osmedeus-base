@@ -38,6 +38,10 @@ install_banner "notify"
 download $TMP_DIST/notify.zip https://github.com/projectdiscovery/notify/releases/download/v1.0.6/notify_1.0.6_linux_amd64.zip
 extractZip $TMP_DIST/notify.zip
 
+install_banner "naabu"
+download $TMP_DIST/naabu.zip https://github.com/projectdiscovery/naabu/releases/download/v2.3.0/naabu_2.3.0_linux_amd64.zip
+extractZip $TMP_DIST/naabu.zip
+
 install_banner "gau"
 download $TMP_DIST/gau.gz https://github.com/lc/gau/releases/download/v2.2.1/gau_2.2.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/gau.gz

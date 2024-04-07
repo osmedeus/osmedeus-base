@@ -1,29 +1,27 @@
-bevigil: []
-binaryedge: []
-bufferover: []
-builtwith: []
-c99: []
-censys: []
+# getting this file from https://docs.projectdiscovery.io/tools/subfinder/install#post-install-configuration
+binaryedge:
+  - xxx
+  - xxx
+censys:
+  - x:x
 certspotter: []
-chaos: []
-chinaz: []
-dnsdb: []
-dnsrepo: []
-facebook: []
-fofa: []
-fullhunt: []
-github: []
-hunter: []
-intelx: []
-leakix: []
-netlas: []
-passivetotal: []
-quake: []
-redhuntlabs: []
-robtex: []
+passivetotal:
+  - sample-email@user.com:sample_password
+redhuntlabs:
+  - ENDPOINT:API_TOKEN
+  - https://reconapi.redhuntlabs.com/community/v1/domains/subdomains:joEPzJJp2AuOCw7teAj63HYrPGnsxuPQ
 securitytrails: []
-shodan: []
-threatbook: []
-virustotal: []
-whoisxmlapi: []
-zoomeyeapi: []
+shodan:
+  - xxx
+github:
+  - ghp_xxx
+  - ghp_xxx
+zoomeyeapi:
+  - zoomeye.hk:xxx
+quake:
+  - xxx
+facebook:
+  - APP_ID:APP_SECRET
+intelx:
+  - HOST:API_KEY
+  - 2.intelx.io:xxx
