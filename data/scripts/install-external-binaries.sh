@@ -11,7 +11,7 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v3.2.3/nuclei_3.2.3_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v3.2.4/nuclei_3.2.4_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -62,16 +62,8 @@ install_banner "metabigor"
 download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_linux_amd64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
 
-install_banner "goverview"
-download $TMP_DIST/goverview.gz https://github.com/j3ssie/goverview/releases/download/v1.0.1/goverview_v1.0.1_linux_amd64.tar.gz
-extractGz $TMP_DIST/goverview.gz
-
-install_banner "gowitness"
-download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/2.5.1/gowitness-2.5.1-linux-amd64
-cp $TMP_DIST/gowitness $BINARIES_PATH/gowitness
-
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.72.0/trufflehog_3.72.0_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.73.0/trufflehog_3.73.0_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
@@ -81,10 +73,6 @@ extractGz $TMP_DIST/gitleaks.gz
 install_banner "findomain"
 download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-linux.zip
 extractZip $TMP_DIST/findomain.zip
-
-install_banner "aquatone"
-download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
-extractZip $TMP_DIST/aquatone.zip
 
 install_banner "durl"
 download $TMP_DIST/durl.gz https://github.com/j3ssie/durl/releases/download/v0.1/durl_0.1_linux_amd64.tar.gz

@@ -280,12 +280,6 @@ $GO_BIN install github.com/j3ssie/go-auxs/urp@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/cleansub@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/junique@latest 2>&1 >/dev/null
 $GO_BIN install github.com/theblackturtle/ptools/wurl@latest 2>&1 >/dev/null
-install_banner "aquatone"
-$GO_BIN install github.com/michenriksen/aquatone@latest 2>&1 >/dev/null
-install_banner "gowitness"
-$GO_BIN install github.com/sensepost/gowitness@latest 2>&1 >/dev/null
-install_banner "goverview"
-$GO_BIN install github.com/j3ssie/goverview@latest 2>&1 >/dev/null
 install_banner "github-endpoints"
 $GO_BIN install github.com/gwen001/github-endpoints@latest 2>&1 >/dev/null
 install_banner "github-subdomains"

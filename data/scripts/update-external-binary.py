@@ -109,18 +109,6 @@ def generate_content():
     line += "\nextractGz $TMP_DIST/metabigor.gz\n"
     content += line + "\n"
 
-    content += 'install_banner "goverview"\n'
-    binary_version = get_version("j3ssie/goverview")
-    line = "download $TMP_DIST/goverview.gz https://github.com/j3ssie/goverview/releases/download/{version}/goverview_{version}_linux_amd64.tar.gz".format(version=binary_version)
-    line += "\nextractGz $TMP_DIST/goverview.gz\n"
-    content += line + "\n"
-
-    content += 'install_banner "gowitness"\n'
-    binary_version = get_version("sensepost/gowitness").strip("v")
-    line = "download $TMP_DIST/gowitness https://github.com/sensepost/gowitness/releases/download/{version}/gowitness-{version}-linux-amd64".format(version=binary_version)
-    line += "\ncp $TMP_DIST/gowitness $BINARIES_PATH/gowitness\n"
-    content += line + "\n"
-
     content += 'install_banner "trufflehog"\n'
     binary_version = get_version("trufflesecurity/trufflehog").strip("v")
     line = "download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v{version}/trufflehog_{version}_linux_amd64.tar.gz".format(version=binary_version)
@@ -137,13 +125,6 @@ def generate_content():
     binary_version = get_version("Findomain/Findomain").split(" ")[1].strip("v")
     line = "download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/{version}/findomain-linux.zip".format(version=binary_version)
     line += "\nextractZip $TMP_DIST/findomain.zip\n"
-    content += line + "\n"
-
-    # some unchanged binaries that don't need to be updated to avoid Github API rate limit
-    content += 'install_banner "aquatone"\n'
-    binary_version = "1.7.0"
-    line = "download $TMP_DIST/aquatone.zip https://github.com/michenriksen/aquatone/releases/download/v{version}/aquatone_linux_amd64_{version}.zip".format(version=binary_version)
-    line += "\nextractZip $TMP_DIST/aquatone.zip\n"
     content += line + "\n"
 
     content += 'install_banner "durl"\n'
