@@ -11,7 +11,7 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v3.2.4/nuclei_3.2.4_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v3.2.6/nuclei_3.2.6_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -63,7 +63,7 @@ download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/dow
 extractGz $TMP_DIST/metabigor.gz
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.73.0/trufflehog_3.73.0_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.75.0/trufflehog_3.75.0_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
@@ -75,7 +75,7 @@ download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases
 extractZip $TMP_DIST/findomain.zip
 
 install_banner "durl"
-download $TMP_DIST/durl.gz https://github.com/j3ssie/durl/releases/download/v0.1/durl_0.1_linux_amd64.tar.gz
+download $TMP_DIST/durl.gz https://github.com/j3ssie/durl/releases/download/v0.2/durl_0.2_linux_amd64.tar.gz
 extractGz $TMP_DIST/durl.gz
 
 install_banner "json-cleaner"

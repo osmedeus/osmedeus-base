@@ -128,7 +128,7 @@ def generate_content():
     content += line + "\n"
 
     content += 'install_banner "durl"\n'
-    binary_version = "0.1"
+    binary_version = "0.2"
     line = "download $TMP_DIST/durl.gz https://github.com/j3ssie/durl/releases/download/v{version}/durl_{version}_linux_amd64.tar.gz".format(version=binary_version)
     line += "\nextractGz $TMP_DIST/durl.gz\n"
     content += line + "\n"
