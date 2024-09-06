@@ -133,7 +133,6 @@ else
   git clone --quiet https://github.com/blechschmidt/massdns build-massdns
   cd build-massdns
   make 2>&1 >/dev/null
-  cp bin/massdns /usr/local/bin/ 2>&1 >/dev/null
   cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
   rm -rf build-massdns/.git
 fi
