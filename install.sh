@@ -47,6 +47,25 @@ extractGz() {
 	rm -rf $1
 }
 
+detect_package_manager() {
+    if command -v apt-get &> /dev/null; then
+        PACKAGE_MANAGER="apt-get"
+    elif command -v apt &> /dev/null; then
+        PACKAGE_MANAGER="apt"
+    elif command -v yum &> /dev/null; then
+        PACKAGE_MANAGER="yum"
+    elif command -v dnf &> /dev/null; then
+        PACKAGE_MANAGER="dnf"
+    elif command -v pacman &> /dev/null; then
+        PACKAGE_MANAGER="pacman"
+    else
+        echo "No supported package manager found!"
+        exit 1
+    fi
+
+    announce "Detected package manager: $PACKAGE_MANAGER"
+}
+detect_package_manager
 
 announce "Please be aware that this installation is only compatible with\033[0m Linux (amd64) and MacOS Intel chip systems"
 if [[ $EUID -ne 0 ]]; then
@@ -133,7 +152,6 @@ else
   git clone --quiet https://github.com/blechschmidt/massdns build-massdns
   cd build-massdns
   make 2>&1 >/dev/null
-  cp bin/massdns /usr/local/bin/ 2>&1 >/dev/null
   cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
   rm -rf build-massdns/.git
 fi
