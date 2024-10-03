@@ -110,9 +110,6 @@ fi
 announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
 announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
 
-announce "Clean up old stuff first"
-rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
-
 if [ -d "$HOME/osmedeus-base/data" ]; then
     announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base $HOME/.osmedeus\033[0m"
     rm -rf $BAK_DIST 
@@ -125,6 +122,7 @@ rm -rf $BASE_PATH && git clone --quiet --depth=1 https://github.com/osmedeus/osm
 if [ ! -d "$BASE_PATH" ]; then
     git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 fi
+mkdir -p $BINARIES_PATH 2>/dev/null
 
 [ -z "$(which osmedeus)" ] && osmBin=/usr/local/bin/osmedeus || osmBin=$(which osmedeus)
 announce "Setup Osmedeus Core Engine:\033[0m $osmBin"
@@ -143,6 +141,9 @@ fi
 install_banner "External binaries"
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
 
+curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
+source "$TMP_DIST/external-binaries.sh"
+
 install_banner "massdns"
 cd $BINARIES_PATH
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -155,9 +156,6 @@ else
   cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
   rm -rf build-massdns/.git
 fi
-
-curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
-source "$TMP_DIST/external-binaries.sh"
 
 install_banner "findomain"
 if [[ "$OSTYPE" == "darwin"* ]]; then
