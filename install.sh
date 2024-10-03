@@ -141,6 +141,9 @@ fi
 install_banner "External binaries"
 rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
 
+curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
+source "$TMP_DIST/external-binaries.sh"
+
 install_banner "massdns"
 cd $BINARIES_PATH
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -153,9 +156,6 @@ else
   cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
   rm -rf build-massdns/.git
 fi
-
-curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
-source "$TMP_DIST/external-binaries.sh"
 
 install_banner "findomain"
 if [[ "$OSTYPE" == "darwin"* ]]; then
