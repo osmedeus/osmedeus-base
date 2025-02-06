@@ -143,14 +143,6 @@ Check this page for more [docker usage](https://docs.osmedeus.org/installation/u
 
 Join Our Discord server [here](https://discord.gg/mtQG2FQsYA)
 
-## 💎 Donation & Sponsor
-
-<h3 align="center">
- <img alt="Osmedeus" src="https://raw.githubusercontent.com/osmedeus/assets/main/premium-package.gif" />
-
- <p align="center"> Check out for a couple of <strong><a href="https://docs.osmedeus.org/donation/">donation methods here</a></strong> to get a <strong><a href="https://docs.osmedeus.org/premium/">premium package</a></strong><p>
-</h3>
-
 ## 🙏 Thanks
 
 Special Thanks to all authors of the binaries tool that's being used in the Workflow at [THANKS.md](THANKS.md)
