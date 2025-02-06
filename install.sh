@@ -58,11 +58,11 @@ detect_package_manager() {
         PACKAGE_MANAGER="dnf"
     elif command -v pacman &> /dev/null; then
         PACKAGE_MANAGER="pacman"
+    elif command -v brew &> /dev/null; then
+        PACKAGE_MANAGER="brew"
     else
-        echo "No supported package manager found!"
-        exit 1
+        announce "No compatible package manager detected! The installation may be broken."
     fi
-
     announce "Detected package manager: $PACKAGE_MANAGER"
 }
 detect_package_manager
