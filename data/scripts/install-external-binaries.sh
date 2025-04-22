@@ -7,11 +7,11 @@ download $TMP_DIST/httprobe.gz https://github.com/tomnomnom/httprobe/releases/do
 extractGz $TMP_DIST/httprobe.gz
 
 install_banner "subfinder"
-download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.6.8/subfinder_2.6.8_linux_amd64.zip
+download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.7.0/subfinder_2.7.0_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v3.3.8/nuclei_3.3.8_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v3.4.2/nuclei_3.4.2_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
@@ -31,7 +31,7 @@ download $TMP_DIST/dnsx.zip https://github.com/projectdiscovery/dnsx/releases/do
 extractZip $TMP_DIST/dnsx.zip
 
 install_banner "alterx"
-download $TMP_DIST/alterx.zip https://github.com/projectdiscovery/alterx/releases/download/v0.0.4/alterx_0.0.4_linux_amd64.zip
+download $TMP_DIST/alterx.zip https://github.com/projectdiscovery/alterx/releases/download/v0.0.6/alterx_0.0.6_linux_amd64.zip
 extractZip $TMP_DIST/alterx.zip
 
 install_banner "notify"
@@ -63,11 +63,11 @@ download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/dow
 extractGz $TMP_DIST/metabigor.gz
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.88.4/trufflehog_3.88.4_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.88.25/trufflehog_3.88.25_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
-download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/download/v8.23.3/gitleaks_8.23.3_linux_x64.tar.gz
+download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz
 extractGz $TMP_DIST/gitleaks.gz
 
 install_banner "findomain"
