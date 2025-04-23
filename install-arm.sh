@@ -170,16 +170,13 @@ cp $(which semgrep) $BINARIES_PATH/semgrep
 
 install_banner "findomain"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  if [[ $(uname -p) == "arm" ]]; then
-    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-osx-arm64.zip
-  else
-    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-osx-x86_64.zip
-  fi
+  brew install findomain -q
+  cp $(which findomain) $BINARIES_PATH/findomain
 else
   if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
-    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-linux.zip
+    download $TMP_DIST/findomain.zip https://github.com/findomain/findomain/releases/latest/download/findomain-armv7.zip
   else
-    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-aarch64.zip
+    download $TMP_DIST/findomain.zip https://github.com/findomain/findomain/releases/latest/download/findomain-linux.zip
   fi
   extractZip $TMP_DIST/findomain.zip
 fi
@@ -208,9 +205,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   cp $(which csvtk) $BINARIES_PATH/csvtk
 else
   if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
-    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.30.0/csvtk_linux_arm64.tar.gz
+    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.33.0/csvtk_linux_arm64.tar.gz
   else
-    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.30.0/csvtk_linux_amd64.tar.gz
+    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.33.0/csvtk_linux_amd64.tar.gz
   fi
   extractGz $TMP_DIST/csvtk.gz
 fi
@@ -219,7 +216,7 @@ install_banner "rustscan"
 if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install rustscan -q
 else
-  wget -q -O /tmp/rustscan.deb https://github.com/RustScan/RustScan/releases/download/2.0.1/rustscan_2.0.1_amd64.deb 2>&1 >/dev/null
+  wget -q -O /tmp/rustscan.deb https://github.com/RustScan/RustScan/releases/download/2.4.1/rustscan.deb.zip 2>&1 >/dev/null
   dpkg -i /tmp/rustscan.deb 2>&1 >/dev/null
   rm -rf /tmp/rustscan.deb 2>&1 >/dev/null
 fi
@@ -323,13 +320,15 @@ $GO_BIN install github.com/projectdiscovery/katana/cmd/katana@latest 2>&1 >/dev/
 install_banner "httpx"
 $GO_BIN install github.com/projectdiscovery/httpx/cmd/httpx@latest 2>&1 >/dev/null
 install_banner "nuclei"
-$GO_BIN install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest 2>&1 >/dev/null
+$GO_BIN install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest 2>&1 >/dev/null
 install_banner "naabu"
 $GO_BIN install github.com/projectdiscovery/naabu/v2/cmd/naabu@latest 2>&1 >/dev/null
 install_banner "subfinder"
 $GO_BIN install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 2>&1 >/dev/null
 install_banner "notify"
 $GO_BIN install github.com/projectdiscovery/notify/cmd/notify@latest 2>&1 >/dev/null
+install_banner "uncover"
+$GO_BIN install github.com/projectdiscovery/uncover/cmd/uncover@latest 2>&1 >/dev/null
 install_banner "gospider"
 $GO_BIN install github.com/jaeles-project/gospider@latest 2>&1 >/dev/null
 install_banner "jaeles"
