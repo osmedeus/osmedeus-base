@@ -133,7 +133,6 @@ fi
 announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
 announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
 
-
 announce "Remove the existing base directory if it is present"
 rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
 if [ -d "$HOME/osmedeus-base/data" ]; then
@@ -141,7 +140,6 @@ if [ -d "$HOME/osmedeus-base/data" ]; then
     rm -rf $BAK_DIST 
     mv $HOME/osmedeus-base $BAK_DIST
 fi
-
 
 # Download the latest osm base repo
 announce "Cloning Osmedeus base repo:\033[0m https://github.com/osmedeus/osmedeus-base"
@@ -167,6 +165,7 @@ fi
 ###################################################
 #      Start to install external binaries         #
 ###################################################
+mkdir -p $BINARIES_PATH $TMP_DIST >/dev/null 2>&1
 
 install_banner "massdns"
 cd $BINARIES_PATH
@@ -174,11 +173,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install massdns -q
   cp $(which massdns) $BINARIES_PATH/massdns
 else
-  git clone --quiet https://github.com/blechschmidt/massdns build-massdns
+  git clone --depth=1 --quiet https://github.com/blechschmidt/massdns build-massdns
   cd build-massdns
-  make 2>&1 >/dev/null
-  cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
-  rm -rf build-massdns/.git
+  make > /dev/null 2>&1
+  cp bin/massdns "$BINARIES_PATH/massdns" > /dev/null 2>&1
+  rm -rf build-massdns
 fi
 cd $BASE_PATH
 
