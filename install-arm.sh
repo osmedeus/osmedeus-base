@@ -157,7 +157,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install massdns -q
   cp $(which massdns) $BINARIES_PATH/massdns
 else
-  git clone --depth=1 --quiet https://github.com/blechschmidt/massdns build-massdns
+  git clone --depth=1 --quiet https://github.com/blechschmidt/massdns build-massdns 2>&1 >/dev/null
   cd build-massdns
   make 2>&1 >/dev/null
   cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null

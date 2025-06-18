@@ -173,7 +173,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install massdns -q
   cp $(which massdns) $BINARIES_PATH/massdns
 else
-  git clone --depth=1 --quiet https://github.com/blechschmidt/massdns build-massdns
+  git clone --depth=1 --quiet https://github.com/blechschmidt/massdns build-massdns 2>&1 >/dev/null
   cd build-massdns
   make > /dev/null 2>&1
   cp bin/massdns "$BINARIES_PATH/massdns" > /dev/null 2>&1
@@ -268,10 +268,10 @@ rm -rf $BINARIES_PATH/LICENSE*  $BINARIES_PATH/README* $BINARIES_PATH/CHANGELOG*
 
 # Download the auxiliary tools as some of them are not available in the official repo
 install_banner "auxiliary tools"
-git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries
+git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries 2>&1 >/dev/null
 # retry to clone in case of anything wrong with the connection
 if [ ! -d "$TMP_DIST/auxs-binaries" ]; then
-git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries
+  git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries 2>&1 >/dev/null
 fi
 
 # copy all the binaries to the binaries path
