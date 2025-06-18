@@ -13,6 +13,10 @@ DEFAULT_SHELL="$HOME/.bashrc"
 CWD=$(pwd)
 PACKGE_MANAGER="apt-get"
 
+# Detect OS and ARCH
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m)
+
 SUDO="sudo"
 if [ "$(whoami)" == "root" ]; then
     SUDO=""
@@ -35,6 +39,25 @@ download() {
     if [ ! -f "$1" ]; then
         wget -q -O $1 $2
     fi
+}
+
+download_multi_platform() {
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    DOWNLOAD_URL=$(echo $2 | sed -E 's/linux/darwin/g')
+  else
+    DOWNLOAD_URL=$(echo $2 | sed -E 's/darwin|osx|macos/linux/g')
+  fi
+
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    DOWNLOAD_URL=$(echo $DOWNLOAD_URL | sed -E 's/amd/arm/g')
+  else
+    DOWNLOAD_URL=$(echo $DOWNLOAD_URL | sed -E 's/arm/amd/g')
+  fi
+
+  wget -q -O $1 $DOWNLOAD_URL
+  if [ ! -f "$1" ]; then
+    wget -q -O $1 $DOWNLOAD_URL
+  fi
 }
 
 extractZip() {
@@ -73,7 +96,7 @@ if [[ $EUID -ne 0 ]]; then
   announce "If you're already have essential tools installed, you can continue the installation as normal"
   echo -e "\033[1;37m[\033[1;31m+\033[1;37m]\033[1;32m Press any key to continue ... \033[0m"; read -n 1; echo
 else
-  $SUDO $PACKGE_MANAGER update -qq > /dev/null 2>&1
+  $SUDO $PACKGE_MANAGER update -qq >/dev/null 2>&1
   install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
   # reinstall all essioontials tools just to double check
   [ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER -qq install wget -y >/dev/null 2>&1
@@ -95,6 +118,7 @@ else
   [ -x "$(command -v pip)" ] || $SUDO $PACKGE_MANAGER install python3 python3-pip -y >/dev/null 2>&1
 fi
 
+### Check if the machine is ARM-based or MacOS-based machine
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "\033[1;34m[!] MacOS machine detected. Exit the script\033[0m"
     announce "Check out https://docs.osmedeus.org/installation/#install-for-macos-or-arm-based-machine for more MacOS installation"
@@ -106,19 +130,20 @@ if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
     bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install-arm.sh)
     exit 1
 fi
-
 announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
 announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
 
-announce "Clean up old stuff first"
-rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
 
+announce "Remove the existing base directory if it is present"
+rm -rf $BINARIES_PATH/* && mkdir -p $BINARIES_PATH 2>/dev/null
 if [ -d "$HOME/osmedeus-base/data" ]; then
     announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base $HOME/.osmedeus\033[0m"
     rm -rf $BAK_DIST 
     mv $HOME/osmedeus-base $BAK_DIST
 fi
 
+
+# Download the latest osm base repo
 announce "Cloning Osmedeus base repo:\033[0m https://github.com/osmedeus/osmedeus-base"
 rm -rf $BASE_PATH && git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 # # retry to clone in case of anything wrong with the connection
@@ -126,6 +151,7 @@ if [ ! -d "$BASE_PATH" ]; then
     git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 fi
 
+# setting up the osmedeus binary
 [ -z "$(which osmedeus)" ] && osmBin=/usr/local/bin/osmedeus || osmBin=$(which osmedeus)
 announce "Setup Osmedeus Core Engine:\033[0m $osmBin"
 unzip -q -o -j $BASE_PATH/dist/osmedeus-linux-amd64.zip -d $BASE_PATH/dist/
@@ -138,10 +164,9 @@ if [ ! -f "$osmBin" ]; then
     cp $BASE_PATH/dist/osmedeus $osmBin
 fi
 
-#### done the osm core part
-
-install_banner "External binaries"
-rm -rf $TMP_DIST && mkdir -p $TMP_DIST 2>/dev/null
+###################################################
+#      Start to install external binaries         #
+###################################################
 
 install_banner "massdns"
 cd $BINARIES_PATH
@@ -155,22 +180,25 @@ else
   cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
   rm -rf build-massdns/.git
 fi
+cd $BASE_PATH
 
-curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
-source "$TMP_DIST/external-binaries.sh"
+install_banner "semgrep"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  brew install semgrep -q 2>&1 >/dev/null
+else
+  PIP_BREAK_SYSTEM_PACKAGES=1 python3 -m pip -q install semgrep --break-system-packages --root-user-action=ignore 2>&1 >/dev/null
+fi
+cp $(which semgrep) $BINARIES_PATH/semgrep 2>&1 >/dev/null
 
 install_banner "findomain"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  if [[ $(uname -p) == "arm" ]]; then
-    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-osx-arm64.zip
-  else
-    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-osx-x86_64.zip
-  fi
+  brew install findomain -q
+  cp $(which findomain) $BINARIES_PATH/findomain
 else
   if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
-    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-linux.zip
+    download $TMP_DIST/findomain.zip https://github.com/findomain/findomain/releases/latest/download/findomain-armv7.zip
   else
-    download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-aarch64.zip
+    download $TMP_DIST/findomain.zip https://github.com/findomain/findomain/releases/latest/download/findomain-linux.zip
   fi
   extractZip $TMP_DIST/findomain.zip
 fi
@@ -193,11 +221,53 @@ else
 fi
 extractZip $TMP_DIST/packer.zip
 
-[ -x "$(command -v semgrep)" ] || python3 -m pip -q install semgrep >/dev/null 2>&1
-cp $(which semgrep) $BINARIES_PATH/semgrep
+install_banner "csvtk"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  brew install csvtk -q
+  cp $(which csvtk) $BINARIES_PATH/csvtk
+else
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.33.0/csvtk_linux_arm64.tar.gz
+  else
+    download $TMP_DIST/csvtk.gz https://github.com/shenwei356/csvtk/releases/download/v0.33.0/csvtk_linux_amd64.tar.gz
+  fi
+  extractGz $TMP_DIST/csvtk.gz
+fi
 
-rm -rf $BINARIES_PATH/LICENSE*  $BINARIES_PATH/README* $BINARIES_PATH/config.ini 2>/dev/null
+install_banner "metabigor"
+download_multi_platform $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_arm64.tar.gz
+extractGz $TMP_DIST/metabigor.gz
 
+install_banner "trufflehog"
+TRUFFLEHOG_VERSION=$(curl -s https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest | jq -r '.name' | sed 's/v//g')
+download_multi_platform $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_darwin_arm64.tar.gz
+extractGz $TMP_DIST/trufflehog.gz
+
+install_banner "rustscan"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  brew install rustscan -q
+else
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    download $TMP_DIST/rustscan.zip https://github.com/bee-san/RustScan/releases/download/2.4.1/aarch64-linux-rustscan.zip
+    extractZip $TMP_DIST/rustscan.zip
+  else
+    # yes, this is weird due to the author naming release
+    download $TMP_DIST/rustscan.gz.zip https://github.com/bee-san/RustScan/releases/download/2.4.1/x86_64-linux-rustscan.tar.gz.zip
+    unzip -q -o -j $TMP_DIST/rustscan.gz.zip -d $TMP_DIST/
+    extractGz $TMP_DIST/x86_64-linux-rustscan.tar.gz
+  fi
+fi
+
+###################################################
+#        End to install external binaries         #
+###################################################
+
+# Download the external binaries with the pre-built binaries
+curl -fsSL $INSTALL_EXT_BINARY > $TMP_DIST/external-binaries.sh
+source "$TMP_DIST/external-binaries.sh"
+rm -rf $BINARIES_PATH/LICENSE*  $BINARIES_PATH/README* $BINARIES_PATH/CHANGELOG* $BINARIES_PATH/config.ini 2>/dev/null
+
+# Download the auxiliary tools as some of them are not available in the official repo
 install_banner "auxiliary tools"
 git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries
 # retry to clone in case of anything wrong with the connection
@@ -205,16 +275,21 @@ if [ ! -d "$TMP_DIST/auxs-binaries" ]; then
 git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries
 fi
 
+# copy all the binaries to the binaries path
 cp $TMP_DIST/auxs-binaries/releases/* $BINARIES_PATH/
 chmod +x $BINARIES_PATH/*
-export PATH="$BINARIES_PATH:$PATH"
+export PATH=$BINARIES_PATH:$PATH
+echo "export PATH=$BINARIES_PATH:\$PATH" >> $DEFAULT_SHELL
 
 ### done the binaries part
-
 install_banner "Osmedeus Web UI"
 rm -rf ~/.osmedeus/server/* >/dev/null 2>&1
 mkdir -p ~/.osmedeus/server >/dev/null 2>&1
 cp -R $BASE_PATH/ui ~/.osmedeus/server/ui >/dev/null 2>&1
+
+#############################################
+#        Start to setup the workflow        #
+#############################################
 
 install_banner "Osmedeus Community Workflow:\033[0m https://github.com/osmedeus/osmedeus-workflow"
 rm -rf $BASE_PATH/workflow >/dev/null 2>&1
@@ -224,10 +299,16 @@ if [ ! -d "$BASE_PATH/workflow" ]; then
     git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
 fi
 
+#############################################
+#        Done to setup the workflow        #
+#############################################
+
+
 announce "Downloading Vulnerability templates"
 jaeles config init >/dev/null 2>&1
 rm -rf ~/nuclei-templates && git clone --quiet --depth=1 https://github.com/projectdiscovery/nuclei-templates.git ~/nuclei-templates >/dev/null 2>&1
 
+# copy the old data to the new one
 if [ -d "$BAK_DIST/data" ]; then
     announce "Updating old data + cloud config ..."
     rm -rf $HOME/osmedeus-base/data && cp -R $BAK_DIST/data $HOME/osmedeus-base/data

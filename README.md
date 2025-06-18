@@ -28,7 +28,7 @@ You can check out the documentation at [**docs.osmedeus.org**](https://docs.osme
 
 ## 📦 Installation
 
-### Installation for Linux
+### Installation for Linux (amd64)
 
 > NOTE that you need some essential tools like `curl, wget, git, zip` and login as **root** to start
 
@@ -135,6 +135,7 @@ Check out [**this page**](https://docs.osmedeus.org/installation/usage/) for ful
 
 ```bash
 docker run -it j3ssie/osmedeus:latest scan -t example.com
+docker run --platform linux/amd64 --no-cache -t j3ssie/osmedeus:latest .
 ```
 
 Check this page for more [docker usage](https://docs.osmedeus.org/installation/using-docker/)

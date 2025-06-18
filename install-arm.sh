@@ -10,6 +10,10 @@ DEFAULT_SHELL="$HOME/.bashrc"
 CWD=$(pwd)
 PACKGE_MANAGER="apt-get"
 
+# Detect OS and ARCH
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m)
+
 SUDO="sudo"
 if [ "$(whoami)" == "root" ]; then
   SUDO=""
@@ -100,7 +104,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
   [ -x "$(command -v nmap)" ] || $SUDO $PACKGE_MANAGER install nmap -y >/dev/null 2>&1
   [ -x "$(command -v masscan)" ] || $SUDO $PACKGE_MANAGER install masscan -y >/dev/null 2>&1
   [ -x "$(command -v chromium)" ] || $SUDO $PACKGE_MANAGER install chromium -y >/dev/null 2>&1
-  [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER install build-essential -y >/dev/null 2>&1
+  [ -x "$(command -v make)" ] || $SUDO $PACKGE_MANAGER install build-essential libpcap-dev -y >/dev/null 2>&1
   [ -x "$(command -v rg)" ] || $SUDO $PACKGE_MANAGER install ripgrep -y >/dev/null 2>&1
   [ -x "$(command -v unzip)" ] || $SUDO $PACKGE_MANAGER install unzip -y >/dev/null 2>&1
   [ -x "$(command -v chromium-browser)" ] || $SUDO $PACKGE_MANAGER install chromium-browser -y >/dev/null 2>&1
@@ -126,10 +130,8 @@ fi
 announce "\033[1;34mSet Data Directory:\033[1;37m $DATA_PATH \033[0m"
 announce "\033[1;34mSet Binaries Directory:\033[1;37m $BINARIES_PATH \033[0m"
 
-announce "Clean up old stuff first"
+announce "Remove the existing base directory if it is present"
 rm -rf $BINARIES_PATH/* $TMP_DIST && mkdir -p $BINARIES_PATH >/dev/null 2>&1
-mkdir -p "$GO_DIR" >/dev/null 2>&1
-
 if [ -d "$HOME/osmedeus-base/data" ]; then
   announce "Backup old osmedeus custom data. If you want a fresh install please run the command: \033[0mrm -rf $HOME/osmedeus-base $HOME/.osmedeus\033[0m"
   rm -rf $BAK_DIST
@@ -143,7 +145,10 @@ if [ ! -d "$BASE_PATH" ]; then
   git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
 fi
 
-######## Start to install binaries
+###################################################
+#      Start to install external binaries         #
+###################################################
+
 mkdir -p $BINARIES_PATH $TMP_DIST >/dev/null 2>&1
 
 install_banner "massdns"
@@ -162,11 +167,11 @@ cd $BASE_PATH
 
 install_banner "semgrep"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  brew install semgrep -q
+  brew install semgrep -q 2>&1 >/dev/null
 else
-  python3 -m pip -q install semgrep
+  PIP_BREAK_SYSTEM_PACKAGES=1 python3 -m pip -q install semgrep --break-system-packages --root-user-action=ignore 2>&1 >/dev/null
 fi
-cp $(which semgrep) $BINARIES_PATH/semgrep
+cp $(which semgrep) $BINARIES_PATH/semgrep 2>&1 >/dev/null
 
 install_banner "findomain"
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -212,16 +217,6 @@ else
   extractGz $TMP_DIST/csvtk.gz
 fi
 
-install_banner "rustscan"
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  brew install rustscan -q
-else
-  wget -q -O /tmp/rustscan.deb https://github.com/RustScan/RustScan/releases/download/2.4.1/rustscan.deb.zip 2>&1 >/dev/null
-  dpkg -i /tmp/rustscan.deb 2>&1 >/dev/null
-  rm -rf /tmp/rustscan.deb 2>&1 >/dev/null
-fi
-cp $(which rustscan) $BINARIES_PATH/rustscan 2>&1 >/dev/null
-
 install_banner "metabigor"
 download_multi_platform $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_arm64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
@@ -231,47 +226,94 @@ TRUFFLEHOG_VERSION=$(curl -s https://api.github.com/repos/trufflesecurity/truffl
 download_multi_platform $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_darwin_arm64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
-######## Start to install golang
-cd $CWD
+install_banner "rustscan"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  brew install rustscan -q
+else
+  if [[ $(uname -p) == "arm" || $(uname -p) == "aarch64" ]]; then
+    download $TMP_DIST/rustscan.zip https://github.com/bee-san/RustScan/releases/download/2.4.1/aarch64-linux-rustscan.zip
+    extractZip $TMP_DIST/rustscan.zip
+  else
+    # yes, this is weird due to the author naming release
+    download $TMP_DIST/rustscan.gz.zip https://github.com/bee-san/RustScan/releases/download/2.4.1/x86_64-linux-rustscan.tar.gz.zip
+    unzip -q -o -j $TMP_DIST/rustscan.gz.zip -d $TMP_DIST/
+    extractGz $TMP_DIST/x86_64-linux-rustscan.tar.gz
+  fi
+fi
+
+
+###################################################
+#        End to install external binaries         #
+###################################################
+
+##########################################################
+#      Start to install golang external binaries         #
+##########################################################
 
 # update golang version
-install_banner "Golang"
-export GO_BIN=$(which go)
-if [ -f "$GO_BIN" ]; then
-  announce "Detected go binary: $GO_BIN"
-  announce "Skipping golang installation"
-fi
-export GOPATH=$(go env GOPATH)
+install_banner "Install Latest Golang"
+
+# Map to GOOS and GOARCH
+case $OS in
+  linux)
+    GOOS="linux"
+    ;;
+  darwin)
+    GOOS="darwin"
+    ;;
+  *)
+    echo "Unsupported OS: $OS. Defaulting to Linux build"
+    GOOS="linux"
+    ;;
+esac
+
+case $ARCH in
+  x86_64)
+    GOARCH="amd64"
+    ;;
+  i686)
+    GOARCH="386"
+    ;;
+  arm64)
+    GOARCH="arm64"
+    ;;
+  aarch64)
+    GOARCH="arm64"
+    ;;
+  *)
+    echo "Unsupported architecture: $GOARCH. Defaulting to amd64 build"
+    GOARCH="amd64"
+    ;;
+esac
+
+# Get latest stable version
+STABLE_VERSIONS=$(curl -s https://go.dev/dl/?mode=json | grep '"version":' | cut -d '"' -f 4 | egrep '^go[0-9]+\.[0-9]+(\.[0-9]+)?$')
+LATEST_VERSION=$(echo "$STABLE_VERSIONS" | sort -V | tail -1)
+# Construct filename
+GO_PKG="${LATEST_VERSION}.${GOOS}-${GOARCH}.tar.gz"
+# clean up previous
+rm -rf "$HOME/.go/" /tmp/$GO_PKG
+# Download
+wget -qO /tmp/$GO_PKG https://dl.google.com/go/$GO_PKG
+
+# Extract and move to $HOME/.go
+rm -rf /tmp/go && tar -xzf /tmp/$GO_PKG -C /tmp/
+rm -rf $HOME/.go && mv /tmp/go $HOME/.go
+
+export GO_BIN="$HOME/.go/bin/go"
+export GOROOT="$HOME/.go"
+export GOPATH="$HOME/go"
 export GO_DIR="$GOPATH/bin"
-export GO_BIN=$(which go)
-if [ -d "$GOPATH" ]; then
-  announce "The current GOPATH already exists. Try to install the latest version of Golang"
-fi
+export PATH="$HOME/.go/bin:$GOPATH:$PATH"
 
-# (re)install fresh golang
-# brew install golang -q 2>&1 > /dev/null
-export GO_LATEST_VERSION=$(curl -s 'https://go.dev/VERSION?m=text' | grep 'go' | sed 's/go//g')
-install_banner "latest go version: $GO_LATEST_VERSION"
-wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --version $GO_LATEST_VERSION
+##########################################################
+##      End to install golang external binaries        ###
+##########################################################
 
-export GOROOT=$HOME/.go
-export PATH=$GOROOT/bin:$PATH
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
-export GO_DIR="$GOPATH/bin"
-export GO_BIN=$(which go)
+##########################################################
+#      Start to download golang external binaries        #
+##########################################################
 
-announce "Detected go binary:\033[1;37m $GO_BIN\033[0m"
-announce "Detected go tools:\033[1;37m $GO_DIR\033[0m"
-CURRENT_GO=$(go version)
-announce "Required golang verion >= v1.17"
-announce "Detected current golang version:\033[1;37m $CURRENT_GO\033[0m"
-
-cd $CWD
-
-##
-# Install go stuff
-##
 install_banner "osmedeus"
 $GO_BIN install github.com/j3ssie/osmedeus@latest 2>&1 >/dev/null
 install_banner "goaltdns"
@@ -279,14 +321,13 @@ $GO_BIN install github.com/subfinder/goaltdns@latest 2>&1 >/dev/null
 install_banner "assetfinder"
 $GO_BIN install github.com/tomnomnom/assetfinder@latest 2>&1 >/dev/null
 install_banner "httprobe"
-$GO_BIN install github.com/tomnomnom/httprobe@latest 2>&1 >/dev/null
+$GO_BIN install github.com/tomnomnom/httprobe@master 2>&1 >/dev/null
 install_banner "unfurl"
 $GO_BIN install github.com/tomnomnom/unfurl@latest 2>&1 >/dev/null
 $GO_BIN install github.com/tomnomnom/anew@latest 2>&1 >/dev/null
 install_banner "go cli-utils"
 $GO_BIN install github.com/shenwei356/rush@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/chrunk@latest 2>&1 >/dev/null
-$GO_BIN install github.com/j3ssie/cinfo@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/cdnstrip@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/str-replace@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/durl@latest 2>&1 >/dev/null
@@ -295,7 +336,6 @@ $GO_BIN install github.com/j3ssie/go-auxs/ourl@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/urp@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/cleansub@latest 2>&1 >/dev/null
 $GO_BIN install github.com/j3ssie/go-auxs/junique@latest 2>&1 >/dev/null
-$GO_BIN install github.com/theblackturtle/ptools/wurl@latest 2>&1 >/dev/null
 install_banner "github-endpoints"
 $GO_BIN install github.com/gwen001/github-endpoints@latest 2>&1 >/dev/null
 install_banner "github-subdomains"
@@ -329,6 +369,9 @@ install_banner "notify"
 $GO_BIN install github.com/projectdiscovery/notify/cmd/notify@latest 2>&1 >/dev/null
 install_banner "uncover"
 $GO_BIN install github.com/projectdiscovery/uncover/cmd/uncover@latest 2>&1 >/dev/null
+install_banner "cdncheck"
+$GO_BIN install github.com/projectdiscovery/cdncheck/cmd/cdncheck@latest 2>&1 >/dev/null
+$GO_BIN install github.com/ipinfo/cli/ipinfo@latest 2>&1 >/dev/null
 install_banner "gospider"
 $GO_BIN install github.com/jaeles-project/gospider@latest 2>&1 >/dev/null
 install_banner "jaeles"
@@ -339,10 +382,15 @@ $GO_BIN install github.com/ffuf/ffuf/v2@latest 2>&1 >/dev/null
 # just to make sure the binary has been installed
 [ -x "$(command -v osmedeus)" ] || $GO_BIN install github.com/j3ssie/osmedeus@latest 2>&1 >/dev/null
 
+##########################################################
+#      End to download golang external binaries        #
+##########################################################
+
 announce "Copy all go tools from:\033[1;37m $GO_DIR\033[0m"
 cp $GO_DIR/* $BINARIES_PATH/ >/dev/null 2>&1
 chmod +x $BINARIES_PATH/*
 export PATH=$BINARIES_PATH:$PATH
+echo "export PATH=$BINARIES_PATH:\$PATH" >> $DEFAULT_SHELL
 
 ###### done the binaries part
 
@@ -351,13 +399,21 @@ rm -rf $HOME/.osmedeus/server/* >/dev/null 2>&1
 mkdir -p $HOME/.osmedeus/server >/dev/null 2>&1
 cp -R $BASE_PATH/ui $HOME/.osmedeus/server/ui >/dev/null 2>&1
 
+#############################################
+#        Start to setup the workflow        #
+#############################################
+
 install_banner "Osmedeus Community Workflow:\033[0m https://github.com/osmedeus/osmedeus-workflow"
 rm -rf $BASE_PATH/workflow >/dev/null 2>&1
 git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
 ## retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH/workflow" ]; then
-  git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
+    git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
 fi
+
+#############################################
+#        Done to setup the workflow        #
+#############################################
 
 announce "Downloading Vulnerability templates"
 jaeles config init >/dev/null 2>&1
