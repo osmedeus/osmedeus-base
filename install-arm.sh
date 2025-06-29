@@ -94,6 +94,7 @@ detect_package_manager
 
 if [[ "$OSTYPE" == "linux"* ]]; then
   $SUDO $PACKGE_MANAGER update -qq >/dev/null 2>&1
+  DEBIAN_FRONTEND=noninteractive $SUDO $PACKGE_MANAGER install -y --no-install-recommends tzdata -qq >/dev/null 2>&1
   touch /var/lib/cloud/instance/locale-check.skip >/dev/null 2>&1
   install_banner "wget, git, make, nmap, masscan, chromium, golang"
   [ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER install wget -y >/dev/null 2>&1
@@ -159,7 +160,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
   git clone --depth=1 --quiet https://github.com/blechschmidt/massdns build-massdns 2>&1 >/dev/null
   cd build-massdns
-  make 2>&1 >/dev/null
+  make &>/dev/null
   cp bin/massdns $BINARIES_PATH/massdns 2>&1 >/dev/null
   rm -rf build-massdns/.git
 fi

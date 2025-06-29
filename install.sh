@@ -97,6 +97,8 @@ if [[ $EUID -ne 0 ]]; then
   echo -e "\033[1;37m[\033[1;31m+\033[1;37m]\033[1;32m Press any key to continue ... \033[0m"; read -n 1; echo
 else
   $SUDO $PACKGE_MANAGER update -qq >/dev/null 2>&1
+  DEBIAN_FRONTEND=noninteractive $SUDO $PACKGE_MANAGER install -y --no-install-recommends tzdata -qq >/dev/null 2>&1
+  touch /var/lib/cloud/instance/locale-check.skip >/dev/null 2>&1
   install_banner "Essential tool: wget, git, make, nmap, masscan, chromium"
   # reinstall all essioontials tools just to double check
   [ -x "$(command -v wget)" ] || $SUDO $PACKGE_MANAGER -qq install wget -y >/dev/null 2>&1
@@ -175,7 +177,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
   git clone --depth=1 --quiet https://github.com/blechschmidt/massdns build-massdns 2>&1 >/dev/null
   cd build-massdns
-  make > /dev/null 2>&1
+  make &>/dev/null
   cp bin/massdns "$BINARIES_PATH/massdns" > /dev/null 2>&1
   rm -rf build-massdns
 fi
@@ -268,7 +270,10 @@ rm -rf $BINARIES_PATH/LICENSE*  $BINARIES_PATH/README* $BINARIES_PATH/CHANGELOG*
 
 # Download the auxiliary tools as some of them are not available in the official repo
 install_banner "auxiliary tools"
-git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries 2>&1 >/dev/null
+if [ ! -d "$TMP_DIST/auxs-binaries" ]; then
+  git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries 2>&1 >/dev/null
+fi
+
 # retry to clone in case of anything wrong with the connection
 if [ ! -d "$TMP_DIST/auxs-binaries" ]; then
   git clone --quiet --depth=1 https://github.com/osmedeus/auxs-binaries $TMP_DIST/auxs-binaries 2>&1 >/dev/null
