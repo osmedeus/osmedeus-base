@@ -219,7 +219,7 @@ else
 fi
 
 install_banner "metabigor"
-download_multi_platform $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_arm64.tar.gz
+download_multi_platform $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.1/metabigor_v2.0.1_darwin_arm64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
 
 install_banner "trufflehog"

@@ -7,7 +7,7 @@ download $TMP_DIST/httprobe.gz https://github.com/tomnomnom/httprobe/releases/do
 extractGz $TMP_DIST/httprobe.gz
 
 install_banner "subfinder"
-download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.7.1/subfinder_2.7.1_linux_amd64.zip
+download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/releases/download/v2.8.0/subfinder_2.8.0_linux_amd64.zip
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
@@ -59,7 +59,7 @@ download $TMP_DIST/jaeles.zip https://github.com/jaeles-project/jaeles/releases/
 extractZip $TMP_DIST/jaeles.zip
 
 install_banner "metabigor"
-download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_linux_amd64.tar.gz
+download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.1/metabigor_v2.0.1_linux_amd64.tar.gz
 extractGz $TMP_DIST/metabigor.gz
 
 install_banner "trufflehog"

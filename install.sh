@@ -235,10 +235,6 @@ else
   extractGz $TMP_DIST/csvtk.gz
 fi
 
-install_banner "metabigor"
-download_multi_platform $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/download/v2.0.0/metabigor_v2.0.0_darwin_arm64.tar.gz
-extractGz $TMP_DIST/metabigor.gz
-
 install_banner "trufflehog"
 TRUFFLEHOG_VERSION=$(curl -s https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest | jq -r '.name' | sed 's/v//g')
 download_multi_platform $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_darwin_arm64.tar.gz
