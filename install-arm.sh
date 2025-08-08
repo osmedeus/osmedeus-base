@@ -345,7 +345,7 @@ GO111MODULE=off $GO_BIN get -u github.com/Josue87/gotator 2>&1 >/dev/null
 install_banner "puredns"
 $GO_BIN install github.com/d3mondev/puredns/v2@latest 2>&1 >/dev/null
 install_banner "amass"
-$GO_BIN install github.com/owasp-amass/amass/v4/...@master 2>&1 >/dev/null
+CGO_ENABLED=0 go install -v github.com/owasp-amass/amass/v5/cmd/amass@main
 install_banner "gau"
 $GO_BIN install github.com/lc/gau@latest 2>&1 >/dev/null
 install_banner "shuffledns"

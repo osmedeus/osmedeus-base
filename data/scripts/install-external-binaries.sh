@@ -1,5 +1,5 @@
 install_banner "Amass"
-download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v4.2.0/amass_linux_amd64.zip
+download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v5.0.0/amass_linux_amd64.zip
 extractZip $TMP_DIST/amass.zip
 
 install_banner "httprobe"
@@ -11,19 +11,19 @@ download $TMP_DIST/subfinder.zip https://github.com/projectdiscovery/subfinder/r
 extractZip $TMP_DIST/subfinder.zip
 
 install_banner "nuclei"
-download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v3.4.5/nuclei_3.4.5_linux_amd64.zip
+download $TMP_DIST/nuclei.zip https://github.com/projectdiscovery/nuclei/releases/download/v3.4.7/nuclei_3.4.7_linux_amd64.zip
 extractZip $TMP_DIST/nuclei.zip
 
 install_banner "httpx"
-download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.7.0/httpx_1.7.0_linux_amd64.zip
+download $TMP_DIST/httpx.zip https://github.com/projectdiscovery/httpx/releases/download/v1.7.1/httpx_1.7.1_linux_amd64.zip
 extractZip $TMP_DIST/httpx.zip
 
 install_banner "tlsx"
-download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.1.9/tlsx_1.1.9_linux_amd64.zip
+download $TMP_DIST/tlsx.zip https://github.com/projectdiscovery/tlsx/releases/download/v1.2.0/tlsx_1.2.0_linux_amd64.zip
 extractZip $TMP_DIST/tlsx.zip
 
 install_banner "katana"
-download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/releases/download/v1.1.3/katana_1.1.3_linux_amd64.zip
+download $TMP_DIST/katana.zip https://github.com/projectdiscovery/katana/releases/download/v1.2.1/katana_1.2.1_linux_amd64.zip
 extractZip $TMP_DIST/katana.zip
 
 install_banner "dnsx"
@@ -39,7 +39,7 @@ download $TMP_DIST/notify.zip https://github.com/projectdiscovery/notify/release
 extractZip $TMP_DIST/notify.zip
 
 install_banner "naabu"
-download $TMP_DIST/naabu.zip https://github.com/projectdiscovery/naabu/releases/download/v2.3.4/naabu_2.3.4_linux_amd64.zip
+download $TMP_DIST/naabu.zip https://github.com/projectdiscovery/naabu/releases/download/v2.3.5/naabu_2.3.5_linux_amd64.zip
 extractZip $TMP_DIST/naabu.zip
 
 install_banner "gau"
@@ -63,15 +63,15 @@ download $TMP_DIST/metabigor.gz https://github.com/j3ssie/metabigor/releases/dow
 extractGz $TMP_DIST/metabigor.gz
 
 install_banner "trufflehog"
-download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.89.2/trufflehog_3.89.2_linux_amd64.tar.gz
+download $TMP_DIST/trufflehog.gz https://github.com/trufflesecurity/trufflehog/releases/download/v3.90.3/trufflehog_3.90.3_linux_amd64.tar.gz
 extractGz $TMP_DIST/trufflehog.gz
 
 install_banner "gitleaks"
-download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/download/v8.27.2/gitleaks_8.27.2_linux_x64.tar.gz
+download $TMP_DIST/gitleaks.gz https://github.com/gitleaks/gitleaks/releases/download/v8.28.0/gitleaks_8.28.0_linux_x64.tar.gz
 extractGz $TMP_DIST/gitleaks.gz
 
 install_banner "findomain"
-download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-linux.zip
+download $TMP_DIST/findomain.zip https://github.com/Findomain/Findomain/releases/download/10.0.1/findomain-linux.zip
 extractZip $TMP_DIST/findomain.zip
 
 install_banner "durl"
