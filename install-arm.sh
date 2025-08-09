@@ -366,6 +366,8 @@ install_banner "naabu"
 $GO_BIN install github.com/projectdiscovery/naabu/v2/cmd/naabu@latest 2>&1 >/dev/null
 install_banner "subfinder"
 $GO_BIN install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 2>&1 >/dev/null
+install_banner "urlfinder"
+$GO_BIN install github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest 2>&1 >/dev/null
 install_banner "notify"
 $GO_BIN install github.com/projectdiscovery/notify/cmd/notify@latest 2>&1 >/dev/null
 install_banner "uncover"

@@ -34,6 +34,10 @@ install_banner "alterx"
 download $TMP_DIST/alterx.zip https://github.com/projectdiscovery/alterx/releases/download/v0.0.6/alterx_0.0.6_linux_amd64.zip
 extractZip $TMP_DIST/alterx.zip
 
+install_banner "urlfinder"
+download $TMP_DIST/urlfinder.zip https://github.com/projectdiscovery/urlfinder/releases/download/v0.0.3/urlfinder_0.0.3_linux_amd64.zip
+extractZip $TMP_DIST/urlfinder.zip
+
 install_banner "notify"
 download $TMP_DIST/notify.zip https://github.com/projectdiscovery/notify/releases/download/v1.0.7/notify_1.0.7_linux_amd64.zip
 extractZip $TMP_DIST/notify.zip

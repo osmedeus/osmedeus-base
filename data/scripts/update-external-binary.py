@@ -67,6 +67,12 @@ def generate_content():
     line += "\nextractZip $TMP_DIST/alterx.zip\n"
     content += line + "\n"
 
+    content += 'install_banner "urlfinder"\n'
+    binary_version = get_version("projectdiscovery/urlfinder").strip("v")
+    line = "download $TMP_DIST/urlfinder.zip https://github.com/projectdiscovery/urlfinder/releases/download/v{version}/urlfinder_{version}_linux_amd64.zip".format(version=binary_version)
+    line += "\nextractZip $TMP_DIST/urlfinder.zip\n"
+    content += line + "\n"
+
     content += 'install_banner "notify"\n'
     binary_version = get_version("projectdiscovery/notify").strip("v")
     line = "download $TMP_DIST/notify.zip https://github.com/projectdiscovery/notify/releases/download/v{version}/notify_{version}_linux_amd64.zip".format(version=binary_version)
