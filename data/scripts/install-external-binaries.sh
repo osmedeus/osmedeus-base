@@ -1,6 +1,6 @@
 install_banner "Amass"
-download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/v5.0.0/amass_linux_amd64.zip
-extractZip $TMP_DIST/amass.zip
+download $TMP_DIST/amass.gz https://github.com/OWASP/Amass/releases/download/v5.0.1/amass_linux_amd64.tar.gz
+extractGz $TMP_DIST/amass.gz
 
 install_banner "httprobe"
 download $TMP_DIST/httprobe.gz https://github.com/tomnomnom/httprobe/releases/download/v0.2/httprobe-linux-amd64-0.2.tgz
