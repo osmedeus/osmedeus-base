@@ -15,8 +15,8 @@ def get_version(repo):
 def generate_content():
     content = ''
     content += 'install_banner "Amass"\n'
-    line = "download $TMP_DIST/amass.zip https://github.com/OWASP/Amass/releases/download/{version}/amass_linux_amd64.zip".format(version=get_version("OWASP/Amass"))
-    line += "\nextractZip $TMP_DIST/amass.zip\n"
+    line = "download $TMP_DIST/amass.gz https://github.com/OWASP/Amass/releases/download/{version}/amass_linux_amd64.tar.gz".format(version=get_version("OWASP/Amass"))
+    line += "\nextractGz $TMP_DIST/amass.gz\n"
     content += line + "\n"
 
     content += 'install_banner "httprobe"\n'
