@@ -291,12 +291,12 @@ cp -R $BASE_PATH/ui ~/.osmedeus/server/ui >/dev/null 2>&1
 #        Start to setup the workflow        #
 #############################################
 
-install_banner "Osmedeus Community Workflow:\033[0m https://github.com/osmedeus/osmedeus-workflow"
+install_banner "Osmedeus Community Workflow:\033[0m https://github.com/qgrosperrin/osmedeus-workflow"
 rm -rf $BASE_PATH/workflow >/dev/null 2>&1
-git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH/workflow
+git clone --quiet --depth=1 https://github.com/qgrosperrin/osmedeus-workflow $BASE_PATH/workflow
 ## retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH/workflow" ]; then
-    git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-workflow $BASE_PATH
+    git clone --quiet --depth=1 https://github.com/qgrosperrin/osmedeus-workflow $BASE_PATH
 fi
 
 #############################################
