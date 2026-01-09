@@ -23,10 +23,22 @@
 
 ***
 
+## DNS
+
+### 📨 MX, TXT records and SPF analysis
+<content src="{{Output}}/dns/dns-records-{{Workspace}}.txt" />
+
+### 📡 ASN Mapping
+<content src="{{Output}}/dns/dns-asn-{{Workspace}}.txt" />
+
+***
+
 ## 🌐 HTTP Fingerprint
 
 <content src="{{Output}}/fingerprint/beautify-{{Workspace}}-http.txt" />
 
+### 🏢 NTLM Info
+<content src="{{Output}}/fingerprint/{{Output}}/fingerprint/{{Workspace}}-ntlm-info.txt" />
 ***
 
 ## 🐞 Vulnerability
@@ -63,11 +75,9 @@
 
 ***
 
-
 ## 🔍 Port Scan
 
 <content src="{{Output}}/portscan/open-ports.txt" />
-
 
 ***
 
