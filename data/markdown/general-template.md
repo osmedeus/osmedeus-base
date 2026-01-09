@@ -23,12 +23,12 @@
 
 ***
 
-## DNS
+## 🧭 DNS
 
-### 📨 MX, TXT records and SPF analysis
+### MX, TXT records and SPF analysis
 <content src="{{Output}}/dns/dns-records-{{Workspace}}.txt" />
 
-### 📡 ASN Mapping
+### ASN Mapping
 <content src="{{Output}}/dns/dns-asn-{{Workspace}}.txt" />
 
 ***
@@ -37,7 +37,7 @@
 
 <content src="{{Output}}/fingerprint/beautify-{{Workspace}}-http.txt" />
 
-### 🏢 NTLM Info
+### NTLM Info
 <content src="{{Output}}/fingerprint/{{Output}}/fingerprint/{{Workspace}}-ntlm-info.txt" />
 
 ***
