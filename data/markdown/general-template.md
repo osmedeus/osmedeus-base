@@ -39,6 +39,7 @@
 
 ### 🏢 NTLM Info
 <content src="{{Output}}/fingerprint/{{Output}}/fingerprint/{{Workspace}}-ntlm-info.txt" />
+
 ***
 
 ## 🐞 Vulnerability
