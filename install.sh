@@ -144,11 +144,11 @@ if [ -d "$HOME/osmedeus-base/data" ]; then
 fi
 
 # Download the latest osm base repo
-announce "Cloning Osmedeus base repo:\033[0m https://github.com/osmedeus/osmedeus-base"
-rm -rf $BASE_PATH && git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
+announce "Cloning Osmedeus base repo:\033[0m https://github.com/qgrosperrin/osmedeus-base"
+rm -rf $BASE_PATH && git clone --quiet --depth=1 https://github.com/qgrosperrin/osmedeus-base $BASE_PATH
 # # retry to clone in case of anything wrong with the connection
 if [ ! -d "$BASE_PATH" ]; then
-    git clone --quiet --depth=1 https://github.com/osmedeus/osmedeus-base $BASE_PATH
+    git clone --quiet --depth=1 https://github.com/qgrosperrin/osmedeus-base $BASE_PATH
 fi
 
 # setting up the osmedeus binary
