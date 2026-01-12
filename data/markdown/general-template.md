@@ -20,6 +20,7 @@
 <content src="{{Output}}/dns/dns-records-{{Workspace}}.txt" />
 
 ### ASN Mapping
+_This only shows resolvable domains_
 <content src="{{Output}}/dns/dns-asn-{{Workspace}}.txt" />
 
 ***
