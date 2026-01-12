@@ -73,4 +73,10 @@
 
 ***
 
+## 🗄️ Links from Archives
+
+<content src="{{Output}}/archive/unique-beautify-{{Workspace}}.txt" shorten=true />
+
+***
+
 
