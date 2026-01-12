@@ -57,12 +57,14 @@
 
 ## 🕷️ Spider Content
 
+**Header**: URL | HTTP Status Code | Response size | Redirect location
 <content src="{{Output}}/linkfinding/unique-beautify-{{Workspace}}.txt" />
 
 ***
 
 ## 📃 Content Discovery
 
+**Header**: URL | HTTP Status Code | Response size | Words | Lines | Redirect location
 <content src="{{Output}}/directory/unique-beautify-{{Workspace}}.txt" />
 
 ***
@@ -75,6 +77,7 @@
 
 ## 🗄️ Links from Archives
 
+**Header**: URL | HTTP Status Code | Response size | Redirect location
 <content src="{{Output}}/archive/{{Workspace}}-archive-table.txt" shorten=true />
 
 ***
