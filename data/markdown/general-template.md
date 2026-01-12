@@ -66,7 +66,7 @@
 
 ## 🕷️ Spider Content
 
-<content src="{{Output}}/linkfinding/links-{{Workspace}}.txt" />
+<content src="{{Output}}/linkfinding/unique-beautify-{{Workspace}}.txt" />
 
 ***
 
