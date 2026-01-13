@@ -22,7 +22,7 @@
 ### ASN Mapping
 _This only shows resolvable domains_
 <content src="{{Output}}/dns/dns-asn-{{Workspace}}.txt" />
-
+<content src="{{Output}}/dns/asn-whois-details-{{Workspace}}.txt" />
 ***
 
 ## 🌐 HTTP Fingerprint
