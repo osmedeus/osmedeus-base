@@ -16,7 +16,7 @@
 
 This repository contains the default ready-to-use workflows, configurations, and data files for the [Osmedeus Engine](https://github.com/j3ssie/osmedeus).
 
-Use this as a starting point to run reconnaissance scans or as a reference for building your own custom workflows.
+Use this as a starting point to run reconnaissance scans or as a reference for building your own custom environments setup.
 
 ## Quick Start
 
@@ -46,11 +46,6 @@ Use this as a starting point to run reconnaissance scans or as a reference for b
 ## Repository Structure
 
 ```
-.
-├── workflows/                    # Workflow definitions
-│   ├── general.yaml              # Full reconnaissance flow
-│   ├── fast.yaml                 # Quick reconnaissance flow
-│   └── common/                   # Core reusable modules
 ├── external-configs/             # Tool configuration files
 ├── external-data/                # Supporting data files
 │   ├── wordlists/                # DNS, content, params wordlists
@@ -76,19 +71,9 @@ shodan:
   - YOUR_API_KEY
 ```
 
-### Creating Custom Workflows
-
-1. Copy an existing module from `workflows/modules/`
-2. Modify steps to fit your needs
-3. Reference it in a flow or run directly:
-   ```bash
-   osmedeus run -m your-module -t example.com
-   ```
-
 ## Documentation
 
 - [Osmedeus Documentation](https://docs.osmedeus.org/)
-- [Writing Workflows](https://docs.osmedeus.org/workflows/overview)
 - [CLI Reference](https://docs.osmedeus.org/getting-started/cli)
 
 ## License
