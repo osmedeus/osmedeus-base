@@ -1,0 +1,107 @@
+# =============================================================================
+# Flow Workflow: General Reconnaissance
+# =============================================================================
+# Running default reconnaissance routine for domain targets.
+# Executes subdomain enumeration, probing, fingerprinting, screenshots,
+# spidering, vulnerability scanning, directory bruteforcing, and port scanning.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# WORKFLOW-LEVEL FIELDS
+# -----------------------------------------------------------------------------
+
+kind: flow
+name: fast
+description: Running fast reconnaissance routine
+tags: fast, recon, domain
+
+# -----------------------------------------------------------------------------
+# PARAMS SECTION
+# -----------------------------------------------------------------------------
+params:
+  - name: enableDnsBruteFocing
+    default: "false"
+
+# -----------------------------------------------------------------------------
+# DEPENDENCIES SECTION
+# -----------------------------------------------------------------------------
+dependencies:
+  variables:
+    - name: Target
+      type: domain
+      required: true
+
+# -----------------------------------------------------------------------------
+# MODULES SECTION
+# Execution order with dependencies
+# -----------------------------------------------------------------------------
+modules:
+  # ===========================================================================
+  # Phase 1: Subdomain Enumeration
+  # ===========================================================================
+  - name: subdomain
+    path: common/subdomain.yaml
+
+  # ===========================================================================
+  # Phase 2: Probing
+  # ===========================================================================
+  - name: probing
+    path: common/probing.yaml
+    depends_on:
+      - subdomain
+
+  # ===========================================================================
+  # Phase 3: Fingerprinting
+  # ===========================================================================
+  - name: fingerprint
+    path: common/fingerprint.yaml
+    depends_on:
+      - probing
+
+  # ===========================================================================
+  # Phase 4: Screenshots
+  # ===========================================================================
+  - name: screenshot
+    path: common/screenshot.yaml
+    depends_on:
+      - fingerprint
+
+  # ===========================================================================
+  # Phase 5: Archiving
+  # ===========================================================================
+  - name: archive
+    path: common/archive.yaml
+    depends_on:
+      - fingerprint
+
+  # ===========================================================================
+  # Phase 6: IP Space Enumeration
+  # ===========================================================================
+  - name: ipspace
+    path: common/ipspace.yaml
+    depends_on:
+      - fingerprint
+
+  # ===========================================================================
+  # Phase 7: Port Scanning
+  # ===========================================================================
+  - name: portscan
+    path: common/portscan.yaml
+    depends_on:
+      - fingerprint
+
+  # ===========================================================================
+  # Phase 8: Vulnerability Scanning
+  # ===========================================================================
+  - name: vulnscan
+    path: common/vulnscan.yaml
+    depends_on:
+      - fingerprint
+
+  # ===========================================================================
+  # Phase 9: Content Discovery
+  # ===========================================================================
+  - name: content-discovery
+    path: common/content-discovery.yaml
+    depends_on:
+      - fingerprint

@@ -1,0 +1,95 @@
+# =============================================================================
+# Module Workflow: Screenshot Capture
+# =============================================================================
+
+kind: module
+name: screenshot
+description: Screenshot based on result of probing
+tags: screenshot, visual, http
+
+# -----------------------------------------------------------------------------
+# PARAMS SECTION
+# -----------------------------------------------------------------------------
+params:
+  - name: screenshotThreads
+    default: "{{ threads / 2 }}"
+  - name: screenTimeout
+    default: "15"
+
+  - name: httpInterestingFile
+    default: "{{Output}}/fingerprint/http-interesting-{{TargetSpace}}.txt"
+
+  - name: screenshotHttpJsonlFile
+    default: "{{Output}}/fingerprint/http-fingerprint-{{TargetSpace}}.jsonl"
+
+  - name: screenshotHTMLFile
+    default: "{{Output}}/screenshots/{{TargetSpace}}-screenshots/screenshot-{{TargetSpace}}.html"
+
+  - name: defaultUA
+    default: "User-Agent: Mozilla/5.0 (compatible; Osmedeus/v5; +https://github.com/j3ssie/osmedeus)"
+
+# -----------------------------------------------------------------------------
+# DEPENDENCIES SECTION
+# -----------------------------------------------------------------------------
+dependencies:
+  commands:
+    - httpx
+
+  variables:
+    - name: Target
+      type: string
+      required: true
+
+# -----------------------------------------------------------------------------
+# REPORTS SECTION
+# -----------------------------------------------------------------------------
+reports:
+  - name: screenshot-gallery
+    path: "{{screenshotHTMLFile}}"
+    type: html
+    description: Screenshot gallery HTML
+
+  - name: screenshot-json
+    path: "{{screenshotHttpJsonlFile}}"
+    type: jsonl
+    description: Screenshot index file
+
+# -----------------------------------------------------------------------------
+# STEPS SECTION
+# -----------------------------------------------------------------------------
+steps:
+  # ---------------------------------------------------------------------------
+  # Setup: Create output folder
+  # ---------------------------------------------------------------------------
+  - name: create-output-folder
+    type: function
+    log: "Creating screenshot output folder"
+    functions:
+      - 'createFolder("{{Output}}/screenshots/{{TargetSpace}}-screenshots")'
+
+  # ---------------------------------------------------------------------------
+  # Take screenshots with httpx
+  # ---------------------------------------------------------------------------
+  - name: capture-screenshots
+    type: bash
+    log: "Capturing screenshots with httpx"
+    pre_condition: 'fileExists("{{httpInterestingFile}}")'
+    command: 'cat {{httpInterestingFile}} | {{Binaries}}/httpx -t {{screenshotThreads}} -no-color -silent -screenshot -screenshot-timeout {{screenTimeout}} -json -system-chrome -store-response-dir {{Output}}/screenshots/{{TargetSpace}}-screenshots/ >> {{screenshotHttpJsonlFile}}'
+    on_error: 
+      - action: continue # expected error if there is no chrome installed
+
+  - name: process-screenshots
+    type: function
+    log: "Processing screenshot results"
+    pre_condition: 'fileExists("{{Output}}/screenshots/{{TargetSpace}}-screenshots/screenshot.html")'
+    functions:
+      - 'moveFile("{{Output}}/screenshots/{{TargetSpace}}-screenshots/screenshot.html", "{{Output}}/screenshots/{{TargetSpace}}-screenshots/screenshot-{{TargetSpace}}.html")'
+
+  # ---------------------------------------------------------------------------
+  # Summary
+  # ---------------------------------------------------------------------------
+  - name: screenshot-summary
+    type: function
+    function: 'printf("Calculating total screenshots")'
+    exports:
+      total_screenshots: "dirLength('{{Output}}/screenshots/{{TargetSpace}}-screenshots/')"

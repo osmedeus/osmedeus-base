@@ -1,0 +1,127 @@
+# =============================================================================
+# Module Workflow: Vulnerability Scanning
+# =============================================================================
+
+kind: module
+name: vulnscan
+description: Run vulnerability scan on all HTTP hosts
+tags: vulnerability, security, nuclei, jaeles
+
+# -----------------------------------------------------------------------------
+# PARAMS SECTION
+# -----------------------------------------------------------------------------
+params:
+  - name: httpFile
+    default: "{{Output}}/probing/http-{{TargetSpace}}.txt"
+
+  - name: nucleiOutputJsonl
+    default: "{{Output}}/vulnscan/nuclei-jsonl-{{TargetSpace}}.txt"
+
+  - name: nucleiCleanOutputJsonl
+    default: "{{Output}}/vulnscan/clean-jsonl-{{TargetSpace}}.txt"
+
+  - name: nucleiMarkdownReport
+    default: "{{Output}}/vulnscan/nuclei-overview-report-{{TargetSpace}}.md"
+
+  - name: nucleiTemplateConfig
+    default: "~/nuclei-templates/"
+  - name: nucleiThreads
+    default: "{{ threads * 10 }}"
+
+  - name: nucleiTimeout
+    default: "8h"
+  - name: nucleiSeverity
+    default: "critical,high,medium,low,info"
+
+  - name: extraNuclei
+    default: " "
+
+  - name: vulnLimit
+    default: "10000"
+
+  - name: defaultUA
+    default: "User-Agent: Mozilla/5.0 (compatible; Osmedeus/v5; +https://github.com/j3ssie/osmedeus)"
+
+# -----------------------------------------------------------------------------
+# DEPENDENCIES SECTION
+# -----------------------------------------------------------------------------
+dependencies:
+  commands:
+    - nuclei
+    - jq
+
+  variables:
+    - name: Target
+      type: string
+      required: true
+
+# -----------------------------------------------------------------------------
+# REPORTS SECTION
+# -----------------------------------------------------------------------------
+reports:
+  - name: nuclei-raw-json
+    path: "{{nucleiOutputJsonl}}"
+    type: jsonl
+    description: Nuclei scan results JSON
+
+  - name: nuclei-markdown-report
+    path: "{{nucleiMarkdownReport}}"
+    type: markdown
+    description: Nuclei scan results Markdown report
+
+# -----------------------------------------------------------------------------
+# STEPS SECTION
+# -----------------------------------------------------------------------------
+steps:
+  # ---------------------------------------------------------------------------
+  # Setup: Create output folders
+  # ---------------------------------------------------------------------------
+  - name: create-output-folders
+    type: function
+    log: "Creating output folders"
+    functions:
+      - 'createFolder("{{Output}}/vulnscan")'
+
+  # ---------------------------------------------------------------------------
+  # Check input file limit
+  # ---------------------------------------------------------------------------
+  - name: check-input-limit
+    type: function
+    log: "Checking input file size limit"
+    pre_condition: 'fileLength("{{httpFile}}") > {{vulnLimit}}'
+    functions:
+      - 'log_error("Got {{fileLength("{{httpFile}}")}} lines in input file, which is greater than {{vulnLimit}} line")'
+      - 'exit(1)'
+
+  # ---------------------------------------------------------------------------
+  # Nuclei vulnerability scan
+  # ---------------------------------------------------------------------------
+  - name: nuclei-scan
+    type: bash
+    log: "Running Nuclei vulnerability scan"
+    pre_condition: 'fileExists("{{httpFile}}")'
+    commands:
+      - "timeout -k 1m {{nucleiTimeout}} {{Binaries}}/nuclei -H '{{defaultUA}}' -silent -c {{nucleiThreads}} -jsonl -severity '{{nucleiSeverity}}' -t {{nucleiTemplateConfig}} -l {{httpFile}} -irr -o {{nucleiOutputJsonl}} {{extraNuclei}} > /dev/null 2>&1"
+
+  - name: nuclei-report-processing
+    type: function
+    log: "Processing Nuclei report"
+    pre_condition: 'fileLength("{{nucleiOutputJsonl}}") > 0'
+    functions:
+      - jsonl_filter("{{nucleiOutputJsonl}}", "{{nucleiCleanOutputJsonl}}", "template-id,info.name,info.severity,matched-at,matched-name")
+      - sortUnix("{{nucleiCleanOutputJsonl}}")
+      # updating total vulnerabilities count in db
+      - db_total_vulns("{{nucleiCleanOutputJsonl}}")
+
+  # ---------------------------------------------------------------------------
+  # Generate vulnerability markdown report
+  # ---------------------------------------------------------------------------
+  - name: generate-vuln-md-report
+    type: function
+    log: "Generating vulnerability markdown report"
+    pre_condition: 'fileLength("{{nucleiCleanOutputJsonl}}") > 0'
+    functions:
+      - 'convert_jsonl_to_markdown("{{nucleiCleanOutputJsonl}}", "{{nucleiMarkdownReport}}")'
+      # render markdown report
+      - render_markdown_report("{{ExternalMarkdowns}}/sample-report-template-filesystem.md", "{{Output}}/security-report.md")
+      - register_artifact("{{Output}}/security-report.md", "md")

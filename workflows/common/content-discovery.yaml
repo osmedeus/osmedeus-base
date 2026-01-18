@@ -1,0 +1,125 @@
+# =============================================================================
+# Module Workflow: Directory Scanning
+# =============================================================================
+
+kind: module
+name: content-discovery
+description: Run directory scan based on http output
+tags: directory, bruteforce, content-discovery
+
+# -----------------------------------------------------------------------------
+# PARAMS SECTION
+# -----------------------------------------------------------------------------
+params:
+  - name: httpFile
+    default: "{{Output}}/probing/http-{{TargetSpace}}.txt"
+
+  - name: contentDiscoverFile
+    default: "{{Output}}/content-discovery/content-discovery-{{TargetSpace}}.jsonl"
+
+  - name: contentDiscoverFilteredFile
+    default: "{{Output}}/content-discovery/content-discovery-filtered-{{TargetSpace}}.jsonl"
+
+  - name: contentDiscoverMarkdownFile
+    default: "{{Output}}/content-discovery/content-discovery-report-{{TargetSpace}}.md"
+
+  - name: contentDiscoverWordlist
+    default: "{{ExternalData}}/wordlists/content/small.txt"
+  - name: dirLimit
+    default: "20000"
+  - name: recursion
+    default: "0"
+  - name: ffThreads
+    default: "{{ threads }}"
+  - name: dirbThreads
+    default: "{{ threads / 3 }}"
+  - name: ffTimeout
+    default: "1h"
+
+  - name: defaultUA
+    default: "User-Agent: Mozilla/5.0 (compatible; Osmedeus/v5; +https://github.com/j3ssie/osmedeus)"
+
+# -----------------------------------------------------------------------------
+# DEPENDENCIES SECTION
+# -----------------------------------------------------------------------------
+dependencies:
+  commands:
+    - ffuf
+    - jq
+
+  variables:
+    - name: Target
+      type: string
+      required: true
+
+# -----------------------------------------------------------------------------
+# REPORTS SECTION
+# -----------------------------------------------------------------------------
+reports:
+  - name: beautify-results
+    path: "{{contentDiscoverMarkdownFile}}"
+    type: md
+    description: Beautified content discovery results
+
+  - name: unique-results
+    path: "{{contentDiscoverFilteredFile}}"
+    type: jsonl
+    description: Unique filtered content discovery results
+
+# -----------------------------------------------------------------------------
+# STEPS SECTION
+# -----------------------------------------------------------------------------
+steps:
+  # ---------------------------------------------------------------------------
+  # Setup: Create output folder
+  # ---------------------------------------------------------------------------
+  - name: create-output-folder
+    type: function
+    log: "Creating content-discovery output folder"
+    function: 'createFolder("{{Output}}/content-discovery")'
+  # ---------------------------------------------------------------------------
+  # Check input file size limit
+  # ---------------------------------------------------------------------------
+  - name: check-input-limit
+    type: function
+    log: "Checking input file size"
+    pre_condition: 'fileLength("{{httpFile}}") > {{dirLimit}}'
+    functions:
+      - 'log_error("Filter", "Got input file greater than {{dirLimit}} line")'
+      - 'exit(1)'
+
+  # ---------------------------------------------------------------------------
+  # Directory bruteforce with ffuf
+  # ---------------------------------------------------------------------------
+  - name: directory-bruteforce
+    type: foreach
+    log: "Running directory bruteforce with ffuf"
+    pre_condition: 'fileExists("{{httpFile}}")'
+    input: "{{httpFile}}"
+    variable: line
+    threads: "{{dirbThreads}}"
+    step:
+      name: ffuf-single-target
+      type: bash
+      command: 'timeout -k 1m {{ffTimeout}} {{Binaries}}/ffuf -s -t {{ffThreads}} -noninteractive -ac -acs advanced -timeout 15 -se -D -fc "429,404,400" -e "asp,aspx,aspx~,asp~,py,py~,rb,rb~,php,php~,bak,bkp,cache,cgi,conf,csv,html,inc,js,json,jsp,jsp~,log,old,txt" -json -H "{{defaultUA}}" -ac -s -fc "429,404,400" -json -u "[[line]]/FUZZ" -w {{wordlists}}:FUZZ > {{Output}}/content-discovery/raw-[[_id_]].json 2>/dev/null'
+
+  # ---------------------------------------------------------------------------
+  # Process and beautify results
+  # ---------------------------------------------------------------------------
+  - name: process-results
+    type: function
+    log: "Processing and beautifying scan results"
+    pre_condition: 'dirLength("{{Output}}/content-discovery/") > 1'
+    functions:
+      - 'exec_cmd("cat {{Output}}/content-discovery/raw-*.json | jq -r ''[.url,(.status|tostring),(.length|tostring),(.words|tostring),(.lines|tostring),.redirectlocation] | join(\",\")'' > {{contentDiscoverFile}}")'
+      # clean up raw json files
+      - 'exec_cmd("rm -rf {{Output}}/content-discovery/raw-*.json")'
+
+  - name: beautify-interesting-content-results
+    type: function
+    log: "Beautifying interesting content results"
+    pre_condition: 'fileExists("{{contentDiscoverFile}}")'
+    functions:
+      - log_info("Filtering unique results based on status,words,lines which might contain interesting content")
+      - jsonl_unique("{{contentDiscoverFile}}", "{{contentDiscoverFilteredFile}}", "status,words,lines")
+      - 'convert_jsonl_to_markdown("{{contentDiscoverFilteredFile}}", "{{contentDiscoverMarkdownFile}}")'
